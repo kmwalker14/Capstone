@@ -47,15 +47,15 @@
               />
               <span class="nav-text">Research</span>
             </li>
-            <!-- Admin Public Works -->
+            <!-- Admin Public Work -->
             <li class="nav-item">
               <img
                 loading="lazy"
                 src="@/assets/spiral.png"
-                alt="Public Works navigation icon"
+                alt="Public Work navigation icon"
                 class="nav-icon"
               />
-              <span class="nav-text">Public Works</span>
+              <span class="nav-text">Public Work</span>
             </li>
             <!-- Admin Tools -->
             <li class="nav-item">
@@ -98,7 +98,7 @@
                 alt="Profile banner background"
                 class="banner-image"
               />
-              <button class="edit-button" tabindex="0">Edit Text</button>
+              <button class="edit-button" tabindex="0">Edit</button>
             </div>
             <div class="profile-content">
               <div class="profile-details">

@@ -47,15 +47,15 @@
               />
               <span class="nav-text">Research</span>
             </li>
-            <!-- Admin Public Works -->
+            <!-- Admin Public Work -->
             <li class="nav-item">
               <img
                 loading="lazy"
                 src="@/assets/spiral.png"
-                alt="Public Works navigation icon"
+                alt="Public Work navigation icon"
                 class="nav-icon"
               />
-              <span class="nav-text">Public Works</span>
+              <span class="nav-text">Public Work</span>
             </li>
             <!-- Admin Tools -->
             <li class="nav-item">
@@ -98,12 +98,9 @@
                 <div class="profile-header-section">
                 </div>
                 <section class="about-section">
-                  <h3 class="section-title">Text box here</h3>
+                  <h3 class="section-title">Rich text box here</h3>
                   <p class="section-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                    enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.
+                    This is a placeholder for a rich text box that enables admin to make and style edits
                   </p>
                 </section>
               </div>

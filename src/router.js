@@ -1,3 +1,4 @@
+/*
 import {createRouter, createWebHashHistory} from 'vue-router';
 import AdminHome from '@/components/AdminHome.vue';
 import AdminPublications from '@/components/AdminPublications.vue';
@@ -13,3 +14,4 @@ const router = createRouter({
 });
 
 export default router;
+*/

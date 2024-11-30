@@ -1,45 +1,73 @@
 <template>
   <div id="app">
-    <!-- Add components here -->
-    <!-- <HomePage /> -->
-    <!-- <PublicationsPage /> -->
-    <!-- <AdminHome /> -->
-    <!-- <AdminPublications /> -->
+    <!-- Add individual components here if needed -->
+    <!-- e.g., <AdminHome /> -->
 
     <!-- Router will render component based on current route -->
     <!-- <router-view></router-view> -->
 
-    <!-- Testing different navigation technique below (not using Vue router)-->
-    <!--
+    <!-- Testing different navigation techniques below (not using Vue router)-->
+
+    <!-- This can navigate using the sidebar menu but does not work with more than two pages ????
+    <AdminHome @page-changed="setPage" v-if="currentPage === 'adminhome'" />
+    <AdminPublications @page-changed="setPage" v-if="currentPage === 'adminpublications'" />
+    <AdminResearch @page-changed="setPage" v-if="currentPage === 'adminresearch'" />
+    -->
+    
+    <!-- Testing with button navigation -->
     <nav>
       <button @click="setPage('adminhome')">Home</button>
+      <button @click="setPage('adminteaching')">Teaching</button>
       <button @click="setPage('adminpublications')">Publications</button>
+      <button @click="setPage('adminresearch')">Research</button>
+      <button @click="setPage('admininsideasu')">Inside ASU</button>  <!-- Public Work -->
+      <button @click="setPage('adminoutsideasu')">Outside ASU</button>  <!-- Public Work -->
+      <button @click="setPage('adminmentorfaculty')">Mentor Faculty</button>  <!-- Public Work -->
+      <button @click="setPage('adminmentorstudents')">Mentor Students</button>  <!-- Public Work -->
+      <button @click="setPage('adminworkhistory')">Work History</button>  <!-- Public Work -->
+      <button @click="setPage('admintools')">Tools</button>
     </nav>
 
     <AdminHome v-if="currentPage === 'adminhome'" />
+    <AdminTeaching v-if="currentPage === 'adminteaching'" />
     <AdminPublications v-if="currentPage === 'adminpublications'" />
-    -->
-
-    <AdminHome @page-changed="setPage" v-if="currentPage === 'adminhome'" />
-    <AdminPublications @page-changed="setPage" v-if="currentPage === 'adminpublications'" />
+    <AdminResearch v-if="currentPage === 'adminresearch'" />
+    <AdminInsideASU v-if="currentPage === 'admininsideasu'" />  <!-- Public Work -->
+    <AdminOutsideASU v-if="currentPage === 'adminoutsideasu'" />  <!-- Public Work -->
+    <AdminMentorFaculty v-if="currentPage === 'adminmentorfaculty'" />  <!-- Public Work -->
+    <AdminMentorStudents v-if="currentPage === 'adminmentorstudents'" />  <!-- Public Work -->
+    <AdminWorkHistory v-if="currentPage === 'adminworkhistory'" />  <!-- Public Work -->
+    <AdminTools v-if="currentPage === 'admintools'" />
   </div>
 </template>
 
 <script>
  /* Import the components */
-//import HomePage from './components/HomePage.vue';
-//import PublicationsPage from './components/PublicationsPage.vue';
   import AdminHome from './components/AdminHome.vue';
+  import AdminTeaching from './components/AdminTeaching.vue';
   import AdminPublications from './components/AdminPublications.vue';
+  import AdminResearch from './components/AdminResearch.vue';
+  import AdminInsideASU from './components/AdminInsideASU.vue'; // Public Work
+  import AdminOutsideASU from './components/AdminOutsideASU.vue'; // Public Work
+  import AdminMentorFaculty from './components/AdminMentorFaculty.vue'; // Public Work
+  import AdminMentorStudents from './components/AdminMentorStudents.vue'; // Public Work
+  import AdminWorkHistory from './components/AdminWorkHistory.vue'; // Public Work
+  import AdminTools from './components/AdminTools.vue';
 
   export default {
     name: 'App',
     components: {
       /* Register components */
-      //HomePage,
-      //PublicationsPage,
       AdminHome,
-      AdminPublications
+      AdminTeaching,
+      AdminPublications,
+      AdminResearch,
+      AdminInsideASU,
+      AdminOutsideASU,
+      AdminMentorFaculty,
+      AdminMentorStudents,
+      AdminWorkHistory,
+      AdminTools
     },
 
     data() {
@@ -51,6 +79,7 @@
     methods: {
       // Method to switch between pages
       setPage(page) {
+        console.log('Navigating to', page); // debug
         this.currentPage = page;
       }
     }
@@ -58,13 +87,12 @@
 </script>
 
 <style>
-/* Import CSS files */
+/* Import CSS files if needed*/
 /*
+e.g.,
 @import './assets/globals.css';
 @import './assets/home-style.css';
 @import './assets/home-styleguide.css';
-@import './assets/publications-style.css';
-@import './assets/publications-styleguide.css';
 */
 </style>
 
