@@ -8,13 +8,13 @@
 
     <!-- Testing different navigation techniques below (not using Vue router)-->
 
-    <!-- This can navigate using the sidebar menu but does not work with more than two pages ????
+    <!-- This navigates using the sidebar menu
     <AdminHome @page-changed="setPage" v-if="currentPage === 'adminhome'" />
     <AdminPublications @page-changed="setPage" v-if="currentPage === 'adminpublications'" />
     <AdminResearch @page-changed="setPage" v-if="currentPage === 'adminresearch'" />
     -->
     
-    <!-- Testing with button navigation -->
+    <!-- Testing with button navigation to view all pages without submenu (submenu not yet implemented) -->
     <nav>
       <button @click="setPage('adminhome')">Home</button>
       <button @click="setPage('adminteaching')">Teaching</button>

@@ -38,7 +38,7 @@
               <span class="nav-text">Publications</span>
             </li>
             <!-- Admin Research -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('adminresearch')">
               <img
                 loading="lazy"
                 src="@/assets/clipboard.png"
