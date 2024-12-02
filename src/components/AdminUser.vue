@@ -48,7 +48,7 @@
             <span class="nav-text">Research</span>
           </li>
           <!-- Admin Public Work -->
-          <li class="nav-item active">
+          <li class="nav-item">
             <img
               loading="lazy"
               src="@/assets/spiral.png"
@@ -68,7 +68,7 @@
             <span class="nav-text">Tools</span>
           </li>
           <!-- Admin User -->
-          <li class="nav-item" @click="setPage('adminuser')">
+          <li class="nav-item active" @click="setPage('adminuser')">
             <img
               loading="lazy"
               src="@/assets/user.png"
@@ -81,7 +81,7 @@
       </nav>
       <main class="main-content">
         <header class="header">
-          <h1 class="page-title">Mentor Students</h1>
+          <h1 class="page-title">Admin</h1>
           <div class="user-profile">
             <div class="user-info">
               <span class="user-name">Samira G.</span>
@@ -113,7 +113,7 @@
 
 <script>
 export default {
-name: 'AdminMentorStudents',
+name: 'AdminUser',
 methods: {
   setPage(page) {
     this.$emit('page-changed', page);

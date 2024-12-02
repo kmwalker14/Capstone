@@ -18,7 +18,7 @@
               <span class="nav-text">Home</span>
             </li>
             <!-- Admin Teaching -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('adminteaching')">
               <img
                 loading="lazy"
                 src="@/assets/book.png"
@@ -58,7 +58,7 @@
               <span class="nav-text">Public Work</span>
             </li>
             <!-- Admin Tools -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('admintools')">
               <img
                 loading="lazy"
                 src="@/assets/wrench.png"
@@ -68,7 +68,7 @@
               <span class="nav-text">Tools</span>
             </li>
             <!-- Admin User -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('adminuser')">
               <img
                 loading="lazy"
                 src="@/assets/user.png"
@@ -113,10 +113,13 @@
 
 <script>
 export default {
-  name: 'AdminPublications',
+  name: "AdminPublications",
   methods: {
     setPage(page) {
-      this.$emit('page-changed', page);
+      this.$emit("page-changed", page);
+    },
+    saveContent() {
+      alert("Saved!"); // Replace with actual save logic later
     }
   }
 };
@@ -133,7 +136,7 @@ overflow: hidden;
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
 display: flex;
-gap: 20px; /* Space between sidebar and content*/
+gap: 37px; /* Space between sidebar and content*/
 }
 
 /* Sidebar styling*/

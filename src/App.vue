@@ -10,8 +10,19 @@
 
     <!-- This navigates using the sidebar menu
     <AdminHome @page-changed="setPage" v-if="currentPage === 'adminhome'" />
+    <AdminTeaching @page-changed="setPage" v-if="currentPage === 'adminteaching'" />
     <AdminPublications @page-changed="setPage" v-if="currentPage === 'adminpublications'" />
     <AdminResearch @page-changed="setPage" v-if="currentPage === 'adminresearch'" />
+    <AdminTools @page-changed="setPage" v-if="currentPage === 'admintools'" />
+    <AdminUser @page-changed="setPage" v-if="currentPage === 'adminuser'" />
+    -->
+    
+    <!-- Public Works pages
+    <AdminInsideASU @page-changed="setPage" v-if="currentPage === 'admininsideasu'" />
+    <AdminOutsideASU @page-changed="setPage" v-if="currentPage === 'adminoutsideasu'" />
+    <AdminMentorFaculty @page-changed="setPage" v-if="currentPage === 'adminmentorfaculty'" />
+    <AdminMentorStudents @page-changed="setPage" v-if="currentPage === 'adminmentorstudents'" />
+    <AdminWorkHistory @page-changed="setPage" v-if="currentPage === 'adminworkhistory'" />
     -->
     
     <!-- Testing with button navigation to view all pages without submenu (submenu not yet implemented) -->
@@ -26,6 +37,7 @@
       <button @click="setPage('adminmentorstudents')">Mentor Students</button>  <!-- Public Work -->
       <button @click="setPage('adminworkhistory')">Work History</button>  <!-- Public Work -->
       <button @click="setPage('admintools')">Tools</button>
+      <button @click="setPage('adminuser')">Admin</button>
     </nav>
 
     <AdminHome v-if="currentPage === 'adminhome'" />
@@ -38,6 +50,7 @@
     <AdminMentorStudents v-if="currentPage === 'adminmentorstudents'" />  <!-- Public Work -->
     <AdminWorkHistory v-if="currentPage === 'adminworkhistory'" />  <!-- Public Work -->
     <AdminTools v-if="currentPage === 'admintools'" />
+    <AdminUser v-if="currentPage === 'adminuser'" />
   </div>
 </template>
 
@@ -53,6 +66,7 @@
   import AdminMentorStudents from './components/AdminMentorStudents.vue'; // Public Work
   import AdminWorkHistory from './components/AdminWorkHistory.vue'; // Public Work
   import AdminTools from './components/AdminTools.vue';
+  import AdminUser from './components/AdminUser.vue';
 
   export default {
     name: 'App',
@@ -67,7 +81,8 @@
       AdminMentorFaculty,
       AdminMentorStudents,
       AdminWorkHistory,
-      AdminTools
+      AdminTools,
+      AdminUser
     },
 
     data() {
@@ -91,8 +106,6 @@
 /*
 e.g.,
 @import './assets/globals.css';
-@import './assets/home-style.css';
-@import './assets/home-styleguide.css';
 */
 </style>
 

@@ -18,7 +18,7 @@
               <span class="nav-text">Home</span>
             </li>
             <!-- Admin Teaching -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('adminteaching')">
               <img
                 loading="lazy"
                 src="@/assets/book.png"
@@ -58,7 +58,7 @@
               <span class="nav-text">Public Work</span>
             </li>
             <!-- Admin Tools -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('admintools')">
               <img
                 loading="lazy"
                 src="@/assets/wrench.png"
@@ -68,7 +68,7 @@
               <span class="nav-text">Tools</span>
             </li>
             <!-- Admin User -->
-            <li class="nav-item">
+            <li class="nav-item" @click="setPage('adminuser')">
               <img
                 loading="lazy"
                 src="@/assets/user.png"
@@ -182,7 +182,12 @@ export default {
 };
 </script>
   
-  <style scoped>
+  <style> /* Not scoped */
+  body {
+  margin: 0;
+  padding: 0;
+  }
+
   /* Styles the main container that holds the entire admin layout */
   .admin-container {
     background: var(--Color-Background, #f3f4ff);
@@ -193,7 +198,7 @@ export default {
   /* Flex container that holds the sidebar and main content */
   .layout-wrapper {
     display: flex;
-    gap: 20px; /* Space between sidebar and content*/
+    gap: 37px; /* Space between sidebar and content*/
   }
   
   /* Sidebar styling*/
@@ -322,6 +327,11 @@ export default {
   .banner {
     position: relative;
     min-height: 202px;
+    /*
+    background-color: rgba(106, 36, 18, 1);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    */
   }
   
   .banner-image {
@@ -437,7 +447,7 @@ export default {
   .profile-image {
     width: 100%;
     aspect-ratio: 1.03;
-    object-fit: contain;
+    object-fit: fill;
     border-radius: 50%;
   }
   
