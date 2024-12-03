@@ -81,7 +81,7 @@
       </nav>
       <main class="main-content">
         <header class="header">
-          <h1 class="page-title">Admin Users</h1>
+          <h1 class="page-title">New Admin</h1>
           <div class="user-profile">
             <div class="user-info">
               <span class="user-name">Samira G.</span>
@@ -90,73 +90,77 @@
             <div class="user-avatar"></div>
           </div>
         </header>
-        <button class="new-admin-button" @click="setPage('adminnew')">+ New Admin</button>
-        <section class="content-section">
-          <div class="banner"> <!-- REMOVE BANNER ??? -->
-          </div>
-          <div class="profile-content">
-            <div class="profile-details">
-              <div class="profile-header-section">
+          <button class="new-admin-button" @click="setPage('adminnew')">+ New Admin</button>
+          <section class="admin-form-section">
+            <h2 class="section-title">Admin Details</h2>
+            <form class="admin-form" @submit.prevent="handleSubmit">
+              <div class="form-layout">
+                <!--
+                <div class="photo-upload">
+                  <label for="photo-input" class="visually-hidden">Upload Photo</label>
+                  <input 
+                    type="file" 
+                    id="photo-input"
+                    accept="image/*"
+                    class="photo-input"
+                  />
+                </div>
+                -->
+                <div class="form-fields">
+                  <div class="field-row">
+                    <div class="form-group">
+                      <label for="firstName">First Name *</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        v-model="firstName"
+                        placeholder="e.g., Jennifer"
+                        required
+                        class="form-input"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName">Last Name *</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        v-model="lastName"
+                        placeholder="e.g., Williams"
+                        required
+                        class="form-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="field-row">
+                    <div class="form-group">
+                      <label for="email">Email *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        v-model="email"
+                        placeholder="e.g., jwilliams@asu.edu"
+                        required
+                        class="form-input"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="username">Username *</label>
+                      <input
+                        type="text"
+                        id="username"
+                        v-model="username"
+                        placeholder="e.g., jwilliams123"
+                        required
+                        class="form-input"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <section class="about-section">
-                <!-- <h3 class="section-title">Modify Admin Users</h3> -->
-                <!-- User info header -->
-                <div class="user-info-header">
-                  <!-- <span class="user-checkbox-header">Select</span> -->
-                  <span class="user-name-header">Name</span>
-                  <span class="user-username-header">Username</span>
-                  <span class="user-email-header">Email</span>
-                  <span class="action-header">Action</span>
-                </div>
-                <!-- User info row -->
-                <div class="user-info-row">
-                  <!-- <input type="checkbox" id="user1" class="user-checkbox" /> -->
-                  <label for="user1" class="user-name">Leslie Grey</label>
-                  <span class="user-username">lgrey123</span>
-                  <span class="user-email">lgrey123@asu.edu</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(1, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === 1" class="dropdown-menu">
-                      <li @click="editUser(1)">Edit</li>
-                      <li @click="removeUser(1)">Remove</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="user-info-row">
-                  <!-- <input type="checkbox" id="user2" class="user-checkbox" /> -->
-                  <label for="user2" class="user-name">Nathan Lee</label>
-                  <span class="user-username">nlee123</span>
-                  <span class="user-email">nlee123@asu.edu</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(2, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === 2" class="dropdown-menu">
-                      <li @click="editUser(2)">Edit</li>
-                      <li @click="removeUser(2)">Remove</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="user-info-row">
-                  <!-- <input type="checkbox" id="user3" class="user-checkbox" /> -->
-                  <label for="user3" class="user-name">Maria Smith</label>
-                  <span class="user-username">msmith123</span>
-                  <span class="user-email">msmith123@asu.edu</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(3, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === 3" class="dropdown-menu">
-                      <li @click="editUser(3)">Edit</li>
-                      <li @click="removeUser(3)">Remove</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+            <button type="submit" class="submit-button" tabindex="0"> <!-- tabindex lets user tab through fields in order-->
+              Submit
+            </button>
+          </form>
         </section>
       </main>
     </div>
@@ -165,160 +169,125 @@
 
 <script>
 export default {
-  name: 'AdminUser',
+  name: 'AdminNew',
   data() {
     return {
-      dropdownVisible: null, // Tracks which dropdown is visible
+      firstName: '',
+      lastName: '',
+      email: '',
+      username: ''
     };
   },
   methods: {
-    setPage(page) { // Navigate to this page when clicked
+    setPage(page) {
       this.$emit('page-changed', page);
     },
-    toggleDropdown(userId, event) {
-      event.stopPropagation();
-      this.dropdownVisible = this.dropdownVisible === userId ? null : userId; // Toggle visibility based on userId
-    },
-    editUser(userId) {  // Handle the actions when the edit option is clicked (currently shows an alert with user's ID)
-      alert(`Edit user with ID: ${userId}`);
-    },
-    removeUser(userId) {  // Handle the actions when the remove option is clicked (currently shows an alert with user's ID)
-      alert(`Remove user with ID: ${userId}`);
-    },
-    closeDropdown() {
-      this.dropdownVisible = null; // Close any open dropdown
-    },
-  },
-  mounted() {
-    // Close dropdown when clicking outside
-    document.addEventListener('click', this.closeDropdown);
-  },
-  beforeUnmount() {
-    // Clean up event listener when component is destroyed/unmounted
-    document.removeEventListener('click', this.closeDropdown);
-  },
+    handleSubmit() {
+      // Form submission logic here
+      console.log('Form submitted:', {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        username: this.username
+      });
+    }
+  }
 };
 </script>
 
 <style scoped>
 /* New admin button styling */
-  .new-admin-button {
-    display: block;
-    position: relative;
-    margin: 50px 0 0 1325px;
-    width: 155px;
-    height: 50px;
-    border-radius: 40px;
-    background: var(--Color-Purple, #4d44b5);
-    color: #fff;
-    font: 400 18px Poppins, sans-serif;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
+.new-admin-button {
+  display: block;
+  position: relative;
+  margin: 50px 0 -15px 1325px;
+  width: 155px;
+  height: 50px;
+  border-radius: 40px;
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
+  font: 400 18px Poppins, sans-serif;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
   }
 
-/* Styles the user info header */
-.user-info-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 16px;
-  color: var(--Color-Text, #303972);
-  padding-bottom: 10px;
-  border-bottom: 2px solid #ddd;
-}
-
-/*
-.user-checkbox-header {
-  width: 20%;
-}
-*/
-
-.user-name-header, .user-username-header, .user-email-header {
-  flex: 1;
-  text-align: left;
-}
-
-.action-header {
-  width: 50px;  /* Align with action menu button */
-  text-align: right;
-}
-
-/* Styles the user info row */
-.user-info-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-  position: relative;
-}
-
-/*
-.user-checkbox {
-  width: 20px;
-  height: 20px;
-}
-*/
-
-.user-name, .user-username, .user-email {
-  flex: 1;  /* Align with header */
-  font-size: 14px;
-  color: var(--Color-Gray-3, #a098ae);
-}
-
-.user-name {
-  font-weight: 600;
-  color: var(--Color-Text, #303972);
-}
-
-.action-menu {
-  width: 50px; /* Align with action header */
-  text-align: right;
-}
-
-/* Styles the action dropdown menu */
-.action-menu {
-  position: relative;
-  margin-left: auto;
-}
-
-.action-button {
-  background: none;
+  /* Styles the submit button */ 
+.submit-button {
+  display: block;
+  width: 140px;
+  height: 50px;
+  margin: 20px auto -50px;
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
   border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
+}
+
+/* Styles the form area */
+.admin-form-section {
+  background: #fff;
+  border-radius: 20px;
+  padding-bottom: 80px;
+}
+
+.section-title {
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
+  padding: 12px 40px;
   font-size: 24px;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: 50%;
-  padding: 0;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 5px 0;
+  font-weight: 700;
+  border-radius: 20px 20px 0 0;
   margin: 0;
-  z-index: 10;
-  width: 120px;
 }
 
-.dropdown-menu li {
-  padding: 10px;
+.admin-form {
+  padding: 32px 40px;
+}
+
+.form-layout {
+  display: flex;
+  gap: 24px;
+}
+
+/*
+.photo-upload {
+  width: 175px;
+}
+*/
+
+.form-fields {
+  flex: 1;
+}
+
+.field-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 49px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  color: var(--Color-Text, #303972);
+  font: 700 18px Poppins, sans-serif;
+  margin-bottom: 16px;
+}
+
+.form-input {
+  width: 95%;
+  padding: 14px;
+  border: 1px solid var(--Color-Gray-2, #c1bbeb);
+  border-radius: 5px;
   font-size: 14px;
-  cursor: pointer;
-  color: #303972;
-}
-
-.dropdown-menu li:hover {
-  background: #f5f5f5;
 }
 
 /* Styles the main container that holds the entire admin layout */
@@ -459,13 +428,13 @@ margin-top: 20px;
 /* Banner styling */
 .banner {
 position: relative;
-min-height: 55px;
+min-height: 100px;
 }
 
 /* Profile styling */
 .profile-content {
 display: flex;
-padding: 0 36px 55px;
+padding: 0 36px 92px;
 margin-top: -27px;
 position: relative;
 z-index: 1;
@@ -494,7 +463,7 @@ padding-right: 1%; /*T: 1%, O: null*/
 /* Styling for about section */
 .section-title {
 font: 700 24px Poppins, sans-serif;
-margin: 34px 30px;
+margin: 34px 0 30px;
 }
 
 .section-content {

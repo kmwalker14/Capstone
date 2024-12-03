@@ -38,6 +38,7 @@
       <button @click="setPage('adminworkhistory')">Work History</button>  <!-- Public Work -->
       <button @click="setPage('admintools')">Tools</button>
       <button @click="setPage('adminuser')">Admin</button>
+      <button @click="setPage('adminnew')">New Admin</button>
     </nav>
 
     <AdminHome v-if="currentPage === 'adminhome'" />
@@ -51,6 +52,7 @@
     <AdminWorkHistory v-if="currentPage === 'adminworkhistory'" />  <!-- Public Work -->
     <AdminTools v-if="currentPage === 'admintools'" />
     <AdminUser v-if="currentPage === 'adminuser'" />
+    <AdminNew v-if="currentPage === 'adminnew'" />
   </div>
 </template>
 
@@ -67,6 +69,7 @@
   import AdminWorkHistory from './components/AdminWorkHistory.vue'; // Public Work
   import AdminTools from './components/AdminTools.vue';
   import AdminUser from './components/AdminUser.vue';
+  import AdminNew from './components/AdminNew.vue';
 
   export default {
     name: 'App',
@@ -82,7 +85,8 @@
       AdminMentorStudents,
       AdminWorkHistory,
       AdminTools,
-      AdminUser
+      AdminUser,
+      AdminNew
     },
 
     data() {
