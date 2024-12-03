@@ -14,7 +14,7 @@
     <AdminPublications @page-changed="setPage" v-if="currentPage === 'adminpublications'" />
     <AdminResearch @page-changed="setPage" v-if="currentPage === 'adminresearch'" />
     <AdminTools @page-changed="setPage" v-if="currentPage === 'admintools'" />
-    <AdminUser @page-changed="setPage" v-if="currentPage === 'adminuser'" />
+    <AdminUsers @page-changed="setPage" v-if="currentPage === 'adminusers'" />
     -->
     
     <!-- Public Works pages
@@ -27,6 +27,7 @@
     
     <!-- Testing with button navigation to view all pages without submenu (submenu not yet implemented) -->
     <nav>
+      <button @click="setPage('adminlogin')">Admin Login</button>
       <button @click="setPage('adminhome')">Home</button>
       <button @click="setPage('adminteaching')">Teaching</button>
       <button @click="setPage('adminpublications')">Publications</button>
@@ -37,10 +38,11 @@
       <button @click="setPage('adminmentorstudents')">Mentor Students</button>  <!-- Public Work -->
       <button @click="setPage('adminworkhistory')">Work History</button>  <!-- Public Work -->
       <button @click="setPage('admintools')">Tools</button>
-      <button @click="setPage('adminuser')">Admin</button>
+      <button @click="setPage('adminusers')">Admin Users</button>
       <button @click="setPage('adminnew')">New Admin</button>
     </nav>
 
+    <AdminLogin v-if="currentPage === 'adminlogin'" />
     <AdminHome v-if="currentPage === 'adminhome'" />
     <AdminTeaching v-if="currentPage === 'adminteaching'" />
     <AdminPublications v-if="currentPage === 'adminpublications'" />
@@ -51,13 +53,14 @@
     <AdminMentorStudents v-if="currentPage === 'adminmentorstudents'" />  <!-- Public Work -->
     <AdminWorkHistory v-if="currentPage === 'adminworkhistory'" />  <!-- Public Work -->
     <AdminTools v-if="currentPage === 'admintools'" />
-    <AdminUser v-if="currentPage === 'adminuser'" />
+    <AdminUsers v-if="currentPage === 'adminusers'" />
     <AdminNew v-if="currentPage === 'adminnew'" />
   </div>
 </template>
 
 <script>
  /* Import the components */
+  import AdminLogin from './components/AdminLogin.vue';
   import AdminHome from './components/AdminHome.vue';
   import AdminTeaching from './components/AdminTeaching.vue';
   import AdminPublications from './components/AdminPublications.vue';
@@ -68,13 +71,14 @@
   import AdminMentorStudents from './components/AdminMentorStudents.vue'; // Public Work
   import AdminWorkHistory from './components/AdminWorkHistory.vue'; // Public Work
   import AdminTools from './components/AdminTools.vue';
-  import AdminUser from './components/AdminUser.vue';
+  import AdminUsers from './components/AdminUsers.vue';
   import AdminNew from './components/AdminNew.vue';
 
   export default {
     name: 'App',
     components: {
       /* Register components */
+      AdminLogin,
       AdminHome,
       AdminTeaching,
       AdminPublications,
@@ -85,13 +89,13 @@
       AdminMentorStudents,
       AdminWorkHistory,
       AdminTools,
-      AdminUser,
-      AdminNew
+      AdminUsers,
+      AdminNew,
     },
 
     data() {
       return {
-        currentPage: 'adminhome' // Default to this page
+        currentPage: 'adminlogin' // Default to this page
       };
     },
     

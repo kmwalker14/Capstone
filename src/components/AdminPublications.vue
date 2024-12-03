@@ -67,8 +67,8 @@
               />
               <span class="nav-text">Tools</span>
             </li>
-            <!-- Admin User -->
-            <li class="nav-item" @click="setPage('adminuser')">
+            <!-- Admin Users -->
+            <li class="nav-item" @click="setPage('adminusers')">
               <img
                 loading="lazy"
                 src="@/assets/user.png"
