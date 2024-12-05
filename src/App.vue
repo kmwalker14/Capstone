@@ -47,6 +47,7 @@
       <button @click="setPage('studentoutsideasu')">Student Outside ASU</button>  <!-- Public Work -->
       <button @click="setPage('studentpublications')">Student Publications</button>
       <button @click="setPage('studentresearch')">Student Research</button>
+      <button @click="setPage('studentteaching')">Student Teaching</button>
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -69,6 +70,7 @@
     <StudentOutsideASU v-if="currentPage === 'studentoutsideasu'" />  <!-- Public Work -->
     <StudentPublications v-if="currentPage === 'studentpublications'" />
     <StudentResearch v-if="currentPage === 'studentresearch'" />
+    <StudentTeaching v-if="currentPage === 'studentteaching'" />
   </div>
 </template>
 
@@ -94,10 +96,12 @@
  import StudentOutsideASU from './components/StudentOutsideASU.vue'; // Public Work
  import StudentPublications from './components/StudentPublications.vue';
  import StudentResearch from './components/StudentResearch.vue';
+ import StudentTeaching from './components/StudentTeaching.vue';
 
   export default {
     name: 'App',
     components: {
+      StudentTeaching,
       StudentResearch,
       StudentPublications,
       StudentMentorFaculty,
