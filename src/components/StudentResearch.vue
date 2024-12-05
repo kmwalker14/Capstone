@@ -73,12 +73,7 @@
       <main class="main-content">
         <header class="header">
           <h1 class="page-title">Research</h1>
-          <div class="user-profile">
-            <div class="user-info">
 
-            </div>
-            <div class="user-avatar"></div>
-          </div>
         </header>
         <section class="content-section">
           <div class="banner"> <!-- REMOVE ??? -->
