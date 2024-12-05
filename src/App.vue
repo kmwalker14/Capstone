@@ -41,15 +41,15 @@
       <button @click="setPage('adminusers')">Admin Users</button>
       <button @click="setPage('adminnew')">New Admin</button>
       <button @click="setPage('studenthome')">Student Home</button>
-      <button @click="setPage('studentinsideasu')">Student Inside ASU</button>
-      <button @click="setPage('studentmentorfaculty')">Student Mentor Faculty</button>  <!-- Public Work -->
-      <button @click="setPage('studentmentorstudents')">Student Mentor Students</button>  <!-- Public Work -->
-      <button @click="setPage('studentoutsideasu')">Student Outside ASU</button>  <!-- Public Work -->
+      <button @click="setPage('studentteaching')">Student Teaching</button>
       <button @click="setPage('studentpublications')">Student Publications</button>
       <button @click="setPage('studentresearch')">Student Research</button>
-      <button @click="setPage('studentteaching')">Student Teaching</button>
-      <button @click="setPage('studenttools')">Student Tools</button>
+      <button @click="setPage('studentinsideasu')">Student Inside ASU</button>
+      <button @click="setPage('studentoutsideasu')">Student Outside ASU</button>  <!-- Public Work -->
+      <button @click="setPage('studentmentorfaculty')">Student Mentor Faculty</button>  <!-- Public Work -->
+      <button @click="setPage('studentmentorstudents')">Student Mentor Students</button>  <!-- Public Work -->
       <button @click="setPage('studentworkhistory')">Student Work History</button>  <!-- Public Work -->
+      <button @click="setPage('studenttools')">Student Tools</button>
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
