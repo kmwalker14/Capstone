@@ -41,6 +41,7 @@
       <button @click="setPage('adminusers')">Admin Users</button>
       <button @click="setPage('adminnew')">New Admin</button>
       <button @click="setPage('studenthome')">Student Home</button>
+      <button @click="setPage('studentinsideasu')">Student Inside ASU</button>
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -57,6 +58,7 @@
     <AdminUsers v-if="currentPage === 'adminusers'" />
     <AdminNew v-if="currentPage === 'adminnew'" />
     <StudentHome v-if="currentPage === 'studenthome'" />
+    <StudentInsideASU v-if="currentPage === 'studentinsideasu'" />  <!-- Public Work -->
   </div>
 </template>
 
@@ -76,11 +78,13 @@
   import AdminUsers from './components/AdminUsers.vue';
   import AdminNew from './components/AdminNew.vue';
  import StudentHome from "@/components/StudentHome.vue";
+ import StudentInsideASU from './components/StudentInsideASU.vue'; // Public Work
 
   export default {
     name: 'App',
     components: {
       StudentHome,
+      StudentInsideASU,
       /* Register components */
       AdminLogin,
       AdminHome,

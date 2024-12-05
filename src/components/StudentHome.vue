@@ -1,5 +1,5 @@
 <template>
-  <div class="student-container">
+  <div class="admin-container">
     <div class="layout-wrapper">
       <nav class="sidebar">
         <div class="profile-header">
@@ -72,7 +72,7 @@
             <img
                 loading="lazy"
                 src="@/assets/user.png"
-                alt="Adminnavigation icon"
+                alt="Student navigation icon"
                 class="nav-icon"
             />
             <span class="nav-text">Student</span>
