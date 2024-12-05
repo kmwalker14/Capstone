@@ -48,6 +48,7 @@
       <button @click="setPage('studentpublications')">Student Publications</button>
       <button @click="setPage('studentresearch')">Student Research</button>
       <button @click="setPage('studentteaching')">Student Teaching</button>
+      <button @click="setPage('studenttools')">Student Tools</button>
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -71,6 +72,7 @@
     <StudentPublications v-if="currentPage === 'studentpublications'" />
     <StudentResearch v-if="currentPage === 'studentresearch'" />
     <StudentTeaching v-if="currentPage === 'studentteaching'" />
+    <StudentTools v-if="currentPage === 'studenttools'" />
   </div>
 </template>
 
@@ -97,10 +99,12 @@
  import StudentPublications from './components/StudentPublications.vue';
  import StudentResearch from './components/StudentResearch.vue';
  import StudentTeaching from './components/StudentTeaching.vue';
+ import StudentTools from './components/StudentTools.vue';
 
   export default {
     name: 'App',
     components: {
+      StudentTools,
       StudentTeaching,
       StudentResearch,
       StudentPublications,
