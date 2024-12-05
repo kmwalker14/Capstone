@@ -43,6 +43,7 @@
       <button @click="setPage('studenthome')">Student Home</button>
       <button @click="setPage('studentinsideasu')">Student Inside ASU</button>
       <button @click="setPage('studentmentorfaculty')">Student Mentor Faculty</button>  <!-- Public Work -->
+      <button @click="setPage('studentmentorstudents')">Student Mentor Students</button>  <!-- Public Work -->
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -61,6 +62,7 @@
     <StudentHome v-if="currentPage === 'studenthome'" />
     <StudentInsideASU v-if="currentPage === 'studentinsideasu'" />  <!-- Public Work -->
     <StudentMentorFaculty v-if="currentPage === 'studentmentorfaculty'" />  <!-- Public Work -->
+    <StudentMentorStudents v-if="currentPage === 'studentmentorstudents'" />  <!-- Public Work -->
   </div>
 </template>
 
@@ -82,6 +84,7 @@
  import StudentHome from "@/components/StudentHome.vue";
  import StudentInsideASU from './components/StudentInsideASU.vue'; // Public Work
  import StudentMentorFaculty from './components/StudentMentorFaculty.vue'; // Public Work
+ import StudentMentorStudents from './components/StudentMentorStudents.vue'; // Public Work
 
   export default {
     name: 'App',
@@ -89,6 +92,7 @@
       StudentMentorFaculty,
       StudentHome,
       StudentInsideASU,
+      StudentMentorStudents,
       /* Register components */
       AdminLogin,
       AdminHome,
