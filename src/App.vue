@@ -40,6 +40,7 @@
       <button @click="setPage('admintools')">Tools</button>
       <button @click="setPage('adminusers')">Admin Users</button>
       <button @click="setPage('adminnew')">New Admin</button>
+      <button @click="setPage('studenthome')">Student Home</button>
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -55,6 +56,7 @@
     <AdminTools v-if="currentPage === 'admintools'" />
     <AdminUsers v-if="currentPage === 'adminusers'" />
     <AdminNew v-if="currentPage === 'adminnew'" />
+    <StudentHome v-if="currentPage === 'studenthome'" />
   </div>
 </template>
 
@@ -73,10 +75,12 @@
   import AdminTools from './components/AdminTools.vue';
   import AdminUsers from './components/AdminUsers.vue';
   import AdminNew from './components/AdminNew.vue';
+ import StudentHome from "@/components/StudentHome.vue";
 
   export default {
     name: 'App',
     components: {
+      StudentHome,
       /* Register components */
       AdminLogin,
       AdminHome,
