@@ -49,6 +49,7 @@
       <button @click="setPage('studentresearch')">Student Research</button>
       <button @click="setPage('studentteaching')">Student Teaching</button>
       <button @click="setPage('studenttools')">Student Tools</button>
+      <button @click="setPage('studentworkhistory')">Student Work History</button>  <!-- Public Work -->
     </nav>
 
     <AdminLogin v-if="currentPage === 'adminlogin'" />
@@ -73,6 +74,7 @@
     <StudentResearch v-if="currentPage === 'studentresearch'" />
     <StudentTeaching v-if="currentPage === 'studentteaching'" />
     <StudentTools v-if="currentPage === 'studenttools'" />
+    <StudentWorkHistory v-if="currentPage === 'studentworkhistory'" />  <!-- Public Work -->
   </div>
 </template>
 
@@ -100,10 +102,12 @@
  import StudentResearch from './components/StudentResearch.vue';
  import StudentTeaching from './components/StudentTeaching.vue';
  import StudentTools from './components/StudentTools.vue';
+ import StudentWorkHistory from './components/StudentWorkHistory.vue'; // Public Work
 
   export default {
     name: 'App',
     components: {
+      StudentWorkHistory,
       StudentTools,
       StudentTeaching,
       StudentResearch,
