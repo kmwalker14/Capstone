@@ -67,16 +67,7 @@
             />
             <span class="nav-text">Tools</span>
           </li>
-          <!-- Student Users -->
-          <li class="nav-item" @click="setPage('studentusers')">
-            <img
-                loading="lazy"
-                src="@/assets/user.png"
-                alt="Student navigation icon"
-                class="nav-icon"
-            />
-            <span class="nav-text">Student</span>
-          </li>
+
         </ul>
       </nav>
       <main class="main-content">
