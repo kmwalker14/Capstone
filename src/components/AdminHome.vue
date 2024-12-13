@@ -56,6 +56,14 @@
                 class="nav-icon"
               />
               <span class="nav-text">Public Work</span>
+              
+              <!-- SubMenu for Public Work Test-->
+              <ul v-if="showPublicWorkSubMenu" class= "submenu">
+                <li class="submenu-item" @click="setPage('publicworkServices')"> Services </li>
+                <li class="submenu-item" @click="setPage('publicworkMentoring')"> Mentoring </li>
+                <li class="submenu-item" @click="setPage('publicworkWorkHistory')"> Work History </li>
+              </ul>
+
             </li>
             <!-- Admin Tools -->
             <li class="nav-item" @click="setPage('admintools')">
@@ -174,7 +182,15 @@
 <script>
 export default {
   name: 'AdminHome',
+  data(){
+    return {
+      showPublicWorkSubMenu: false,
+    };
+  },
   methods: {
+    togglePublicWorkSubmenu(){
+      this.showPublicWorkSubMenu = !this.showPublicWorkSubMenu;
+    },
     setPage(page) {
       this.$emit('page-changed', page);
     }
@@ -204,7 +220,7 @@ export default {
   /* Sidebar styling*/
   .sidebar {
     background-color: rgba(106, 36, 18, 1);
-    width: 18%;
+    width: 22%;
     padding: 26px 0 336px 34px;
   }
   
@@ -255,6 +271,16 @@ export default {
   .nav-item:hover, .nav-item:focus {
     background-color: rgba(255, 255, 255, 0.1);
     outline: none;
+  }
+
+  .submenu{
+    list-style: none;
+    padding: 0 16px;
+  }
+
+  .submenu-item{
+    cursor: pointer;
+    padding: 4px 0;
   }
   
   /* Icon styling for navigation items */

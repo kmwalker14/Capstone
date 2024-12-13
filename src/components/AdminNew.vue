@@ -306,7 +306,7 @@ gap: 37px; /* Space between sidebar and content*/
 /* Sidebar styling*/
 .sidebar {
 background-color: rgba(106, 36, 18, 1);
-width: 18%;
+width: 22%;
 padding: 26px 0 336px 34px;
 }
 
