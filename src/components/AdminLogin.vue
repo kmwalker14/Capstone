@@ -48,7 +48,7 @@
             <span class="nav-text">Research</span>
           </li>
           <!-- Admin Public Work -->
-          <li class="nav-item">
+          <li class="nav-item" @click="togglePublicWorkMenu">
             <img
               loading="lazy"
               src="@/assets/spiral.png"
@@ -56,7 +56,21 @@
               class="nav-icon"
             />
             <span class="nav-text">Public Work</span>
+            <img
+              loading="lazy"
+              src="@/assets/arrow-down.png"
+              alt="Arrow icon"
+              class="arrow-icon"
+              :class="{'rotated': isMenuVisible}"
+            />
           </li>
+          <!-- Collapsible sub-menu for Public Work -->
+           <ul v-if="isMenuVisible" class="sub-menu">
+            <li class="nav-item"> Services </li>
+            <li class="nav-item"> Mentoring </li>
+            <li class="nav-item"> Work History </li>
+           </ul>
+
           <!-- Admin Tools -->
           <li class="nav-item" @click="setPage('admintools')">
             <img
@@ -138,10 +152,13 @@ export default {
   name: 'AdminLogin',
   data() {
     return {
-      // empty for now
+      isMenuVisible: false, // Track visibility of Public Work menu
     };
   },
   methods: {
+    togglePublicWorkMenu() {   // Track visibility of Public Work menu
+      this.isMenuVisible = !this.isMenuVisible;
+    },
     setPage(page) {
       this.$emit('page-changed', page);
     },
@@ -208,6 +225,36 @@ export default {
   border: 1px solid var(--Color-Gray-2, #c1bbeb);
   border-radius: 5px;
   font-size: 14px;
+}
+
+/* Styles the collapsible menu for Public Works */
+.sub-menu {
+  padding-left: 90px;
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.sub-menu .nav-item {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.sub-menu .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 15px;
+  margin-left: 5px;
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: -5px;
+  transition: transform 0.15s ease;
+}
+
+.arrow-icon.rotated { /* Rotate arrow when menu is visible */
+  transform: rotate(-90deg);
 }
 
 /* Styles the main container that holds the entire admin layout */
