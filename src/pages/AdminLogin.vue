@@ -8,17 +8,17 @@
         </div>
         <ul class="nav-list">
           <!-- Admin Home -->
-          <li class="nav-item">
+          <li class="nav-item" @click="$router.push('/adminhome')">
             <img
               loading="lazy"
               src="@/assets/home.png"
               alt="Home navigation icon"
               class="nav-icon"
             />
-            <span class="nav-text" @click="setPage('adminhome')">Home</span>
+            <span class="nav-text">Home</span>
           </li>
           <!-- Admin Teaching -->
-          <li class="nav-item" @click="setPage('adminteaching')">
+          <li class="nav-item" @click="$router.push('/adminteaching')">
             <img
               loading="lazy"
               src="@/assets/book.png"
@@ -28,7 +28,7 @@
             <span class="nav-text">Teaching</span>
           </li>
           <!-- Admin Publications -->
-          <li class="nav-item" @click="setPage('adminpublications')">
+          <li class="nav-item" @click="$router.push('/adminpublications')">
             <img
               loading="lazy"
               src="@/assets/feather.png"
@@ -38,7 +38,7 @@
             <span class="nav-text">Publications</span>
           </li>
           <!-- Admin Research -->
-          <li class="nav-item" @click="setPage('adminresearch')">
+          <li class="nav-item" @click="router.push('/adminresearch')">
             <img
               loading="lazy"
               src="@/assets/clipboard.png"
@@ -83,7 +83,7 @@
               />
             </li>
             <ul v-if="isServiceMenuVisible" class="sub-menu">
-              <li class = "nav-item">
+              <li class = "nav-item" @click="$router.push('/admin-insideasu')">
                 <img
                   loading="lazy"
                   src="@/assets/bxs-school.svg.png"
@@ -91,7 +91,7 @@
                   class="nav-icon"
                 />
               Inside ASU</li>
-              <li class = "nav-item">
+              <li class = "nav-item" @click="$router.push('/admin-outsideasu')">
                 <img
                   loading="lazy"
                   src="@/assets/bx-building-house.svg.png"
@@ -118,7 +118,7 @@
               />
             </li>
             <ul v-if="isMentorMenuVisible" class="sub-menu"> 
-              <li class="nav-item">
+              <li class="nav-item" @click="$router.push('/admin-mentorfaculty')">
                 <img
                   loading="lazy"
                   src="@/assets/staff.png"
@@ -126,7 +126,7 @@
                   class="nav-icon"
                 />
               Faculty</li>
-              <li class="nav-item">
+              <li class="nav-item" @click="$router.push('/admin-mentorstudents')">
                 <img
                   loading="lazy"
                   src="@/assets/students.png"
@@ -135,7 +135,7 @@
                 />
               Students</li>
             </ul>
-            <li class="nav-item">
+            <li class="nav-item" @click="$router.push('/adminworkhistory')">
               <img
               loading="lazy"
               src="@/assets/work-history.png"
@@ -145,7 +145,7 @@
             Work History </li>
            </ul>
           <!-- Admin Tools -->
-          <li class="nav-item" @click="setPage('admintools')">
+          <li class="nav-item" @click="router.push('/admintools')">
             <img
               loading="lazy"
               src="@/assets/wrench.png"
