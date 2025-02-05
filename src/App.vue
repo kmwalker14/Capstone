@@ -60,19 +60,19 @@
 
 <script>
  /* Import the components */
-  import AdminLogin from './components/AdminLogin.vue';
-  import AdminHome from './components/AdminHome.vue';
-  import AdminTeaching from './components/AdminTeaching.vue';
-  import AdminPublications from './components/AdminPublications.vue';
-  import AdminResearch from './components/AdminResearch.vue';
-  import AdminInsideASU from './components/AdminInsideASU.vue'; // Public Work
-  import AdminOutsideASU from './components/AdminOutsideASU.vue'; // Public Work
-  import AdminMentorFaculty from './components/AdminMentorFaculty.vue'; // Public Work
-  import AdminMentorStudents from './components/AdminMentorStudents.vue'; // Public Work
-  import AdminWorkHistory from './components/AdminWorkHistory.vue'; // Public Work
-  import AdminTools from './components/AdminTools.vue';
-  import AdminUsers from './components/AdminUsers.vue';
-  import AdminNew from './components/AdminNew.vue';
+  import AdminLogin from './pages/AdminLogin.vue';
+  import AdminHome from './pages/AdminHome.vue';
+  import AdminTeaching from './pages/AdminTeaching.vue';
+  import AdminPublications from './pages/AdminPublications.vue';
+  import AdminResearch from './pages/AdminResearch.vue';
+  import AdminInsideASU from './pages/AdminInsideASU.vue'; // Public Work
+  import AdminOutsideASU from './pages/AdminOutsideASU.vue'; // Public Work
+  import AdminMentorFaculty from './pages/AdminMentorFaculty.vue'; // Public Work
+  import AdminMentorStudents from './pages/AdminMentorStudents.vue'; // Public Work
+  import AdminWorkHistory from './pages/AdminWorkHistory.vue'; // Public Work
+  import AdminTools from './pages/AdminTools.vue';
+  import AdminUsers from './pages/AdminUsers.vue';
+  import AdminNew from './pages/AdminNew.vue';
 
   export default {
     name: 'App',

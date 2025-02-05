@@ -8,14 +8,14 @@
         </div>
         <ul class="nav-list">
           <!-- Admin Home -->
-          <li class="nav-item" @click="setPage('adminhome')">
+          <li class="nav-item">
             <img
               loading="lazy"
               src="@/assets/home.png"
               alt="Home navigation icon"
               class="nav-icon"
             />
-            <span class="nav-text">Home</span>
+            <span class="nav-text" @click="setPage('adminhome')">Home</span>
           </li>
           <!-- Admin Teaching -->
           <li class="nav-item" @click="setPage('adminteaching')">
@@ -48,7 +48,7 @@
             <span class="nav-text">Research</span>
           </li>
           <!-- Admin Public Work -->
-          <li class="nav-item">
+          <li class="nav-item" @click="togglePublicWorkMenu">
             <img
               loading="lazy"
               src="@/assets/spiral.png"
@@ -56,7 +56,94 @@
               class="nav-icon"
             />
             <span class="nav-text">Public Work</span>
+            <img 
+              src="@/assets/keyboard_arrow_down.png" 
+              alt="Public Work arrow"
+              class="arrow-icon"
+              :class="{'rotated': isMenuVisible}"
+            />
           </li>
+          <!-- Collapsible sub-menu for Public Work -->
+           <ul v-if="isMenuVisible" class="sub-menu">
+            <li class="nav-item" @click="toggleServiceMenu">
+              <img
+              loading="lazy"
+              src="@/assets/service.png"
+              alt="Research navigation icon"
+              class="nav-icon"
+              />
+              <!-- Name of Services Tab on Submenu-->
+              Services 
+
+              <img 
+                src="@/assets/keyboard_arrow_down.png" 
+                alt="Service dropdown arrow"
+                class="arrow-icon"
+                :class="{'rotated': isServiceMenuVisible}"
+              />
+            </li>
+            <ul v-if="isServiceMenuVisible" class="sub-menu">
+              <li class = "nav-item">
+                <img
+                  loading="lazy"
+                  src="@/assets/bxs-school.svg.png"
+                  alt="Research navigation icon"
+                  class="nav-icon"
+                />
+              Inside ASU</li>
+              <li class = "nav-item">
+                <img
+                  loading="lazy"
+                  src="@/assets/bx-building-house.svg.png"
+                  alt="Research navigation icon"
+                  class="nav-icon"
+                />
+              Outside ASU</li>
+            </ul>
+            <li class="nav-item" @click="toggleMentoringMenu" >
+              <img
+              loading="lazy"
+              src="@/assets/mentoring.png"
+              alt="Research navigation icon"
+              class="nav-icon"
+              />
+              <!-- Name of Mentoring Tab on Submenu-->
+              Mentoring
+
+              <img 
+                src="@/assets/keyboard_arrow_down.png" 
+                alt="Public Work arrow"
+                class="arrow-icon"
+                :class="{'rotated': isMentorMenuVisible}"
+              />
+            </li>
+            <ul v-if="isMentorMenuVisible" class="sub-menu"> 
+              <li class="nav-item">
+                <img
+                  loading="lazy"
+                  src="@/assets/staff.png"
+                  alt="Research navigation icon"
+                  class="nav-icon"
+                />
+              Faculty</li>
+              <li class="nav-item">
+                <img
+                  loading="lazy"
+                  src="@/assets/students.png"
+                  alt="Research navigation icon"
+                  class="nav-icon"
+                />
+              Students</li>
+            </ul>
+            <li class="nav-item">
+              <img
+              loading="lazy"
+              src="@/assets/work-history.png"
+              alt="Research navigation icon"
+              class="nav-icon"
+            />
+            Work History </li>
+           </ul>
           <!-- Admin Tools -->
           <li class="nav-item" @click="setPage('admintools')">
             <img
@@ -138,10 +225,21 @@ export default {
   name: 'AdminLogin',
   data() {
     return {
-      // empty for now
+      isMenuVisible: false, // Track visibility of Public Work menu
+      isServiceMenuVisible: false,  //Track visibility of Service menu
+      isMentorMenuVisible: false, //Track visibility of Mentor menu
     };
   },
   methods: {
+    togglePublicWorkMenu() {   // Track visibility of Public Work menu
+      this.isMenuVisible = !this.isMenuVisible;
+    },
+    toggleServiceMenu(){
+      this.isServiceMenuVisible = !this.isServiceMenuVisible;
+    },
+    toggleMentoringMenu(){   //Track visibility of Mentoring menu
+      this.isMentorMenuVisible = !this.isMentorMenuVisible;
+    },
     setPage(page) {
       this.$emit('page-changed', page);
     },
@@ -210,6 +308,34 @@ export default {
   font-size: 14px;
 }
 
+/* Styles the collapsible menu for Public Works */
+.sub-menu {
+  padding-left: 50px;
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.sub-menu .nav-item {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.sub-menu .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: -5px;
+  transition: transform 0.30s ease;
+}
+
+.arrow-icon.rotated { /* Rotate arrow when menu is visible */
+  transform: rotate(-90deg);
+}
+
 /* Styles the main container that holds the entire admin layout */
 .admin-container {
 background: var(--Color-Background, #f3f4ff);
@@ -226,7 +352,7 @@ gap: 37px; /* Space between sidebar and content*/
 /* Sidebar styling*/
 .sidebar {
 background-color: rgba(106, 36, 18, 1);
-width: 18%;
+width: 22%;
 padding: 26px 0 336px 34px;
 }
 
