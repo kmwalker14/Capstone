@@ -1,0 +1,28 @@
+name: CI  # Name of the workflow
+
+#on:  # Defines the events that trigger the workflow
+#  push:  # Trigger on push events
+#    branches:  # Specify branches to trigger on
+#    - develop  # Only trigger on pushes to the develop branch
+#  pull_request:  # Trigger on pull request events
+#    branches:  # Specify branches for pull requests
+#      - develop  # Only trigger for pull requests on the develop branch
+
+#jobs:  # Define the jobs that will run in this workflow
+#  build:  # Name of the job
+#    runs-on: ubuntu-latest  # Specify the environment to run the job
+
+#    steps: # Steps to execute within the job
+#      - name: Checkout code  # Step to check out the code from the repository
+#        uses: actions/checkout@v2
+#        with:
+#          node-version: '14'  # Specify the version of the Node.js to use
+
+#      - name: Install dependencies # Step to install project dependencies
+#        run: npm install
+
+#      - name: Run tests  # Step to run tests for the project
+#        run: npm test
+
+#      - name: Build project  # Step to build the project
+#        run: npm run build
