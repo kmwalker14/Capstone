@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "@tiptap/vue-3": "^2.0.0",
+  "@tiptap/pm": "^2.0.0",
+  "@tiptap/starter-kit": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
