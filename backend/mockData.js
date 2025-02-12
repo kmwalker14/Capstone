@@ -4,5 +4,6 @@ const mockData = [
     { id: 2, name: "Item 2", description: "This is another sample item" },
   ];
   
+  // Export to use in other files
   module.exports = mockData;
   
