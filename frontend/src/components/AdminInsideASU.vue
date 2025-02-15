@@ -152,6 +152,9 @@
                       </button>
                       <input type="file" ref="fileInput" @change="handleFileUpload" accept=".pdf,.doc,.docx,.jpg, .png" style="display: none;" />
 
+                      <button @click="addLink">🔗 Link</button>
+
+
                     </div>
                   </div>
 
@@ -209,6 +212,14 @@ methods: {
   setPage(page) {
     this.$emit('page-changed', page);
   },
+
+  addLink() {
+    const url = window.prompt("Enter the URL:");
+    if (url) {
+      this.editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+    }
+  },
+
 
   submitContent() {
     const content = this.editor.getHTML();
