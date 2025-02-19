@@ -82,7 +82,7 @@ app.post('/admins', async (req, res) => {
     });
 });
 
-/*
+
 // Define root route
 app.get('/', (req, res) => {
     res.send('Testing Backend API');
@@ -93,7 +93,6 @@ app.get('/items', (req, res) => {
     res.json(mockData);  // Use mock data
 });
 
-*/
 
 // Start the server
 app.listen(PORT, () => {
