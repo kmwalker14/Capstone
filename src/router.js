@@ -1,4 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
+import { useAuth0 } from '@auth0/auth0-vue';
 import AdminLogin from './pages/AdminLogin.vue';
 import AdminHome from '@/pages/AdminHome.vue';
 import AdminTeaching from './pages/AdminTeaching.vue';
@@ -13,7 +14,17 @@ import AdminMentorStudents from './pages/AdminMentorStudents.vue';
 import AdminWorkHistory from './pages/AdminWorkHistory.vue';
 
 const routes = [
-  {path: '/', redirect: '/adminlogin'},
+  {path: '/', 
+    redirect: '/adminlogin',
+    beforeEnter: (to, from, next) => {
+      const { isAuthenticated, user } = useAuth0();
+      if (isAuthenticated && user.value?.email === "professor@example.edu") {
+        next();
+      } else {
+        next('/');
+      }
+    },
+  },
   {path: '/adminhome', name: 'AdminHome', component: AdminHome},
   {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin},
   {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching},

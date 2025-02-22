@@ -211,9 +211,11 @@
                   </div>
                 </div>
               </div>
-            <button type="submit" class="login-button" tabindex="0"> <!-- tabindex lets user tab through fields in order-->
+            <button type="submit" class="login-button" tabindex="0" @click="login"> <!-- tabindex lets user tab through fields in order-->
               Login
             </button>
+            <button @click="logout">Logout</button>
+            <p v-if="user">Welcome, {{ user.name }}</p>
           </form>
       </main>
     </div>
@@ -221,8 +223,19 @@
 </template>
 
 <script>
+import { useAuth0 } from '@auth0/auth0-vue';
 export default {
   name: 'AdminLogin',
+  setup() {
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+
+    return {
+      login: () => loginWithRedirect(),
+      logout: () => logout({ returnTo: window.location.origin }),
+      user,
+      isAuthenticated
+    };
+  },
   data() {
     return {
       isMenuVisible: false, // Track visibility of Public Work menu
