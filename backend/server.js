@@ -16,6 +16,14 @@ const SECRET_KEY = "CSE486Capstone"; // Change this to a strong secret
 app.use(cors());
 app.use(bodyParser.json());
 
+// Enforce HTTPS
+app.use((req, res, next) => {
+    if (process.env.RENDER && req.headers["x-forwarded-proto"] !== "https") {
+        return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    next();
+});
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root', // Change if necessary
