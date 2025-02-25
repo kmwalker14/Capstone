@@ -143,7 +143,7 @@
         Work History </li>
         </ul>
         <!-- Student Tools -->
-        <li class="nav-item" @click="$router.push('/admintools')">
+        <li class="nav-item" @click="$router.push('/studenttools')">
             <img
             loading="lazy"
             src="@/assets/wrench.png"
