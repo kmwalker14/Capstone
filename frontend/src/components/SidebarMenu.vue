@@ -143,7 +143,7 @@
         Work History </li>
         </ul>
         <!-- Student Tools -->
-        <li class="nav-item" @click="setPage('studenttools')">
+        <li class="nav-item" @click="$router.push('/admintools')">
             <img
             loading="lazy"
             src="@/assets/wrench.png"
@@ -218,16 +218,10 @@ export default {
     transform: rotate(-90deg);
   }
   
-  /* Flex container that holds the sidebar and main content */
-  .layout-wrapper {
-    display: flex;
-    gap: 37px; /* Space between sidebar and content*/
-  }
-  
   /* Sidebar styling*/
   .sidebar {
     background-color: rgba(106, 36, 18, 1);
-    width: 22%;
+    width: 21%;
     padding: 26px 0 336px 34px;
   }
   

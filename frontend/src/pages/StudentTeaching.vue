@@ -40,11 +40,24 @@ export default {
   background: var(--Color-Background, #f3f4ff);
   padding: 0 37px 0 0;
   overflow: hidden;
+  flex-grow: 1;
+  width: 100%;
+}
+
+/* Flex container that holds the sidebar and main content */
+.layout-wrapper {
+  display: flex;
+  gap: 37px; /* Space between sidebar and content*/
+  width: 100%;
+  flex-grow: 1;
+  padding: 0px 15px 0px 15px;
 }
 
 /* Main content styling */
 .main-content {
-  width: 82%;
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
 }
 
 /* Header with page title and user details */

@@ -102,211 +102,218 @@ export default {
 };
 </script>
   
-  <style> /* Not scoped */
-  body {
+<style scoped> /* Previously not scoped */
+body {
   margin: 0;
   padding: 0;
-  }
+}
 
-  /* Styles the main container that holds the entire admin layout */
-  .admin-container {
-    background: var(--Color-Background, #f3f4ff);
-    padding: 0 37px 0 0;
-    overflow: hidden;
-  }
-  
-  /* Flex container that holds the sidebar and main content */
-  .layout-wrapper {
-    display: flex;
-    gap: 37px; /* Space between sidebar and content*/
-  }
-  
-  /* Main content styling */
-  .main-content {
-    width: 82%;
-  }
-  
-  /* Header with page title and user details */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 13px 0 36px;
-    font-family: Poppins, sans-serif;
-  }
-  
-  .page-title {
-    color: var(--Color-Text, #303972);
-    font: 700 36px Poppins, sans-serif;
-    margin: 0;
-  }
-  
-  .user-profile {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-  }
-  
-  .user-info {
-    text-align: center;
-  }
-  
-  /* User text styling for name and role */
-  .user-name {
-    color: var(--Color-Text, #303972);
-    font: 600 14px Poppins, sans-serif;
-    display: block;
-  }
-  
-  .user-role {
-    color: var(--Color-Gray-3, #a098ae);
-    font: 400 14px Poppins, sans-serif;
-    margin-top: 4px;
-    display: block;
-  }
-  
-  /* Avatar styling */
-  .user-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 40px;
-    background: var(--Color-Gray-2, #c1bbeb);
-  }
-  
-  /* Content section styling */
-  .content-section {
-    background: #fff;
-    border-radius: 20px;
-    margin-top: 20px;
-  }
-  
-  /* Banner styling */
-  .banner {
-    position: relative;
-    min-height: 202px;
-    /*
-    background-color: rgba(106, 36, 18, 1);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    */
-  }
-  
-  .banner-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* Edit button styling */
-  .edit-button {
-    position: relative;
-    z-index: 1;
-    margin: 92px 0 0 36px;
-    padding: 17px 43px;
-    border-radius: 40px;
-    background: var(--Color-Purple, #4d44b5);
-    color: #fff;
-    font: 400 18px Poppins, sans-serif;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
-  }
-  
-  /* Profile styling */
-  .profile-content {
-    display: flex;
-    padding: 0 36px 92px;
-    margin-top: -27px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .profile-details {
-    width: 70%;
-    color: var(--Color-Text, #303972);
-    font-family: Poppins, sans-serif;
-  }
-  
-  .profile-header-section {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .profile-title {
-    font: 700 32px Poppins, sans-serif;
-    margin: 10;     /*T: 10, O: 0*/
-    padding-right: 1%; /*T: 1%, O: null*/
-  }
-  
-  /* Styling for location and email sections/icons */
-  .location-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 31px;
-    font: 600 18px Poppins, sans-serif;
-  }
-  
-  .location-icon,
-  .email-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
-  
-  .contact-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 134px; /*T: 134px, O: null*/
-    font: 600 18px Poppins, sans-serif;
-  }
-  
-  /* Section styling for About, Education, Office Hours */
-  .section-title {
-    font: 700 24px Poppins, sans-serif;
-    margin: 34px 0 30px;
-  }
-  
-  .section-content {
-    font: 400 18px Poppins, sans-serif;
-    text-align: justify;
-    margin: 0;
-  }
-  
-  .education-item {
-    margin: 29px 0;
-  }
-  
-  .education-degree {
-    font: 600 18px Poppins, sans-serif;
-    margin: 0;
-  }
-  
-  .education-year {
-    color: var(--Color-Gray-3, #a098ae);
-    font: 400 18px Poppins, sans-serif;
-    margin-left: 40px;
-    display: block;
-    margin-top: 14px;
-  }
-  
-  /* Profile image styling */
-  .profile-image-container {
-    width: 30%;
-    margin-left: 20px;
-  }
-  
-  .profile-image {
-    width: 100%;
-    aspect-ratio: 1.03;
-    object-fit: fill;
-    border-radius: 50%;
-  }
-  
+/* Styles the main container that holds the entire admin layout */
+.admin-container {
+  background: var(--Color-Background, #f3f4ff);
+  padding: 0 37px 0 0;
+  overflow: hidden;
+  flex-grow: 1;
+  width: 100%;
+}
+
+/* Flex container that holds the sidebar and main content */
+.layout-wrapper {
+  display: flex;
+  gap: 37px; /* Space between sidebar and content*/
+  width: 100%;
+  flex-grow: 1;
+  padding: 0px 15px 0px 15px;
+}
+
+/* Main content styling */
+.main-content {
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Header with page title and user details */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 13px 0 36px;
+  font-family: Poppins, sans-serif;
+}
+
+.page-title {
+  color: var(--Color-Text, #303972);
+  font: 700 36px Poppins, sans-serif;
+  margin: 0;
+}
+
+.user-profile {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.user-info {
+  text-align: center;
+}
+
+/* User text styling for name and role */
+.user-name {
+  color: var(--Color-Text, #303972);
+  font: 600 14px Poppins, sans-serif;
+  display: block;
+}
+
+.user-role {
+  color: var(--Color-Gray-3, #a098ae);
+  font: 400 14px Poppins, sans-serif;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Avatar styling */
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  background: var(--Color-Gray-2, #c1bbeb);
+}
+
+/* Content section styling */
+.content-section {
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* Banner styling */
+.banner {
+  position: relative;
+  min-height: 202px;
+  /*
+  background-color: rgba(106, 36, 18, 1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  */
+}
+
+.banner-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Edit button styling */
+.edit-button {
+  position: relative;
+  z-index: 1;
+  margin: 92px 0 0 36px;
+  padding: 17px 43px;
+  border-radius: 40px;
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
+  font: 400 18px Poppins, sans-serif;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
+}
+
+/* Profile styling */
+.profile-content {
+  display: flex;
+  padding: 0 36px 92px;
+  margin-top: -27px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-details {
+  width: 70%;
+  color: var(--Color-Text, #303972);
+  font-family: Poppins, sans-serif;
+}
+
+.profile-header-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.profile-title {
+  font: 700 32px Poppins, sans-serif;
+  margin: 10;     /*T: 10, O: 0*/
+  padding-right: 1%; /*T: 1%, O: null*/
+}
+
+/* Styling for location and email sections/icons */
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 31px;
+  font: 600 18px Poppins, sans-serif;
+}
+
+.location-icon,
+.email-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 134px; /*T: 134px, O: null*/
+  font: 600 18px Poppins, sans-serif;
+}
+
+/* Section styling for About, Education, Office Hours */
+.section-title {
+  font: 700 24px Poppins, sans-serif;
+  margin: 34px 0 30px;
+}
+
+.section-content {
+  font: 400 18px Poppins, sans-serif;
+  text-align: justify;
+  margin: 0;
+}
+
+.education-item {
+  margin: 29px 0;
+}
+
+.education-degree {
+  font: 600 18px Poppins, sans-serif;
+  margin: 0;
+}
+
+.education-year {
+  color: var(--Color-Gray-3, #a098ae);
+  font: 400 18px Poppins, sans-serif;
+  margin-left: 40px;
+  display: block;
+  margin-top: 14px;
+}
+
+/* Profile image styling */
+.profile-image-container {
+  width: 30%;
+  margin-left: 20px;
+}
+
+.profile-image {
+  width: 100%;
+  aspect-ratio: 1.03;
+  object-fit: fill;
+  border-radius: 50%;
+}
+
 /* Media queries for responsive design go here */
 </style>

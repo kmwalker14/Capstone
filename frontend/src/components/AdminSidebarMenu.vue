@@ -237,7 +237,7 @@ export default {
   /* Sidebar styling*/
   .sidebar {
     background-color: rgba(106, 36, 18, 1);
-    width: 22%;
+    width: 21%;
     padding: 26px 0 336px 34px;
   }
   
