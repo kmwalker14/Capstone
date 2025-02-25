@@ -20,7 +20,7 @@ import SidebarMenu from "./components/SidebarMenu.vue";
 const mockAuth0 = {
   getUser: () => {
     // Return mock user data
-    return {role: "student"}; // Mock role can be switched between 'admin' or 'student' for testing
+    return {role: "admin"}; // Mock role can be switched between 'admin' or 'student' for testing
   }
 };
 
