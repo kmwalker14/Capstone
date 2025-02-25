@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'AdminLogin',
+  name: 'UserLogin',
   methods: {
     handleLogin() {
       // Login logic here

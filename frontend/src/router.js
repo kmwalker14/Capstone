@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
-import AdminLogin from './pages/AdminLogin.vue';
+import UserLogin from './pages/UserLogin.vue';
 import AdminHome from '@/pages/AdminHome.vue';
 import AdminTeaching from './pages/AdminTeaching.vue';
 import AdminPublications from '@/pages/AdminPublications.vue';
@@ -24,9 +24,9 @@ import StudentMentorFaculty from './pages/StudentMentorFaculty.vue';
 import StudentWorkHistory from './pages/StudentWorkHistory.vue';
 
 const routes = [
-  {path: '/', redirect: '/adminlogin'},
+  {path: '/', redirect: '/userlogin'},
   {path: '/adminhome', name: 'AdminHome', component: AdminHome},
-  {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin},
+  {path: '/userlogin', name: 'UserLogin', component: UserLogin},
   {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching},
   {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications},
   {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch},
