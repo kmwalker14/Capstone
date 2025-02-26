@@ -53,7 +53,7 @@ app.get('/admins', (req, res) => {
             return res.status(500).json({ message: "Database error", error: err });
         }
         res.json(results);
-    });
+    }); 
 });
 
 /*
