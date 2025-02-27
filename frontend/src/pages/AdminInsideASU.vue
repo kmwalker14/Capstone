@@ -139,8 +139,16 @@ methods: {
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
+
+    console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL); // Debugging
+
+    if (!import.meta.env.VITE_BACKEND_URL) {
+      alert('Backend URL is not defined. Check your .env file.');
+      return;
+    }
+
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/insideasu`, { content }); // Send to backend
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/insideasu`, { content });
       alert('Content saved successfully!');
     } catch (error) {
       console.error('Error saving content:', error);
