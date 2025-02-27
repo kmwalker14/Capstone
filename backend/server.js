@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load .env variables
 
 const express = require('express'); // Import express for building the server
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 const cors = require('cors');
@@ -12,30 +12,39 @@ const app = express(); // Create an express app instance
 const mockData = require('./mockData');  // Import the mock data
 
 // Set the port to environment variable or default to 10000
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 const SECRET_KEY = process.env.SECRET_KEY; // Change this to a strong secret
 
-app.use(cors());
+app.use(cors({ origin: "https://asu-capstone.onrender.com" }));
+
 app.use(bodyParser.json());
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER, // Change if necessary
     password: process.env.DB_PASSWORD, // Change if you set a password
     database: process.env.DB_NAME,
-    port: process.env.PORT
+    port: process.env.DB_PORT || 3306
 
 });
 
 // Connect to MySQL
-db.connect(err => {
-    if (err) {
-        console.error('Database connection error:', err.message);
-        return;
+//db.connect(err => {
+//    if (err) {
+//        console.error('Database connection error:', err.message);
+//       return;
+//   }
+//   console.log('Connected to MySQL Database');
+//});
+(async () => {
+    try {
+        const connection = await db.getConnection();
+        console.log('✅ Connected to MySQL Database');
+        connection.release();
+    } catch (err) {
+        console.error('❌ Database connection error:', err.message);
     }
-    console.log('Connected to MySQL Database');
-});
-
+})();
 
 // Hash passwords before storing in DB
 const hashPassword = async (password) => {
@@ -45,16 +54,35 @@ const hashPassword = async (password) => {
 
 
 // Get All Admins API route
-app.get('/admins', (req, res) => {
-    const query = "SELECT id, first_name, last_name, username, email FROM admins";
-    
-    db.query(query, (err, results) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err });
-        }
+app.get('/admins', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, first_name, last_name, username, email FROM admins");
         res.json(results);
-    }); 
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
 });
+
+app.post('/api/insideasu', async (req, res) => {
+    try {
+        const { content } = req.body; // Get the content from request
+
+        if (!content) {
+            return res.status(400).json({ message: 'Content is required' });
+        }
+
+        const query = "INSERT INTO insideasu (content) VALUES (?)"; // Adjust table name if different
+        await db.query(query, [content]);
+
+        res.status(201).json({ message: "Content saved successfully" });
+    } catch (err) {
+        console.error('Database error:', err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
+
+
 
 /*
 // Define root route

@@ -109,6 +109,7 @@ import { faParagraph } from '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import { faHighlighter } from '@fortawesome/free-solid-svg-icons'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
 export default {
 name: 'AdminInsideASU',
@@ -136,11 +137,15 @@ methods: {
     }
   },
 
-  submitContent() {
-    const content = this.editor.getHTML();
-    console.log('Submitted Content:', content);
-    alert('Content Submitted! Check the console for output.');
-    // You can send the content to an API or handle it accordingly
+  async submitContent() {
+    const content = this.editor.getHTML(); // Get rich text content
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/insideasu`, { content }); // Send to backend
+      alert('Content saved successfully!');
+    } catch (error) {
+      console.error('Error saving content:', error);
+      alert('Failed to save content.');
+    }
   },
 
   addImage() {
@@ -187,6 +192,7 @@ methods: {
   },
 };
 </script>
+
 
 <style scoped>
 /* Styles the main container that holds the entire admin layout */
