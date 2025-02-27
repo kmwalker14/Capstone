@@ -12,10 +12,11 @@ const app = express(); // Create an express app instance
 const mockData = require('./mockData');  // Import the mock data
 
 // Set the port to environment variable or default to 10000
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 const SECRET_KEY = process.env.SECRET_KEY; // Change this to a strong secret
 
-app.use(cors({ origin: "https://asu-capstone.onrender.com" }));
+app.use(cors({ origin: "*" }));
+
 
 app.use(bodyParser.json());
 

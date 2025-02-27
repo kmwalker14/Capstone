@@ -151,7 +151,8 @@ methods: {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/insideasu`, { content });
       alert('Content saved successfully!');
     } catch (error) {
-      console.error('Error saving content:', error);
+      console.error('Error saving content:', error.response?.data || error.message);
+
       alert('Failed to save content.');
     }
   },
