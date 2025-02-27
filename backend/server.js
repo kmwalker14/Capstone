@@ -70,21 +70,35 @@ app.get('/admins', async (req, res) => {
 
 app.post('/api/insideasu', async (req, res) => {
     try {
-        const { content } = req.body; // Get the content from request
+        res.setHeader("Access-Control-Allow-Origin", "https://asu-capstone.onrender.com"); // Manually add CORS
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        console.log("🔹 Incoming Request:", req.body); // Debug request body
+
+        const { content } = req.body;
 
         if (!content) {
-            return res.status(400).json({ message: 'Content is required' });
+            console.error("❌ Error: No content provided");
+            return res.status(400).json({ message: "Content is required" });
         }
 
-        const query = "INSERT INTO insideasu (content) VALUES (?)"; // Adjust table name if different
+        const query = "INSERT INTO insideasu (content) VALUES (?)";
         await db.query(query, [content]);
 
+        console.log("✅ Content saved successfully");
         res.status(201).json({ message: "Content saved successfully" });
+
     } catch (err) {
-        console.error('Database error:', err);
-        res.status(500).json({ message: "Database error", error: err.message });
+        console.error("❌ Database error:", err); // Log full error
+
+        res.status(500).json({
+            message: "Database error",
+            error: err.message
+        });
     }
 });
+
 
 
 
