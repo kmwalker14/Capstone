@@ -140,19 +140,21 @@ methods: {
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
 
-    // Use process.env with Vue CLI
+    // Vue CLI uses process.env.VUE_APP_*
     const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
     console.log("Backend URL:", backendUrl); // Debugging output
 
     try {
-      await axios.post(`${backendUrl}/api/insideasu`, { content });
+      const response = await axios.post(`${backendUrl}/api/insideasu`, { content });
+      console.log("✅ Success:", response.data); // Log success response
       alert('Content saved successfully!');
     } catch (error) {
-      console.error('Error saving content:', error.response?.data || error.message);
+      console.error('❌ Error saving content:', error.response?.data || error.message);
       alert('Failed to save content.');
     }
   }
+
 
   ,
 
