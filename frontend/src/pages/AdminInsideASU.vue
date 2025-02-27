@@ -140,15 +140,10 @@ methods: {
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
 
-    // Use process.env for Webpack or fallback to the hardcoded URL
-    const backendUrl = process.env.VITE_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+    // Use process.env with Vue CLI
+    const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
     console.log("Backend URL:", backendUrl); // Debugging output
-
-    if (!backendUrl) {
-      alert('Backend URL is not defined. Check your environment variables.');
-      return;
-    }
 
     try {
       await axios.post(`${backendUrl}/api/insideasu`, { content });
@@ -158,7 +153,8 @@ methods: {
       alert('Failed to save content.');
     }
   }
-,
+
+  ,
 
   addImage() {
     const url = window.prompt('Enter image URL:')
