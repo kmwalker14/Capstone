@@ -15,9 +15,13 @@ const mockData = require('./mockData');  // Import the mock data
 const PORT = process.env.PORT || 10000;
 const SECRET_KEY = process.env.SECRET_KEY; // Change this to a strong secret
 
-app.use(cors({ origin: "*" }));
+app.use(cors({
+    origin: "https://asu-capstone.onrender.com", // Allow requests from your frontend
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true
+}));
 
-
+app.use(express.json()); // Ensure JSON body parsing
 app.use(bodyParser.json());
 
 const db = mysql.createPool({
