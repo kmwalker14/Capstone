@@ -140,22 +140,25 @@ methods: {
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
 
-    console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL); // Debugging
+    // Use process.env for Webpack or fallback to the hardcoded URL
+    const backendUrl = process.env.VITE_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-    if (!import.meta.env.VITE_BACKEND_URL) {
-      alert('Backend URL is not defined. Check your .env file.');
+    console.log("Backend URL:", backendUrl); // Debugging output
+
+    if (!backendUrl) {
+      alert('Backend URL is not defined. Check your environment variables.');
       return;
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/insideasu`, { content });
+      await axios.post(`${backendUrl}/api/insideasu`, { content });
       alert('Content saved successfully!');
     } catch (error) {
       console.error('Error saving content:', error.response?.data || error.message);
-
       alert('Failed to save content.');
     }
-  },
+  }
+,
 
   addImage() {
     const url = window.prompt('Enter image URL:')
