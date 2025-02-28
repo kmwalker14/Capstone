@@ -159,6 +159,17 @@ app.get('/items', (req, res) => {
 });
 
 */
+app.get('/ping-db', async (req, res) => {
+    try {
+        const connection = await db.getConnection();
+        await connection.query("SELECT 1"); // Keep-alive query
+        connection.release();
+        res.status(200).send("✅ Database is alive");
+    } catch (err) {
+        console.error("❌ Database keep-alive failed:", err);
+        res.status(500).send("❌ Database connection lost");
+    }
+});
 
 // Start the server
 app.listen(PORT, () => {
