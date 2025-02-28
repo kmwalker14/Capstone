@@ -124,17 +124,46 @@ setInterval(async () => {
         console.log("✅ Database keep-alive ping successful");
     } catch (err) {
         console.error("❌ Database keep-alive failed:", err);
+
+        // Close and recreate the pool to restore connection
+        db.end();
+        global.db = mysql.createPool({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT || 3306,
+            waitForConnections: true,
+            connectionLimit: 20, // Increase connections
+            queueLimit: 0,
+            connectTimeout: 10000, // 10-second timeout
+        });
+
+        console.log("🔄 Database pool restarted.");
     }
-}, 300000); // Runs every 5 minutes (300,000 ms)
+}, 300000); // Runs every 5 minutes
 
 
 
-db.on("error", (err) => {
+db.on("error", async (err) => {
     console.error("❌ Database error:", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
         console.log("🔄 Attempting to reconnect...");
+        global.db = mysql.createPool({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT || 3306,
+            waitForConnections: true,
+            connectionLimit: 20,
+            queueLimit: 0,
+            connectTimeout: 10000,
+        });
+        console.log("✅ Reconnected to database.");
     }
 });
+
 module.exports = db;
 
 /*
