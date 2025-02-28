@@ -20,19 +20,18 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
+    origin: "*", // Temporarily allow all origins
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true
 }));
 
 app.use(express.json()); // Ensure JSON body parsing
+
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "connect-src 'self' https://asu-capstone-backend.onrender.com https://asu-capstone.onrender.com;");
+    next();
+});
 
 
 const db = mysql.createPool({
