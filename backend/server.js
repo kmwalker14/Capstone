@@ -85,64 +85,45 @@ app.get('/admins', async (req, res) => {
 });
 
 app.post('/api/insideasu', async (req, res) => {
+    let connection;
     try {
         console.log("🔹 Incoming Request Body:", req.body);
 
         const { content } = req.body;
         if (!content) {
+            console.error("❌ Error: No content provided");
             return res.status(400).json({ message: "Content is required" });
         }
 
-        let retries = 3;  // Retry 3 times if there's a failure
-        while (retries > 0) {
-            try {
-                const query = "INSERT INTO insideasu (content) VALUES (?)";
-                await db.query(query, [content]);
-                console.log("✅ Content saved successfully");
-                return res.status(201).json({ message: "Content saved successfully" });
-            } catch (err) {
-                if (err.code === 'PROTOCOL_CONNECTION_LOST' && retries > 0) {
-                    console.warn("⚠️ Lost connection to database, retrying...");
-                    retries--;
-                } else {
-                    throw err;
-                }
-            }
-        }
+        // Get a new connection
+        connection = await db.getConnection();
+
+        const query = "INSERT INTO insideasu (content) VALUES (?)";
+        await connection.query(query, [content]);
+
+        console.log("✅ Content saved successfully");
+        res.status(201).json({ message: "Content saved successfully" });
+
     } catch (err) {
         console.error("❌ Database error:", err);
         res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();  // Ensure connection is always released
     }
 });
+
 
 
 setInterval(async () => {
     try {
         const connection = await db.getConnection();
-        await connection.query("SELECT 1"); // Keeps MySQL connection alive
+        await connection.query("SELECT 1");
         connection.release();
-        console.log("✅ Database keep-alive ping successful");
+        console.log("✅ Database keep-alive successful");
     } catch (err) {
         console.error("❌ Database keep-alive failed:", err);
-
-        // Close and recreate the pool to restore connection
-        db.end();
-        global.db = mysql.createPool({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME,
-            port: process.env.DB_PORT || 3306,
-            waitForConnections: true,
-            connectionLimit: 20, // Increase connections
-            queueLimit: 0,
-            connectTimeout: 10000, // 10-second timeout
-        });
-
-        console.log("🔄 Database pool restarted.");
     }
-}, 300000); // Runs every 5 minutes
-
+}, 60000); // Runs every 1 minute
 
 
 db.on("error", async (err) => {
