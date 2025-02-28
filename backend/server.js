@@ -75,9 +75,9 @@ const hashPassword = async (password) => {
 
 
 // Get All Admins API route
-app.get('/admins', async (req, res) => {
+app.get('/api/admins', async (req, res) => {
     try {
-        const [results] = await db.query("SELECT id, first_name, last_name, username, email FROM admins");
+        const [results] = await db.query("SELECT id, firstname, lastname, username, email FROM admins");
         res.json(results);
     } catch (err) {
         res.status(500).json({ message: "Database error", error: err.message });

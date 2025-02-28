@@ -32,18 +32,18 @@
                   <span class="action-header">Action</span>
                 </div>
                 <!-- User info row -->
-                <div class="user-info-row">
+                <div class="user-info-row" v-for="admin in admins" :key="admin.id">
                   <!-- <input type="checkbox" id="user1" class="user-checkbox" /> -->
-                  <label for="user1" class="user-name">Leslie Grey</label>
-                  <span class="user-username">lgrey123</span>
-                  <span class="user-email">lgrey123@asu.edu</span>
+                  <label class="user-name">{{ admin.firstname }} {{ admin.lastname }}</label>
+                  <span class="user-username">{{ admin.username }}</span>
+                  <span class="user-email">{{ admin.email }}</span>
                   <div class="action-menu">
                     <button class="action-button" @click="toggleDropdown(1, $event)">
                       &#8230; <!-- Horizontal Dots -->
                     </button>
-                    <ul v-if="dropdownVisible === 1" class="dropdown-menu">
-                      <li @click="editUser(1)">Edit</li>
-                      <li @click="removeUser(1)">Remove</li>
+                    <ul v-if="dropdownVisible === admin.id" class="dropdown-menu">
+                      <li @click="editUser(admin.id)">Edit</li>
+                      <li @click="removeUser(admin.id)">Remove</li>
                     </ul>
                   </div>
                 </div>
@@ -87,9 +87,24 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminUsers',
+  data() {
+    return {
+      admins: [],
+      dropdownVisible: null,  // Tracks which dropdown is visible
+    };
+  },
   methods: {
+    async fetchAdmins() {
+      try {
+        const response = await axios.get('http://localhost:5000/admins'); // Update with your API endpoint
+        this.admins = response.data; // Store fetched data
+      } catch (error) {
+        console.error('Error fetching admins:', error);
+      }
+    },
     toggleDropdown(userId, event) {
       event.stopPropagation();
       this.dropdownVisible = this.dropdownVisible === userId ? null : userId; // Toggle visibility based on userId
