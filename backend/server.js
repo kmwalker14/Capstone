@@ -13,24 +13,40 @@ const mockData = require('./mockData');  // Import the mock data
 
 // Set the port to environment variable or default to 10000
 const PORT = process.env.PORT || 5000;
-const SECRET_KEY = process.env.SECRET_KEY; // Change this to a strong secret
+
+const allowedOrigins = [
+    "https://asu-capstone.onrender.com",
+    "http://localhost:8080/"
+];
 
 app.use(cors({
-    origin: "https://asu-capstone.onrender.com", // Allow requests from your frontend
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type, Authorization",
     credentials: true
 }));
 
 app.use(express.json()); // Ensure JSON body parsing
-app.use(bodyParser.json());
+
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
-    user: process.env.DB_USER, // Change if necessary
-    password: process.env.DB_PASSWORD, // Change if you set a password
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 3306
-
+    port: process.env.DB_PORT || 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    connectTimeout: 10000,  // Wait 10s before failing
+    acquireTimeout: 10000,  // Wait 10s before failing
+    reconnect: true
 });
 
 // Connect to MySQL
@@ -70,38 +86,56 @@ app.get('/admins', async (req, res) => {
 
 app.post('/api/insideasu', async (req, res) => {
     try {
-        res.setHeader("Access-Control-Allow-Origin", "https://asu-capstone.onrender.com"); // Manually add CORS
-        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-        console.log("🔹 Incoming Request:", req.body); // Debug request body
+        console.log("🔹 Incoming Request Body:", req.body);
 
         const { content } = req.body;
-
         if (!content) {
-            console.error("❌ Error: No content provided");
             return res.status(400).json({ message: "Content is required" });
         }
 
-        const query = "INSERT INTO insideasu (content) VALUES (?)";
-        await db.query(query, [content]);
-
-        console.log("✅ Content saved successfully");
-        res.status(201).json({ message: "Content saved successfully" });
-
+        let retries = 3;  // Retry 3 times if there's a failure
+        while (retries > 0) {
+            try {
+                const query = "INSERT INTO insideasu (content) VALUES (?)";
+                await db.query(query, [content]);
+                console.log("✅ Content saved successfully");
+                return res.status(201).json({ message: "Content saved successfully" });
+            } catch (err) {
+                if (err.code === 'PROTOCOL_CONNECTION_LOST' && retries > 0) {
+                    console.warn("⚠️ Lost connection to database, retrying...");
+                    retries--;
+                } else {
+                    throw err;
+                }
+            }
+        }
     } catch (err) {
-        console.error("❌ Database error:", err); // Log full error
-
-        res.status(500).json({
-            message: "Database error",
-            error: err.message
-        });
+        console.error("❌ Database error:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
     }
 });
 
 
+setInterval(async () => {
+    try {
+        const connection = await db.getConnection();
+        await connection.query("SELECT 1"); // Keeps MySQL connection alive
+        connection.release();
+        console.log("✅ Database keep-alive ping successful");
+    } catch (err) {
+        console.error("❌ Database keep-alive failed:", err);
+    }
+}, 300000); // Runs every 5 minutes (300,000 ms)
 
 
+
+db.on("error", (err) => {
+    console.error("❌ Database error:", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+        console.log("🔄 Attempting to reconnect...");
+    }
+});
+module.exports = db;
 
 /*
 // Define root route
