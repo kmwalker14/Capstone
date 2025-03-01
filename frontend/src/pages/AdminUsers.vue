@@ -13,7 +13,7 @@
             <div class="user-avatar"></div>
           </div>
         </header>
-        <button class="new-admin-button" @click="setPage('adminnew')">+ New Admin</button>
+        <button class="new-admin-button" @click="$router.push('/adminnew')">+ New Admin</button>
         <section class="content-section">
           <div class="banner"> <!-- REMOVE BANNER ??? -->
           </div>
@@ -68,8 +68,13 @@ export default {
   },
   methods: {
     async fetchAdmins() {
+
+      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+
+
       try {
-        const response = await axios.get('https://asu-capstone-backend.onrender.com/admins'); // Update with your API endpoint
+
+        const response = await axios.get(`${backendUrl}/admins`); // Update with your API endpoint
         this.admins = response.data; // Store fetched data
       } catch (error) {
         console.error('Error fetching admins:', error);
