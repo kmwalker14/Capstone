@@ -73,6 +73,16 @@ const hashPassword = async (password) => {
     return bcrypt.hash(password, salt);
 };
 
+// Get All Admins API route
+app.get('/admins', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, firstname, lastname, username, email FROM admins");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
 
 app.post('/api/admins', async (req, res) => {
     let connection;
