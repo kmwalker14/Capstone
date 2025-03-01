@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
 const app = express(); // Create an express app instance
 
 const mockData = require('./mockData');  // Import the mock data
@@ -129,7 +130,7 @@ db.on("error", async (err) => {
     console.error("❌ Database error:", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
         console.log("🔄 Attempting to reconnect...");
-        global.db = mysql.createPool({
+        db = mysql.createPool({
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
@@ -144,7 +145,8 @@ db.on("error", async (err) => {
     }
 });
 
-module.exports = db;
+
+
 
 /*
 // Define root route
@@ -174,3 +176,6 @@ app.get('/ping-db', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+
+
