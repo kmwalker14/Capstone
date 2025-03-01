@@ -60,7 +60,7 @@
                       <input
                         type="email"
                         id="email"
-                        v-model="email"
+                        v-model="userEmail"
                         placeholder="e.g., jwilliams@asu.edu"
                         required
                         class="form-input"
@@ -71,7 +71,7 @@
                       <input
                         type="text"
                         id="username"
-                        v-model="username"
+                        v-model="userName"
                         placeholder="e.g., jwilliams123"
                         required
                         class="form-input"
@@ -80,9 +80,7 @@
                   </div>
                 </div>
               </div>
-            <button type="submit" class="submit-button" tabindex="0"> <!-- tabindex lets user tab through fields in order-->
-              Submit
-            </button>
+            <button class="submit-button" type="submit">Submit</button>
           </form>
         </section>
       </main>
@@ -91,31 +89,45 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminNew',
   data() {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      username: ''
+      firstName: null,
+      lastName: null,
+      userEmail: null,
+      userName: null
     };
   },
   methods: {
     setPage(page) { // Keep or remove ?????
       this.$emit('page-changed', page);
     },
-    handleSubmit() {
-      // Form submission logic here
-      console.log('Form submitted:', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        username: this.username
-      });
+    async handleSubmit() {
+      const firstname = this.firstName;
+      const lastname = this.lastName;
+      const username = this.userName;
+      const email = this.userEmail;
+      
+      // Make sure the backend URL is correct
+      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+      console.log("Backend URL:", backendUrl); // Debugging output
+
+      try {
+        // Send the POST request to the backend with the entered admin data
+        const response = await axios.post(`${backendUrl}/api/admins`, { firstname, lastname, username, email });
+        console.log("✅ Admin added:", response.data);
+        alert("Admin added successfully!");
+        this.$router.push("/adminusers"); // Redirect to the Admins List page
+      } catch (error) {
+        console.error("❌ Error:", error);
+        alert("An error occurred while adding the admin."); 
+      }
     }
-  }
+  },
 };
+
 </script>
 
 <style scoped>
