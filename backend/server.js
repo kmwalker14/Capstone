@@ -74,7 +74,7 @@ const hashPassword = async (password) => {
 
 
 // Get All Admins API route
-app.get('/api/admins', async (req, res) => {
+app.get('/admins', async (req, res) => {
     try {
         const [results] = await db.query("SELECT id, firstname, lastname, username, email FROM admins");
         res.json(results);
