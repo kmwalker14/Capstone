@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const db = require('./db');
 
 const app = express(); // Create an express app instance
 
@@ -174,3 +175,16 @@ app.get('/ping-db', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+app.get('/test-db', async (req, res) => {
+    try {
+        const connection = await db.promise().getConnection();
+        await connection.query("SELECT 1");
+        connection.release();
+        res.json({ message: "✅ Database connection successful!" });
+    } catch (err) {
+        res.status(500).json({ message: "❌ Database connection failed", error: err.message });
+    }
+});
+
+app.listen(5000, () => console.log("Server running on port 5000"));
