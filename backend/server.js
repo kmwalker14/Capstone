@@ -74,15 +74,46 @@ const hashPassword = async (password) => {
 };
 
 
-// Get All Admins API route
-app.get('/admins', async (req, res) => {
+app.post('/api/admins', async (req, res) => {
+    let connection;
     try {
-        const [results] = await db.query("SELECT id, firstname, lastname, username, email FROM admins");
-        res.json(results);
+        console.log("🔹 Incoming Admin Data:", req.body);
+
+        const { firstname, lastname, username, email } = req.body;
+
+        // Ensure all fields are provided
+        if (!firstname || !lastname || !username || !email) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        // Get a database connection
+        connection = await db.getConnection();
+
+        // Check if username or email already exists in the database
+        const checkQuery = "SELECT COUNT(*) AS count FROM admins WHERE username = ? OR email = ?";
+        const [checkResult] = await connection.query(checkQuery, [username, email]);
+
+        if (checkResult[0].count > 0) {
+            return res.status(400).json({ message: "Username or Email already exists" });
+        }
+
+        // Insert the new admin into the database
+        const query = "INSERT INTO admins (firstname, lastname, username, email) VALUES (?, ?, ?, ?)";
+        await connection.query(query, [firstname, lastname, username, email]);
+
+        console.log("✅ New admin added successfully!");
+        res.status(201).json({ message: "Admin added successfully" });
+
     } catch (err) {
+        console.error("❌ Database error:", err);
         res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();  // Ensure connection is always released
     }
 });
+
+
+
 
 app.post('/api/insideasu', async (req, res) => {
     let connection;
