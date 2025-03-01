@@ -47,36 +47,6 @@
                     </ul>
                   </div>
                 </div>
-                <div class="user-info-row">
-                  <!-- <input type="checkbox" id="user2" class="user-checkbox" /> -->
-                  <label for="user2" class="user-name">Nathan Lee</label>
-                  <span class="user-username">nlee123</span>
-                  <span class="user-email">nlee123@asu.edu</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(2, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === 2" class="dropdown-menu">
-                      <li @click="editUser(2)">Edit</li>
-                      <li @click="removeUser(2)">Remove</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="user-info-row">
-                  <!-- <input type="checkbox" id="user3" class="user-checkbox" /> -->
-                  <label for="user3" class="user-name">Maria Smith</label>
-                  <span class="user-username">msmith123</span>
-                  <span class="user-email">msmith123@asu.edu</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(3, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === 3" class="dropdown-menu">
-                      <li @click="editUser(3)">Edit</li>
-                      <li @click="removeUser(3)">Remove</li>
-                    </ul>
-                  </div>
-                </div>
               </section>
             </div>
           </div>
@@ -99,7 +69,7 @@ export default {
   methods: {
     async fetchAdmins() {
       try {
-        const response = await axios.get('http://localhost:5000/admins'); // Update with your API endpoint
+        const response = await axios.get('https://asu-capstone-backend.onrender.com/admins'); // Update with your API endpoint
         this.admins = response.data; // Store fetched data
       } catch (error) {
         console.error('Error fetching admins:', error);
@@ -122,6 +92,7 @@ export default {
   mounted() {
     // Close dropdown when clicking outside
     document.addEventListener('click', this.closeDropdown);
+    this.fetchAdmins();
   },
   beforeUnmount() {
     // Clean up event listener when component is destroyed/unmounted
