@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('./db');
+
 
 const app = express(); // Create an express app instance
 
@@ -130,7 +130,7 @@ db.on("error", async (err) => {
     console.error("❌ Database error:", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
         console.log("🔄 Attempting to reconnect...");
-        global.db = mysql.createPool({
+        db = mysql.createPool({
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
@@ -145,7 +145,8 @@ db.on("error", async (err) => {
     }
 });
 
-module.exports = db;
+
+
 
 /*
 // Define root route
@@ -176,15 +177,5 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-app.get('/test-db', async (req, res) => {
-    try {
-        const connection = await db.promise().getConnection();
-        await connection.query("SELECT 1");
-        connection.release();
-        res.json({ message: "✅ Database connection successful!" });
-    } catch (err) {
-        res.status(500).json({ message: "❌ Database connection failed", error: err.message });
-    }
-});
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+
