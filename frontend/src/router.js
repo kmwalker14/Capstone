@@ -31,6 +31,7 @@ const routes = [
   {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching},
   {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications},
   {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch},
+  {path: '/adminnew', component: AdminNew},
   {path: '/adminusers', name: 'AdminUsers', component: AdminUsers},
   {path: '/admintools', name: 'AdminTools', component: AdminTools},
   {path: '/admin-insideasu', name: 'AdminInsideASU', component: AdminInsideASU},
@@ -38,6 +39,7 @@ const routes = [
   {path: '/admin-mentorfaculty', name: 'AdminMentorFaculty', component: AdminMentorFaculty},
   {path: '/admin-mentorstudents', name: 'AdminMentorStudents', component: AdminMentorStudents},
   {path: '/adminworkhistory', name: 'AdminWorkHistory', component: AdminWorkHistory},
+
 
   {path: '/studenthome', name: 'StudentHome', component: StudentHome},
   {path: '/studentteaching', name: 'StudentTeaching', component: StudentTeaching},
