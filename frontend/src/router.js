@@ -11,6 +11,7 @@ import AdminOutsideASU from './pages/AdminOutsideASU.vue';
 import AdminMentorFaculty from './pages/AdminMentorFaculty.vue';
 import AdminMentorStudents from './pages/AdminMentorStudents.vue';
 import AdminWorkHistory from './pages/AdminWorkHistory.vue';
+import AdminNew from './pages/AdminNew.vue';
 
 import StudentHome from './pages/StudentHome.vue';
 import StudentTeaching from './pages/StudentTeaching.vue';
