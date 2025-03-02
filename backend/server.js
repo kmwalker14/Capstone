@@ -140,7 +140,7 @@ app.delete('/admins', async (req, res) => {
             return res.status(404).json({ message: "Admin not found" });
         }
 
-        console.log(`✅ Admin with ID ${id} removed successfully`);
+        console.log(`✅ Admin with ID ${adminId} removed successfully`);
         res.status(200).json({ message: "Admin removed successfully" });
 
     } catch (err) {
