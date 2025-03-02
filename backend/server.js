@@ -122,6 +122,37 @@ app.post('/api/admins', async (req, res) => {
     }
 });
 
+app.put('/admins', async (req, res) => {
+    let connection;
+    try {
+        const { id, firstname, lastname, username, email } = req.body;
+
+        if (!id || !firstname || !lastname || !username || !email) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        connection = await db.getConnection();
+
+        const updateQuery = `UPDATE admins SET firstname = ?, lastname = ?, username = ?, email = ? WHERE id = ?`;
+
+        const [result] = await connection.query(updateQuery, [firstname, lastname, username, email, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+
+        console.log(`✅ Admin  ${firstname} updated successfully`);
+        res.status(200).json({ message: "Admin updated successfully" });
+
+    } catch (err) {
+        console.error("❌ Error updating admin:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+
 app.delete('/admins', async (req, res) => {
     let connection;
     try {

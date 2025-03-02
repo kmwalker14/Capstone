@@ -33,19 +33,30 @@
                 </div>
                 <!-- User info row -->
                 <div class="user-info-row" v-for="admin in admins" :key="admin.id">
-                  <!-- <input type="checkbox" id="user1" class="user-checkbox" /> -->
-                  <label class="user-name">{{ admin.firstname }} {{ admin.lastname }}</label>
-                  <span class="user-username">{{ admin.username }}</span>
-                  <span class="user-email">{{ admin.email }}</span>
-                  <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(admin.id, $event)">
-                      &#8230; <!-- Horizontal Dots -->
-                    </button>
-                    <ul v-if="dropdownVisible === admin.id" class="dropdown-menu">
-                      <li @click="editUser(admin.id)">Edit</li>
-                      <li @click="removeUser(admin.id)">Remove</li>
-                    </ul>
-                  </div>
+                  <template v-if="editingAdminId === admin.id">
+                    <!-- Editable Fields -->
+                    <input type="text" v-model="editedAdmin.firstname" class="edit-input" />
+                    <input type="text" v-model="editedAdmin.lastname" class="edit-input" />
+                    <input type="text" v-model="editedAdmin.username" class="edit-input" />
+                    <input type="email" v-model="editedAdmin.email" class="edit-input" />
+                    <div class="action-buttons">
+                      <button class="save-btn" @click="saveEdit(admin.id)">Save</button>
+                      <button class="cancel-btn" @click="cancelEdit">Cancel</button>
+                    </div>
+                  </template>
+                  
+                  <template v-else>
+                    <span class="user-name">{{ admin.firstname }} {{ admin.lastname }}</span>
+                    <span class="user-username">{{ admin.username }}</span>
+                    <span class="user-email">{{ admin.email }}</span>
+                    <div class="action-menu">
+                      <button class="action-button" @click="toggleDropdown(admin.id, $event)">&#8230;</button>
+                      <ul v-if="dropdownVisible === admin.id" class="dropdown-menu">
+                        <li @click="editUser(admin)">Edit</li>
+                        <li @click="removeUser(admin.id)">Remove</li>
+                      </ul>
+                    </div>
+                  </template>
                 </div>
               </section>
             </div>
@@ -64,6 +75,13 @@ export default {
     return {
       admins: [],
       dropdownVisible: null,  // Tracks which dropdown is visible
+      editingAdminId: null,
+      editedAdmin: {
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+      },
     };
   },
   methods: {
@@ -84,9 +102,35 @@ export default {
       event.stopPropagation();
       this.dropdownVisible = this.dropdownVisible === userId ? null : userId; // Toggle visibility based on userId
     },
-    editUser(userId) {  // Handle the actions when the edit option is clicked (currently shows an alert with user's ID)
-      alert(`Edit user with ID: ${userId}`);
+    editUser(admin) {  // Handle the actions when the edit option is clicked (currently shows an alert with user's ID)
+    this.editingAdminId = admin.id;
+      this.editedAdmin = { ...admin }; // Copy admin details to editedAdmin
+      this.dropdownVisible = null; // Close dropdown
     },
+
+    async saveEdit(userId) {
+      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+      try {
+        await axios.put(`${backendUrl}/admins`, {
+          id: userId,
+          firstname: this.editedAdmin.firstname,
+          lastname: this.editedAdmin.lastname,
+          username: this.editedAdmin.username,
+          email: this.editedAdmin.email,
+        });
+        // Update UI
+        this.admins = this.admins.map(admin => admin.id === userId ? { ...admin, ...this.editedAdmin } : admin );
+
+        this.editingAdminId = null; // Exit edit mode
+      } catch (error) {
+        console.error("Error updating admin:", error);
+        alert("Failed to update admin.");
+      }
+    },
+    cancelEdit() {
+      this.editingAdminId = null; // Cancel edit mode
+    },
+
     async removeUser(userId) {  // Handle the actions when the remove option is clicked (currently shows an alert with user's ID)
       if (!confirm("Are you sure you want to remove this admin?")) return;
 
