@@ -93,10 +93,12 @@ export default {
       try {
         const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-        await axios.delete(`${backendUrl}/admins`, {userId} );
-        // Update the UI by removing the admin from the `admins` list
+        await axios.delete(`${backendUrl}/admins`,{ data: { id: userId }});
+        
+        // Update the UI: Remove the deleted admin from the list
         this.admins = this.admins.filter(admin => admin.id !== userId);
 
+        
         alert("Admin removed successfully!");
       } catch (error) {
         console.error("Error removing admin:", error);
