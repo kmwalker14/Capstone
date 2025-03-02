@@ -38,7 +38,7 @@
                   <span class="user-username">{{ admin.username }}</span>
                   <span class="user-email">{{ admin.email }}</span>
                   <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(1, $event)">
+                    <button class="action-button" @click="toggleDropdown(admin, $event)">
                       &#8230; <!-- Horizontal Dots -->
                     </button>
                     <ul v-if="dropdownVisible === admin.id" class="dropdown-menu">
@@ -87,8 +87,22 @@ export default {
     editUser(userId) {  // Handle the actions when the edit option is clicked (currently shows an alert with user's ID)
       alert(`Edit user with ID: ${userId}`);
     },
-    removeUser(userId) {  // Handle the actions when the remove option is clicked (currently shows an alert with user's ID)
-      alert(`Remove user with ID: ${userId}`);
+    async removeUser(userId) {  // Handle the actions when the remove option is clicked (currently shows an alert with user's ID)
+      if (!confirm("Are you sure you want to remove this admin?")) return;
+
+      try {
+        const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+
+        await axios.delete(`${backendUrl}/admins/${userId}`);
+
+        // Update the UI by removing the admin from the `admins` list
+        this.admins = this.admins.filter(admin => admin.id !== userId);
+
+        alert("Admin removed successfully!");
+      } catch (error) {
+        console.error("Error removing admin:", error);
+        alert("Failed to remove admin.");
+      }
     },
     closeDropdown() {
       this.dropdownVisible = null; // Close any open dropdown

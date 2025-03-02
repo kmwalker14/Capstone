@@ -122,6 +122,34 @@ app.post('/api/admins', async (req, res) => {
     }
 });
 
+app.delete('/admins/:id', async (req, res) => {
+    let connection;
+    try {
+        const adminId = req.params.id;
+        
+        if (!adminId) {
+            return res.status(400).json({ message: "Admin ID is required" });
+        }
+
+        connection = await db.getConnection();
+
+        const deleteQuery = "DELETE FROM admins WHERE id = ?";
+        const [result] = await connection.query(deleteQuery, [adminId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+
+        console.log(`✅ Admin with ID ${id} removed successfully`);
+        res.status(200).json({ message: "Admin removed successfully" });
+
+    } catch (err) {
+        console.error("❌ Error removing admin:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
 
 
 
