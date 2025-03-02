@@ -125,22 +125,22 @@ app.post('/api/admins', async (req, res) => {
 app.delete('/admins', async (req, res) => {
     let connection;
     try {
-        const { adminId } = req.body;
+        const { id } = req.body;
         
-        if (!adminId) {
+        if (!id) {
             return res.status(400).json({ message: "Admin ID is required" });
         }
 
         connection = await db.getConnection();
 
         const deleteQuery = "DELETE FROM admins WHERE id = ?";
-        const [result] = await connection.query(deleteQuery, [adminId]);
+        const [result] = await connection.query(deleteQuery, [id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: "Admin not found" });
         }
 
-        console.log(`✅ Admin with ID ${adminId} removed successfully`);
+        console.log(`✅ Admin with ID ${id} removed successfully`);
         res.status(200).json({ message: "Admin removed successfully" });
 
     } catch (err) {
