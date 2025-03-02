@@ -125,7 +125,7 @@ app.post('/api/admins', async (req, res) => {
 app.delete('/admins', async (req, res) => {
     let connection;
     try {
-        const adminId = req.body;
+        const { adminId } = req.body;
         
         if (!adminId) {
             return res.status(400).json({ message: "Admin ID is required" });
