@@ -38,7 +38,7 @@
                   <span class="user-username">{{ admin.username }}</span>
                   <span class="user-email">{{ admin.email }}</span>
                   <div class="action-menu">
-                    <button class="action-button" @click="toggleDropdown(admin, $event)">
+                    <button class="action-button" @click="toggleDropdown(admin.id, $event)">
                       &#8230; <!-- Horizontal Dots -->
                     </button>
                     <ul v-if="dropdownVisible === admin.id" class="dropdown-menu">
