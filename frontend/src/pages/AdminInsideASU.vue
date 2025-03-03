@@ -14,9 +14,6 @@
           </div>
         </header>
         <section class="content-section">
-          <div v-for="content in submittedContent" :key="content.id" class="content-box">
-            <div v-html="content.content"></div>
-          </div>
           <div class="banner"> <!-- REMOVE ??? -->
           </div>
           <div class="profile-content">
@@ -89,12 +86,16 @@
             </div>
           </div>
           <button class="submit-button" @click="submitContent">Submit</button>
-          <!-- Display Submitted Content -->
-          <div v-for="content in submittedContent" :key="content.id" class="content-box">
-            <div v-html="content.content"></div>
-          </div>
 
+          <!-- Display Submitted Content ONLY Below the Rich Text Box -->
+          <div class="submitted-content-container">
+            <div v-for="content in submittedContent" :key="content.id" class="content-box">
+              <div class="submitted-entry tiptap-content" v-html="content.content"></div>
+
+            </div>
+          </div>
         </section>
+
       </main>
     </div>
   </div>
@@ -175,6 +176,7 @@ methods: {
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
+    console.log("Submitting content:", content); // Debugging output
     const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
     console.log("Backend URL:", backendUrl); // Debugging output
@@ -229,6 +231,7 @@ methods: {
         Paragraph,
         Text,
         FontFamily,
+        TextStyle,
       ],
       content: `<p>I am a rich text editor</p>`,
     })
@@ -245,6 +248,13 @@ methods: {
 
 <style scoped>
 /* Styles the main container that holds the entire admin layout */
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap');
+
+.tiptap-content span[style*="Comic Sans MS"] {
+  font-family: "Comic Sans MS", sans-serif !important;
+}
+
 .admin-container {
   background: var(--Color-Background, #f3f4ff);
   padding: 0 37px 0 0;
@@ -373,6 +383,75 @@ methods: {
 .submit-button:hover {
   background: #3b3791;
 }
+
+
+.submitted-content-container {
+  margin-top: 20px;
+}
+
+.submitted-entry {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px; /* Adds spacing between entries */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: inherit
+}
+
+.submitted-entry * {
+  font-family: inherit !important; /* Apply font-family to all child elements */
+}
+
+.submitted-entry span {
+  font-family: inherit !important;
+}
+
+/* Preserve rich text styling */
+.tiptap-content {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.tiptap-content span {
+  all: unset;
+}
+.tiptap-content p,
+.tiptap-content div {
+  font-family: inherit !important;
+}
+
+.tiptap-content h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.tiptap-content h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.tiptap-content strong {
+  font-weight: bold;
+}
+
+.tiptap-content em {
+  font-style: italic;
+}
+
+.tiptap-content a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.tiptap-content p {
+  margin-bottom: 10px;
+}
+
+
+
 
 .button-group button {
   padding: 8px 12px;
