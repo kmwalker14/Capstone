@@ -15,10 +15,11 @@
               <div class="profile-header-section">
               </div>
               <section class="about-section">
-                <h3 class="section-title">Title</h3>
-                <p class="section-content">
-                  Content posted by professor
-                </p>
+                <h3 class="section-title">Inside ASU Content</h3>
+                <div v-for="content in contents" :key="content.id" class="content-box">
+                  <div v-html="content.content"></div>
+                </div>
+
               </section>
             </div>
           </div>
@@ -29,8 +30,29 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'StudentInsideASU'
+  name: 'StudentInsideASU',
+  data() {
+    return {
+      contents: [] // Array to store fetched content
+    };
+  },
+  async created() {
+    await this.fetchContent();
+  },
+  methods: {
+    async fetchContent() {
+      try {
+        const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+        const response = await axios.get(`${backendUrl}/api/insideasu`);
+        this.contents = response.data; // Store data in Vue component state
+      } catch (error) {
+        console.error("❌ Error fetching content:", error);
+      }
+    }
+  }
 };
 </script>
 
@@ -42,6 +64,14 @@ export default {
   overflow: hidden;
   flex-grow: 1;
   width: 100%;
+}
+
+.content-box {
+  background-color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Flex container that holds the sidebar and main content */

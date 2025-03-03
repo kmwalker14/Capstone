@@ -212,6 +212,15 @@ app.post('/api/insideasu', async (req, res) => {
     }
 });
 
+app.get('/api/insideasu', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, content FROM insideasu ORDER BY id DESC");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
 
 
 setInterval(async () => {

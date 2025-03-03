@@ -14,6 +14,9 @@
           </div>
         </header>
         <section class="content-section">
+          <div v-for="content in submittedContent" :key="content.id" class="content-box">
+            <div v-html="content.content"></div>
+          </div>
           <div class="banner"> <!-- REMOVE ??? -->
           </div>
           <div class="profile-content">
@@ -86,6 +89,11 @@
             </div>
           </div>
           <button class="submit-button" @click="submitContent">Submit</button>
+          <!-- Display Submitted Content -->
+          <div v-for="content in submittedContent" :key="content.id" class="content-box">
+            <div v-html="content.content"></div>
+          </div>
+
         </section>
       </main>
     </div>
@@ -109,10 +117,38 @@ import { faParagraph } from '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import { faHighlighter } from '@fortawesome/free-solid-svg-icons'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios';
+import axios from 'axios'
+import { ref, onMounted } from "vue";
 
 export default {
 name: 'AdminInsideASU',
+  setup() {
+    const submittedContent = ref([]);
+
+    // Fetch content from backend when component loads
+    const fetchContent = async () => {
+      try {
+        console.log("Fetching content from backend..."); // Debugging
+        const response = await axios.get("https://asu-capstone-backend.onrender.com/api/insideasu");
+        console.log("Fetched content:", response.data); // Debugging
+        submittedContent.value = response.data;
+      } catch (error) {
+        console.error("Error fetching content:", error);
+      }
+    };
+
+
+
+
+    // Fetch content on mount
+    onMounted(fetchContent);
+
+    return {
+      submittedContent,
+      fetchContent
+    }
+  },
+
   components: {
     EditorContent,
     FontAwesomeIcon
@@ -139,8 +175,6 @@ methods: {
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
-
-    // Vue CLI uses process.env.VUE_APP_*
     const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
     console.log("Backend URL:", backendUrl); // Debugging output
@@ -149,14 +183,18 @@ methods: {
       const response = await axios.post(`${backendUrl}/api/insideasu`, { content });
       console.log("✅ Success:", response.data); // Log success response
       alert('Content saved successfully!');
+
+      // Fetch the updated content after submission
+      this.fetchContent(); // Use this.fetchContent() instead of await this.fetchContent()
+
     } catch (error) {
       console.error('❌ Error saving content:', error.response?.data || error.message);
       alert('Failed to save content.');
     }
   }
-
-
   ,
+
+
 
   addImage() {
     const url = window.prompt('Enter image URL:')
@@ -194,6 +232,7 @@ methods: {
       ],
       content: `<p>I am a rich text editor</p>`,
     })
+    this.fetchContent();
   },
   beforeUnmount() {
     if (this.editor) {
