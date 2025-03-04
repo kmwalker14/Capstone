@@ -62,7 +62,8 @@
                           <button @click="editor.chain().focus().setFontFamily('serif').run()">Serif</button>
                           <button @click="editor.chain().focus().setFontFamily('monospace').run()">Monospace</button>
                           <button @click="editor.chain().focus().setFontFamily('cursive').run()">Cursive</button>
-                          <button @click="editor.chain().focus().unsetFontFamily().run()">Unset Font</button>
+                          <button @click="editor.chain().focus().setFontFamily('Poppins, sans-serif').run()">Unset Font</button>
+
                         </div>
                       </div>
 
@@ -233,8 +234,13 @@ methods: {
         FontFamily,
         TextStyle,
       ],
-      content: `<p>I am a rich text editor</p>`,
-    })
+      content: `<p style="font-family: Poppins;">I am a rich text editor</p>`, // Ensure Poppins is the default font
+      editorProps: {
+        attributes: {
+          style: "font-family: Poppins;" // Apply Poppins globally
+        }
+      }
+    });
     this.fetchContent();
   },
   beforeUnmount() {
@@ -396,7 +402,7 @@ methods: {
   padding: 15px;
   margin-bottom: 15px; /* Adds spacing between entries */
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: inherit
+  font-family: "Poppins", sans-serif;
 }
 
 .submitted-entry * {
@@ -409,7 +415,7 @@ methods: {
 
 /* Preserve rich text styling */
 .tiptap-content {
-  font-family: inherit;
+  font-family: "Poppins", sans-serif !important;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
