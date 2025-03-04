@@ -1,7 +1,7 @@
 <template>
   <div class="admin-container">
     <div class="layout-wrapper">
-      
+
       <main class="main-content">
         <header class="header">
           <h1 class="page-title">Inside ASU</h1>
@@ -400,11 +400,11 @@ methods: {
 }
 
 .submitted-entry * {
-  font-family: inherit !important; /* Apply font-family to all child elements */
+  font-family: inherit; /* Apply font-family to all child elements */
 }
 
 .submitted-entry span {
-  font-family: inherit !important;
+  font-family: inherit;
 }
 
 /* Preserve rich text styling */
