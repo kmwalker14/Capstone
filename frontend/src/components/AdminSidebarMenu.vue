@@ -162,13 +162,34 @@
             />
             <span class="nav-text">Admin</span>
         </li>
+        <!-- Admin Logout Feature -->
+        <li class="nav-item" @click="handleLogout">
+            <img
+            loading="lazy"
+            src="@/assets/logoutButton.png"
+            alt="Admin navigation icon"
+            class="nav-icon"
+            />
+            <span class="nav-text">Logout</span>
+        </li>
         </ul>
     </nav>
 </template>
 
 <script>
+import { useAuth0 } from "@auth0/auth0-vue";
+
 export default {
   name: 'AdminSidebarMenu',
+  setup (){
+    const { logout } = useAuth0();
+
+    return{
+      handleLogout: () => {
+        logout({ logoutParams: {returnTo: window.location.origin}});
+      }
+    };
+  },
   data(){
     return {
       isMenuVisible: false,

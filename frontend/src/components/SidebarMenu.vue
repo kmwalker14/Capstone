@@ -143,7 +143,7 @@
         Work History </li>
         </ul>
         <!-- Student Tools -->
-        <li class="nav-item" @click="setPage('studenttools')">
+        <li class="nav-item" @click="$router.push('/studenttools')">
             <img
             loading="lazy"
             src="@/assets/wrench.png"
@@ -152,13 +152,38 @@
             />
             <span class="nav-text">Tools</span>
         </li>
-        </ul>
+        <!-- Authentication Login  -->
+        <li class="nav-item" @click="handleLogin">
+            <img
+            loading="lazy"
+            src="@/assets/loginButton.png"
+            alt="Tools navigation icon"
+            class="nav-icon"
+            />
+            <span class="nav-text" > Login </span>
+        </li>
+      </ul>
     </nav>
 </template>
 
 <script>
+// import LoginButton from '@/authentication/login-button.vue';
+ 
+import { useAuth0 } from "@auth0/auth0-vue";
+   
 export default {
   name: 'SidebarMenu',
+// Setup Auth0 function, to be commented out later
+  setup (){
+    const { loginWithRedirect } = useAuth0();
+
+    return{
+      handleLogin: () => loginWithRedirect({
+        redirectUri: window.location.origin + '/adminhome'
+      }),
+    };
+  },
+
   data(){
     return {
       isMenuVisible: false,

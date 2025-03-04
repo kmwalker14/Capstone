@@ -1,4 +1,6 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
+// import { authGuard } from "@auth0/auth0-vue";
+
 import AdminLogin from './pages/AdminLogin.vue';
 import AdminHome from '@/pages/AdminHome.vue';
 import AdminTeaching from './pages/AdminTeaching.vue';
@@ -23,20 +25,22 @@ import StudentMentorStudents from './pages/StudentMentorStudents.vue';
 import StudentMentorFaculty from './pages/StudentMentorFaculty.vue';
 import StudentWorkHistory from './pages/StudentWorkHistory.vue';
 
+import CallbackPage from './pages/CallbackPage.vue';
+
 const routes = [
-  {path: '/', redirect: '/adminlogin'},
-  {path: '/adminhome', name: 'AdminHome', component: AdminHome},
-  {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin},
-  {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching},
-  {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications},
-  {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch},
-  {path: '/adminusers', name: 'AdminUsers', component: AdminUsers},
-  {path: '/admintools', name: 'AdminTools', component: AdminTools},
-  {path: '/admin-insideasu', name: 'AdminInsideASU', component: AdminInsideASU},
-  {path: '/admin-outsideasu', name: 'AdminOutsideASU', component: AdminOutsideASU},
-  {path: '/admin-mentorfaculty', name: 'AdminMentorFaculty', component: AdminMentorFaculty},
-  {path: '/admin-mentorstudents', name: 'AdminMentorStudents', component: AdminMentorStudents},
-  {path: '/adminworkhistory', name: 'AdminWorkHistory', component: AdminWorkHistory},
+  {path: '/', redirect: '/studenthome'},
+  {path: '/adminhome', name: 'AdminHome', component: AdminHome,},
+  {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin, },
+  {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching,},
+  {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications,},
+  {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch,},
+  {path: '/adminusers', name: 'AdminUsers', component: AdminUsers, },
+  {path: '/admintools', name: 'AdminTools', component: AdminTools,},
+  {path: '/admin-insideasu', name: 'AdminInsideASU', component: AdminInsideASU,},
+  {path: '/admin-outsideasu', name: 'AdminOutsideASU', component: AdminOutsideASU,},
+  {path: '/admin-mentorfaculty', name: 'AdminMentorFaculty', component: AdminMentorFaculty,},
+  {path: '/admin-mentorstudents', name: 'AdminMentorStudents', component: AdminMentorStudents, },
+  {path: '/adminworkhistory', name: 'AdminWorkHistory', component: AdminWorkHistory,},
 
   {path: '/studenthome', name: 'StudentHome', component: StudentHome},
   {path: '/studentteaching', name: 'StudentTeaching', component: StudentTeaching},
@@ -47,11 +51,13 @@ const routes = [
   {path: '/student-outsideasu', name: 'StudentOutsideASU', component: StudentOutsideASU},
   {path: '/student-mentorfaculty', name: 'StudentMentorFaculty', component: StudentMentorFaculty},
   {path: '/student-mentorstudents', name: 'StudentMentorStudents', component: StudentMentorStudents},
-  {path: '/studentworkhistory', name: 'StudentWorkHistory', component: StudentWorkHistory}
+  {path: '/studentworkhistory', name: 'StudentWorkHistory', component: StudentWorkHistory},
+
+  {path: "/callback", name: "callback", component: CallbackPage,}
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 
