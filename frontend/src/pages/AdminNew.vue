@@ -18,17 +18,6 @@
             <h2 class="section-title">Admin Details</h2>
             <form class="admin-form" @submit.prevent="handleSubmit">
               <div class="form-layout">
-                <!--
-                <div class="photo-upload">
-                  <label for="photo-input" class="visually-hidden">Upload Photo</label>
-                  <input 
-                    type="file" 
-                    id="photo-input"
-                    accept="image/*"
-                    class="photo-input"
-                  />
-                </div>
-                -->
                 <div class="form-fields">
                   <div class="field-row">
                     <div class="form-group">
@@ -190,12 +179,6 @@ export default {
   gap: 24px;
 }
 
-/*
-.photo-upload {
-  width: 175px;
-}
-*/
-
 .form-fields {
   flex: 1;
 }
@@ -227,15 +210,20 @@ export default {
 
 /* Styles the main container that holds the entire admin layout */
 .admin-container {
-background: var(--Color-Background, #f3f4ff);
-padding: 0 37px 0 0;
-overflow: hidden;
+  background: var(--Color-Background, #f3f4ff);
+  padding: 0 37px 0 0;
+  overflow: hidden;
+  flex-grow: 1;
+  width: 100%;
 }
 
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
-display: flex;
-gap: 37px; /* Space between sidebar and content*/
+  display: flex;
+  gap: 37px; /* Space between sidebar and content*/
+  width: 100%;
+  flex-grow: 1;
+  padding: 0px 15px 0px 15px;
 }
 
 .profile-initial {
@@ -251,7 +239,9 @@ justify-content: center;
 
 /* Main content styling */
 .main-content {
-width: 82%;
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
 }
 
 /* Header with page title and user details */

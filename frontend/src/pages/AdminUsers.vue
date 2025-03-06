@@ -25,7 +25,6 @@
                 <!-- <h3 class="section-title">Modify Admin Users</h3> -->
                 <!-- User info header -->
                 <div class="user-info-header">
-                  <!-- <span class="user-checkbox-header">Select</span> -->
                   <span class="user-name-header">Name</span>
                   <span class="user-username-header">Username</span>
                   <span class="user-email-header">Email</span>
@@ -195,12 +194,6 @@ export default {
   border-bottom: 2px solid #ddd;
 }
 
-/*
-.user-checkbox-header {
-width: 20%;
-}
-*/
-
 .user-name-header, .user-username-header, .user-email-header {
   flex: 1;
   text-align: left;
@@ -220,13 +213,6 @@ width: 20%;
   border-bottom: 1px solid #ddd;
   position: relative;
 }
-
-/*
-.user-checkbox {
-width: 20px;
-height: 20px;
-}
-*/
 
 .user-name, .user-username, .user-email {
   flex: 1;  /* Align with header */
