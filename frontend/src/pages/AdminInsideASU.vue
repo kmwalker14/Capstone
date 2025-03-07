@@ -169,11 +169,16 @@ methods: {
   },
 
   addLink() {
-    const url = window.prompt("Enter the URL:");
+    let url = window.prompt("Enter the URL:");
     if (url) {
+      // Ensure the URL starts with http:// or https://
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+      }
       this.editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
     }
-  },
+  }
+,
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
