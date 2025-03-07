@@ -87,7 +87,7 @@
             </div>
           </div>
           <button class="submit-button" @click="submitContent">Submit</button>
-
+        </section>
           <!-- Display Submitted Content ONLY Below the Rich Text Box -->
           <div class="submitted-content-container">
             <div v-for="content in submittedContent" :key="content.id" class="content-box">
@@ -95,7 +95,7 @@
 
             </div>
           </div>
-        </section>
+
 
       </main>
     </div>
@@ -342,6 +342,7 @@ methods: {
   background: #fff;
   border-radius: 20px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* Banner styling */
@@ -389,6 +390,9 @@ methods: {
   cursor: pointer;
   box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
   transition: background 0.3s ease-in-out;
+  margin-bottom: 15px; /* Adds space between button and bottom of the box */
+  align-self: flex-start; /* Aligns button to the top if inside a flex container */
+
 }
 
 .submit-button:hover {

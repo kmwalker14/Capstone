@@ -15,7 +15,7 @@
               <div class="profile-header-section">
               </div>
               <section class="about-section">
-                <h3 class="section-title">Inside ASU Content</h3>
+                <h3 class="section-title">My Work Inside ASU </h3>
                 <div v-for="content in contents" :key="content.id" class="content-box">
                   <div v-html="content.content"></div>
                 </div>
