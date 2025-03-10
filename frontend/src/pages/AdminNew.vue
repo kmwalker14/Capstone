@@ -108,7 +108,7 @@ export default {
         const response = await axios.post(`${backendUrl}/api/admins`, { firstname, lastname, username, email });
         console.log("✅ Admin added:", response.data);
         alert("Admin added successfully!");
-        this.$router.push("/adminusers"); // Redirect to the Admins List page
+        this.$router.push("/adminusers"); // Redirect to the Admin Users page
       } catch (error) {
         console.error("❌ Error:", error);
         alert("An error occurred while adding the admin."); 
