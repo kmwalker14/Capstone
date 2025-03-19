@@ -203,12 +203,12 @@ methods: {
         alert("Content saved successfully!");
       }
 
-      //this.selectedContentId = null; // Reset edit state
-      //this.editor.commands.clearContent(); // Clear editor
-      //this.fetchContent(); // Refresh the content list
+      this.selectedContentId = null; // Reset edit state
+      this.editor.commands.clearContent(); // Clear editor
+      this.fetchContent(); // Refresh the content list
     } catch (error) {
       console.error("❌ Error saving content:", error.response?.data || error.message);
-      alert("Failed to save content.");
+      alert("Failed to save content");
     }
   }
 
