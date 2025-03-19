@@ -89,14 +89,12 @@
           <button class="submit-button" @click="submitContent">Submit</button>
         </section>
           <!-- Display Submitted Content ONLY Below the Rich Text Box -->
-          <div class="submitted-content-container">
-            <div v-for="content in submittedContent" :key="content.id" class="content-box">
-              <div class="submitted-entry tiptap-content" v-html="content.content"></div>
-
-              <!-- Edit Button -->
-              <button @click="editContent(content)">Edit</button>
-            </div>
+        <div v-for="content in submittedContent" :key="content.id" class="content-box">
+          <div class="submitted-entry tiptap-content">
+            <div v-html="content.content"></div>
+            <button @click="editContent(content)" class="edit-button">Edit</button>
           </div>
+        </div>
 
 
       </main>
@@ -362,6 +360,13 @@ methods: {
   padding-bottom: 20px;
 }
 
+.content-box {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Ensures relative positioning for absolute elements */
+}
+
+
 /* Banner styling */
 .banner {
   position: relative;
@@ -426,9 +431,27 @@ methods: {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 15px; /* Adds spacing between entries */
+  margin-bottom: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
+  position: relative; /* Needed for absolute positioning of button */
+  display: flex;
+  justify-content: space-between; /* Pushes the button to the right */
+  align-items: center; /* Aligns items vertically */
+}
+
+.edit-button {
+  background-color: #4d44b5;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Adds spacing from content */
+}
+
+.edit-button:hover {
+  background-color: #3b3791;
 }
 
 .submitted-entry * {
