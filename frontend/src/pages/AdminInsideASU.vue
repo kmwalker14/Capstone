@@ -93,6 +93,8 @@
             <div v-for="content in submittedContent" :key="content.id" class="content-box">
               <div class="submitted-entry tiptap-content" v-html="content.content"></div>
 
+              <!-- Edit Button -->
+              <button @click="editContent(content)">Edit</button>
             </div>
           </div>
 
@@ -160,7 +162,8 @@ name: 'AdminInsideASU',
       editor: null,
       paragraphIcon: faParagraph,
       highlightIcon: faHighlighter,
-      faFileUpload
+      faFileUpload,
+      selectedContentId: null,
     }
   },
 methods: {
@@ -182,24 +185,33 @@ methods: {
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
-    console.log("Submitting content:", content); // Debugging output
+    console.log("Submitting content:", content);
+
     const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-    console.log("Backend URL:", backendUrl); // Debugging output
-
     try {
-      const response = await axios.post(`${backendUrl}/api/insideasu`, { content });
-      console.log("✅ Success:", response.data); // Log success response
-      alert('Content saved successfully!');
+      let response;
+      if (this.selectedContentId) {
+        // If editing existing content
+        response = await axios.put(`${backendUrl}/api/insideasu/${this.selectedContentId}`, { content });
+        console.log("✅ Content Updated:", response.data);
+        alert("Content updated successfully!");
+      } else {
+        // If creating new content
+        response = await axios.post(`${backendUrl}/api/insideasu`, { content });
+        console.log("✅ Content Created:", response.data);
+        alert("Content saved successfully!");
+      }
 
-      // Fetch the updated content after submission
-      this.fetchContent(); // Use this.fetchContent() instead of await this.fetchContent()
-
+      //this.selectedContentId = null; // Reset edit state
+      //this.editor.commands.clearContent(); // Clear editor
+      //this.fetchContent(); // Refresh the content list
     } catch (error) {
-      console.error('❌ Error saving content:', error.response?.data || error.message);
-      alert('Failed to save content.');
+      console.error("❌ Error saving content:", error.response?.data || error.message);
+      alert("Failed to save content.");
     }
   }
+
   ,
 
 
@@ -219,8 +231,13 @@ methods: {
       const url = URL.createObjectURL(file)
       this.editor.chain().focus().insertContent(`<a href="${url}" target="_blank">${file.name}</a> `).run()
     }
-  }
-},
+  },
+
+  editContent(content) {
+    this.selectedContentId = content.id; // Track the content being edited
+    this.editor.commands.setContent(content.content);
+    this.isEditing = true; // Load content into editor
+  } },
   mounted() {
     this.editor = new Editor({
       extensions: [

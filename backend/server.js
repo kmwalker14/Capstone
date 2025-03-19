@@ -221,6 +221,34 @@ app.get('/api/insideasu', async (req, res) => {
     }
 });
 
+app.put('/api/insideasu/:id', async (req, res) => {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content) {
+        return res.status(400).json({ message: "Content is required" });
+    }
+
+    try {
+        const connection = await db.getConnection();
+        const query = "UPDATE insideasu SET content = ? WHERE id = ?";
+        const [result] = await connection.query(query, [content, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        res.status(200).json({ message: "Content updated successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Database error", error: error.message });
+    }
+});
+
+
+
+
+
+
 
 
 setInterval(async () => {
