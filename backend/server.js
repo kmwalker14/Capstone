@@ -244,6 +244,36 @@ app.put('/api/insideasu/:id', async (req, res) => {
     }
 });
 
+app.delete('/api/insideasu', async (req, res) => {
+    let connection;
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ message: "Content ID is required" });
+        }
+
+        connection = await db.getConnection();
+
+        const deleteQuery = "DELETE FROM insideasu WHERE id = ?";
+        const [result] = await connection.query(deleteQuery, [id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        console.log(`✅ Content with ID ${id} deleted successfully`);
+        res.status(200).json({ message: "Deleted successfully" });
+
+    } catch (err) {
+        console.error("❌ Error deleting content:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+
 
 
 

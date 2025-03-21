@@ -93,6 +93,8 @@
           <div class="submitted-entry tiptap-content">
             <div v-html="content.content"></div>
             <button @click="editContent(content)" class="edit-button">Edit</button>
+            <button @click="deleteContent(content.id)" class="delete-button">Delete</button>
+
           </div>
         </div>
 
@@ -212,7 +214,26 @@ methods: {
 
   ,
 
+  async deleteContent(id) {
+    if (!confirm("Are you sure you want to delete this content?")) return;
 
+    try {
+      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+
+      await axios.delete(`${backendUrl}/api/insideasu`, { data: { id } });
+
+      // Update the UI: Remove the deleted item from the list
+      this.contentList = this.contentList.filter(content => content.id !== id);
+
+      alert("Content deleted successfully!");
+    } catch (error) {
+      console.error("❌ Error deleting content:", error);
+      alert("Failed to delete content.");
+    }
+  }
+
+
+  ,
 
   addImage() {
     const url = window.prompt('Enter image URL:')
