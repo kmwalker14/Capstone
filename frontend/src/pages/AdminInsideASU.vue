@@ -89,12 +89,16 @@
           <button class="submit-button" @click="submitContent">Submit</button>
         </section>
           <!-- Display Submitted Content ONLY Below the Rich Text Box -->
+        <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <div v-for="content in submittedContent" :key="content.id" class="content-box">
           <div class="submitted-entry tiptap-content">
             <div v-html="content.content"></div>
-            <button @click="editContent(content)" class="edit-button">Edit</button>
-            <button @click="deleteContent(content.id)" class="delete-button">Delete</button>
 
+            <!-- Buttons wrapped in a flex container -->
+            <div class="buttons-container">
+              <button @click="editContent(content)" class="edit-button">Edit</button>
+              <button @click="deleteContent(content.id)" class="delete-button">Delete</button>
+            </div>
           </div>
         </div>
 
@@ -164,6 +168,7 @@ name: 'AdminInsideASU',
       highlightIcon: faHighlighter,
       faFileUpload,
       selectedContentId: null,
+      contents: [],
     }
   },
 methods: {
@@ -214,24 +219,24 @@ methods: {
 
   ,
 
-  async deleteContent(id) {
+  async deleteContent(contentId) {
     if (!confirm("Are you sure you want to delete this content?")) return;
 
     try {
       const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-      await axios.delete(`${backendUrl}/api/insideasu`, { data: { id } });
-
-      // Update the UI: Remove the deleted item from the list
-      this.contentList = this.contentList.filter(content => content.id !== id);
+      await axios.delete(`${backendUrl}/api/insideasu`, { data: { id: contentId } });
 
       alert("Content deleted successfully!");
+
+      // ✅ Reload the entire page to reflect changes
+      window.location.reload();
+
     } catch (error) {
       console.error("❌ Error deleting content:", error);
       alert("Failed to delete content.");
     }
   }
-
 
   ,
 
@@ -442,6 +447,20 @@ methods: {
   background: #3b3791;
 }
 
+.delete-button {
+  background-color: #4d44b5; /* Same as edit button */
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Same spacing */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+  background-color: #3b3791; /* Same hover effect */
+}
 
 .submitted-content-container {
   margin-top: 20px;
