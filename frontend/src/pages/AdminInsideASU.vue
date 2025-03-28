@@ -7,10 +7,10 @@
           <h1 class="page-title">Inside ASU</h1>
           <div class="user-profile">
             <div class="user-info">
-              <span class="user-name">Samira G.</span>
-              <span class="user-role">Admin</span>
+
+
             </div>
-            <div class="user-avatar"></div>
+
           </div>
         </header>
         <section class="content-section">
@@ -68,7 +68,7 @@
                       </div>
 
                       <!-- Add Image Button -->
-                      <button @click="addImage">Add image</button>
+                      <button @click="addImage">Image URL</button>
 
                       <!-- Upload Document Button -->
                       <button @click="triggerFileUpload">
@@ -92,7 +92,8 @@
         <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <div v-for="content in submittedContent" :key="content.id" class="content-box">
           <div class="submitted-entry tiptap-content">
-            <div v-html="content.content"></div>
+            <div v-html="content.content" class="tiptap-content"></div>
+
 
             <!-- Buttons wrapped in a flex container -->
             <div class="buttons-container">
@@ -266,7 +267,11 @@ methods: {
     this.editor = new Editor({
       extensions: [
         StarterKit,
-        TextAlign.configure({types: ['heading', 'paragraph']}),
+        TextAlign.configure({
+          types: ['heading', 'paragraph'],
+
+        }),
+
         FontFamily.configure({
           types: ['textStyle'],
         }),
@@ -315,6 +320,8 @@ methods: {
   width: 100%;
 }
 
+
+
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
   display: flex;
@@ -323,6 +330,8 @@ methods: {
   flex-grow: 1;
   padding: 0px 15px 0px 15px;
 }
+
+
 
 /* Main content styling */
 .main-content {
@@ -462,6 +471,13 @@ methods: {
   background-color: #3b3791; /* Same hover effect */
 }
 
+.buttons-container {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Optional: space between buttons */
+}
+
+
 .submitted-content-container {
   margin-top: 20px;
 }
@@ -474,10 +490,11 @@ methods: {
   margin-bottom: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
-  position: relative; /* Needed for absolute positioning of button */
   display: flex;
-  justify-content: space-between; /* Pushes the button to the right */
-  align-items: center; /* Aligns items vertically */
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-start; /* Ensure content starts from the left */
+
 }
 
 .edit-button {
@@ -503,19 +520,25 @@ methods: {
 }
 
 /* Preserve rich text styling */
-.tiptap-content {
+.tiptap-content [style*="text-align"]{
   font-family: "Poppins", sans-serif !important;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
+
 }
 
 .tiptap-content span {
   all: unset;
 }
-.tiptap-content p,
+.tiptap-content p {
+  text-align: justify; /* Or set to left, center, or right as needed */
+}
+
 .tiptap-content div {
   font-family: inherit !important;
+  text-align: inherit;
+
 }
 
 .tiptap-content h1 {
@@ -539,11 +562,14 @@ methods: {
 .tiptap-content a {
   color: blue;
   text-decoration: underline;
+  text-align: inherit;
 }
 
 .tiptap-content p {
   margin-bottom: 10px;
 }
+
+
 
 
 
