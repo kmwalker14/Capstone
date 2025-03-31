@@ -251,12 +251,30 @@ methods: {
     this.$refs.fileInput.click()
   },
   handleFileUpload(event) {
-    const file = event.target.files[0]
-    if (file) {
-      const url = URL.createObjectURL(file)
-      this.editor.chain().focus().insertContent(`<a href="${url}" target="_blank">${file.name}</a> `).run()
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const fileUrl = URL.createObjectURL(file);
+    const fileType = file.type;
+
+    // Handle images separately to display them
+    if (fileType.startsWith("image/")) {
+      this.editor.chain().focus().setImage({ src: fileUrl }).run();
+    } 
+    // Handle PDFs (embed viewer)
+    else if (fileType === "application/pdf") {
+      this.editor.chain().focus().insertContent(`
+        <embed src="${fileUrl}" type="application/pdf" width="100%" height="500px" />
+      `).run();
+    } 
+    // Handle other file types (display inline frame)
+    else {
+      this.editor.chain().focus().insertContent(`
+        <iframe src="${fileUrl}" width="100%" height="500px"></iframe>
+      `).run();
     }
   },
+
 
   editContent(content) {
     this.selectedContentId = content.id; // Track the content being edited
