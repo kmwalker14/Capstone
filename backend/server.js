@@ -283,6 +283,16 @@ app.post('/api/insideasu', async (req, res) => {
 });
 
 
+// Get All Admins API route
+app.get('/api/insideasu', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, content FROM insideasu");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
 
 setInterval(async () => {
     try {
