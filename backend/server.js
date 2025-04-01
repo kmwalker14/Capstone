@@ -1,4 +1,4 @@
-localrequire('dotenv').config(); // Load .env variables
+require('dotenv').config();
 const multer = require('multer');
 const path = require('path');
 const fs = require("fs");
