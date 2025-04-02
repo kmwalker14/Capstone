@@ -74,7 +74,7 @@
                       <button @click="triggerFileUpload">
                         <font-awesome-icon :icon="faFileUpload" />
                       </button>
-                      <input type="file" ref="fileInput" @change="handleFileUpload" accept=".pdf,.doc,.docx,.jpg, .png" style="display: none;" />
+                      <input type="file" ref="fileInput" @change="handleFileUpload" accept=".pdf,.doc,.docx,.jpg, .png, .zip, .txt, .xlsx" style="display: none;" />
 
                       <button @click="addLink">🔗 Link</button>
 
