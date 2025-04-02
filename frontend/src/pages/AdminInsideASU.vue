@@ -74,7 +74,7 @@
                       <button @click="triggerFileUpload">
                         <font-awesome-icon :icon="faFileUpload" />
                       </button>
-                      <input type="file" ref="fileInput" @change="handleFileUpload" accept=".pdf,.doc,.docx,.jpg, .png, .zip, .txt, .xlsx" style="display: none;" />
+                      <input type="file" ref="fileInput" @change="handleFileUpload" accept=".pdf,.doc,.docx,.jpg, .png" style="display: none;" />
 
                       <button @click="addLink">🔗 Link</button>
 
@@ -84,7 +84,7 @@
                   <editor-content :editor="editor" />
                 </div>
               </section>
-            </div> 
+            </div>
           </div>
           <button class="submit-button" @click="submitContent">Submit</button>
         </section>
@@ -102,6 +102,8 @@
             </div>
           </div>
         </div>
+
+
       </main>
     </div>
   </div>
@@ -126,8 +128,6 @@ import { faHighlighter } from '@fortawesome/free-solid-svg-icons'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { ref, onMounted } from "vue";
-import * as pdfjsLib from "pdfjs-dist/webpack"; // Use this for Webpack builds
-pdfjsLib.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.min.js");
 
 export default {
 name: 'AdminInsideASU',
@@ -170,7 +170,6 @@ name: 'AdminInsideASU',
       faFileUpload,
       selectedContentId: null,
       contents: [],
-      uploads: []
     }
   },
 methods: {
@@ -238,9 +237,9 @@ methods: {
       console.error("❌ Error deleting content:", error);
       alert("Failed to delete content.");
     }
-  },
+  }
 
-
+  ,
 
   addImage() {
     const url = window.prompt('Enter image URL:')
@@ -251,66 +250,30 @@ methods: {
   triggerFileUpload() {
     this.$refs.fileInput.click()
   },
-
-  async handleFileUpload(event) {
+  handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append("file", file);
+    const fileUrl = URL.createObjectURL(file);
+    const fileType = file.type;
 
-    try {
-      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
-        const response = await axios.post(`${backendUrl}/upload`, formData, {
-            headers: { "Content-Type": "multipart/form-data" }
-        });
-
-        // Check if the upload was successful and the URL is returned
-        if (response.data) {
-            // The file upload was successful; now retrieve the file URL
-            this.getFileUrl(response.data.id); // Get the URL using the file's ID or response object
-            alert("File uploaded successfully!");
-        } else {
-            throw new Error("File URL missing in response.");
-        }
-    } catch (error) {
-        console.error("File upload failed:", error);
-        alert("Failed to upload file."); 
+    // Handle images separately to display them
+    if (fileType.startsWith("image/")) {
+      this.editor.chain().focus().setImage({ src: fileUrl }).run();
+    } 
+    // Handle PDFs (embed viewer)
+    else if (fileType === "application/pdf") {
+      this.editor.chain().focus().insertContent(`
+        <embed src="${fileUrl}" type="application/pdf" width="100%" height="500px" />
+      `).run();
+    } 
+    // Handle other file types (display inline frame)
+    else {
+      this.editor.chain().focus().insertContent(`
+        <iframe src="${fileUrl}" width="100%" height="500px"></iframe>
+      `).run();
     }
   },
-
-  async getFileUrl(fileId) {
-    try {
-      const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
-        // Send the file ID as a query parameter
-        const response = await axios.get(`${backendUrl}/files`,);
-        this.uploads = response.data;
-        const fileData = this.uploads.find(file => file.id === fileId);
-
-        if (fileData) {
-            // Insert the URL into the editor as a link
-             let fullUrl = `${backendUrl}${fileData.filepath}`;
-            if (fullUrl) {
-               // Ensure the URL starts with http:// or https://
-                if (!fullUrl.startsWith("http://") && !fullUrl.startsWith("https://")) {
-                 fullUrl = "https://" + fullUrl;
-                }
-              console.log("Editor instance:", this.editor);
-              if (this.editor.isActive("link")) {
-                  this.editor.chain().focus().extendMarkRange("link").setLink({ href: fullUrl }).run();
-              } else {
-                const fileName = fullUrl.split("/").pop(); // Extract just the file name
-                this.editor.chain().focus().insertContent(`<a href="${fullUrl}" target="_blank">${fileName}</a>`).run();
-              }
-            }            
-        } else {
-          throw new Error("File URL not found.");
-        }
-    } catch (error) {
-        console.error("Failed to retrieve file URL:", error);
-        alert("Failed to retrieve file URL.");
-    }
- },
 
 
   editContent(content) {
@@ -375,17 +338,6 @@ methods: {
   width: 100%;
 }
 
-.scrollable-container {
-  width: 100%; /* Set a fixed or percentage width */
-  height: 500px; /* Set a fixed height for scrolling */
-  overflow: auto; /* This will allow scrolling */
-  border: 1px solid #ccc; /* Optional border */
-}
-
-canvas {
-  width: auto; /* Let the canvas resize */
-  height: auto; /* Let the canvas resize */
-}
 
 
 /* Flex container that holds the sidebar and main content */
