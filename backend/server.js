@@ -268,21 +268,7 @@ app.post('/api/insideasu', async (req, res) => {
     try {
         console.log("🔹 Incoming Request Body:", req.body);
 
-        const { content, id } = req.body;
-
-
-        if (id) {
-            // 🔴 DELETE content if ID is provided
-            const deleteQuery = "DELETE FROM insideasu WHERE id = ?";
-            const [result] = await connection.query(deleteQuery, [id]);
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ message: "Content not found" });
-            }
-            console.log("✅ Content deleted successfully");
-            return res.status(200).json({ message: "Content deleted successfully" });
-        }
-        
+        const { content } = req.body;
         if (!content) {
             console.error("❌ Error: No content provided");
             return res.status(400).json({ message: "Content is required" });
