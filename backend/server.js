@@ -254,7 +254,7 @@ app.delete('/admins', async (req, res) => {
 });
 
 // Get All Content API route
-app.get('/admins', async (req, res) => {
+app.get('/api/insideasu', async (req, res) => {
     try {
         const [results] = await db.query("SELECT id, content FROM insideasu");
         res.json(results);
