@@ -109,6 +109,7 @@ app.get('/admins', async (req, res) => {
 
 
 
+
 // Upload file and save path in MySQL
 app.post("/upload", upload.single("file"), async (req, res) => {
     let connection;
@@ -252,7 +253,15 @@ app.delete('/admins', async (req, res) => {
     }
 });
 
-
+// Get All Content API route
+app.get('/admins', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, content FROM insideasu");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
 
 app.post('/api/insideasu', async (req, res) => {
     let connection;
@@ -282,7 +291,15 @@ app.post('/api/insideasu', async (req, res) => {
     }
 });
 
-
+// Route to get all files
+app.get("/files", async (req, res) => {
+    try {
+        const [results] = await  db.query("SELECT id, filename, filepath FROM files");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }   
+});
 
 setInterval(async () => {
     try {
