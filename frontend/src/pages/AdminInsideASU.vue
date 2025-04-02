@@ -129,7 +129,7 @@ import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { ref, onMounted } from "vue";
 import * as pdfjsLib from "pdfjs-dist/webpack"; // Use this for Webpack builds
-pdfjsLib.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.min.js");
+pdfjsLib.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.min.js"); 
 
 export default {
 name: 'AdminInsideASU',
