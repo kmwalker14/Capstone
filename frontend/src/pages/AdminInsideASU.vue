@@ -227,7 +227,7 @@ methods: {
     try {
       const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-      await axios.delete(`${backendUrl}/api/insideasu`, { data: { id: contentId } });
+      await axios.post(`${backendUrl}/api/insideasu`, { data: { id: contentId } });
 
       alert("Content deleted successfully!");
 
