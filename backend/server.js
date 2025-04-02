@@ -1,4 +1,7 @@
 require('dotenv').config(); // Load .env variables
+const multer = require('multer');
+const path = require('path');
+const fs = require("fs");
 
 const express = require('express'); // Import express for building the server
 const mysql = require('mysql2/promise');
@@ -48,6 +51,18 @@ const db = mysql.createPool({
     acquireTimeout: 10000,  // Wait 10s before failing
     reconnect: true
 });
+
+// Multer setup: Store files in 'uploads/' directory
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Files will be saved in "uploads/" folder
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname); // Unique filename
+    }
+});
+const upload = multer({ storage });
+
 
 // Connect to MySQL
 //db.connect(err => {
@@ -273,12 +288,49 @@ app.delete('/api/insideasu', async (req, res) => {
     }
 });
 
+// Upload file and save path in MySQL
+app.post("/upload", upload.single("file"), async (req, res) => {
+    let connection;
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        const { originalname, filename } = req.file;
+        const filepath = `/uploads/${originalname}`; // Store relative path
+
+        connection = await db.getConnection();
+
+        // Insert file details into the database
+        const query = "INSERT INTO files (filename, filepath) VALUES (?, ?)";
+        const [result] = await db.query(query, [originalname, filepath]);
+
+        // Return the relative file URL after insertion
+        res.json({ id: result.insertId, filename: originalname, url: filepath });
+
+    } catch (err) {
+        // Handle any error that occurs during file upload
+        console.error("Error uploading file:", err);
+        res.status(500).json({ error: "Server error during file upload", details: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
 
 
 
+// Route to get all files
+app.get("/files", async (req, res) => {
+    try {
+        const [results] = await  db.query("SELECT id, filename, filepath FROM files");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }   
+});
 
-
-
+// Serve uploaded files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
 setInterval(async () => {
