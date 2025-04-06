@@ -38,7 +38,7 @@ export default {
     async fetchContent() {
       try {
         const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
-        const response = await axios.get(`${backendUrl}/api/insideasu`);
+        const response = await axios.get(`${backendUrl}/api/mentorfaculty`);
         this.contents = response.data; // Store data in Vue component state
       } catch (error) {
         console.error("❌ Error fetching content:", error);
