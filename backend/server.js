@@ -821,6 +821,184 @@ app.delete('/api/mentorstudents', async (req, res) => {
     }
 });
 
+app.post('/api/workhistory', async (req, res) => {
+    let connection;
+    try {
+        console.log("🔹 Incoming Request Body:", req.body);
+
+        const { content } = req.body;
+        if (!content) {
+            console.error("❌ Error: No content provided");
+            return res.status(400).json({ message: "Content is required" });
+        }
+
+        // Get a new connection
+        connection = await db.getConnection();
+
+        const query = "INSERT INTO workhistory (content) VALUES (?)";
+        await connection.query(query, [content]);
+
+        console.log("✅ Content saved successfully");
+        res.status(201).json({ message: "Content saved successfully" });
+
+    } catch (err) {
+        console.error("❌ Database error:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();  // Ensure connection is always released
+    }
+});
+
+app.get('/api/workhistory', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, content FROM workhistory ORDER BY id DESC");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
+app.put('/api/workhistory/:id', async (req, res) => {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content) {
+        return res.status(400).json({ message: "Content is required" });
+    }
+
+    try {
+        const connection = await db.getConnection();
+        const query = "UPDATE workhistory SET content = ? WHERE id = ?";
+        const [result] = await connection.query(query, [content, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        res.status(200).json({ message: "Content updated successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Database error", error: error.message });
+    }
+});
+
+app.delete('/api/workhistory', async (req, res) => {
+    let connection;
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ message: "Content ID is required" });
+        }
+
+        connection = await db.getConnection();
+
+        const deleteQuery = "DELETE FROM workhistory WHERE id = ?";
+        const [result] = await connection.query(deleteQuery, [id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        console.log(`✅ Content with ID ${id} deleted successfully`);
+        res.status(200).json({ message: "Deleted successfully" });
+
+    } catch (err) {
+        console.error("❌ Error deleting content:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+app.post('/api/tools', async (req, res) => {
+    let connection;
+    try {
+        console.log("🔹 Incoming Request Body:", req.body);
+
+        const { content } = req.body;
+        if (!content) {
+            console.error("❌ Error: No content provided");
+            return res.status(400).json({ message: "Content is required" });
+        }
+
+        // Get a new connection
+        connection = await db.getConnection();
+
+        const query = "INSERT INTO tools (content) VALUES (?)";
+        await connection.query(query, [content]);
+
+        console.log("✅ Content saved successfully");
+        res.status(201).json({ message: "Content saved successfully" });
+
+    } catch (err) {
+        console.error("❌ Database error:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();  // Ensure connection is always released
+    }
+});
+
+app.get('/api/tools', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, content FROM tools ORDER BY id DESC");
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
+app.put('/api/tools/:id', async (req, res) => {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content) {
+        return res.status(400).json({ message: "Content is required" });
+    }
+
+    try {
+        const connection = await db.getConnection();
+        const query = "UPDATE tools SET content = ? WHERE id = ?";
+        const [result] = await connection.query(query, [content, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        res.status(200).json({ message: "Content updated successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Database error", error: error.message });
+    }
+});
+
+app.delete('/api/tools', async (req, res) => {
+    let connection;
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ message: "Content ID is required" });
+        }
+
+        connection = await db.getConnection();
+
+        const deleteQuery = "DELETE FROM tools WHERE id = ?";
+        const [result] = await connection.query(deleteQuery, [id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Content not found" });
+        }
+
+        console.log(`✅ Content with ID ${id} deleted successfully`);
+        res.status(200).json({ message: "Deleted successfully" });
+
+    } catch (err) {
+        console.error("❌ Error deleting content:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
 // Upload file and save path in MySQL
 app.post("/upload", upload.single("file"), async (req, res) => {
     let connection;
@@ -875,7 +1053,7 @@ setInterval(async () => {
     } catch (err) {
         console.error("❌ Database keep-alive failed:", err);
     }
-}, 60000); // Runs every 1 minute
+}, 300000); // Runs every 1 minute
 
 
 db.on("error", async (err) => {
