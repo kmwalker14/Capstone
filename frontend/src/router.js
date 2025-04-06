@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
-// import { authGuard } from "@auth0/auth0-vue";
+import { authGuard } from "@auth0/auth0-vue";
+// import { useAuth0 } from '@auth0/auth0-vue';
 
 import AdminLogin from './pages/AdminLogin.vue';
 import AdminHome from '@/pages/AdminHome.vue';
@@ -29,18 +30,18 @@ import CallbackPage from './pages/CallbackPage.vue';
 
 const routes = [
   {path: '/', redirect: '/studenthome'},
-  {path: '/adminhome', name: 'AdminHome', component: AdminHome,},
-  {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin, },
-  {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching,},
-  {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications,},
-  {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch,},
-  {path: '/adminusers', name: 'AdminUsers', component: AdminUsers, },
-  {path: '/admintools', name: 'AdminTools', component: AdminTools,},
-  {path: '/admin-insideasu', name: 'AdminInsideASU', component: AdminInsideASU,},
-  {path: '/admin-outsideasu', name: 'AdminOutsideASU', component: AdminOutsideASU,},
-  {path: '/admin-mentorfaculty', name: 'AdminMentorFaculty', component: AdminMentorFaculty,},
-  {path: '/admin-mentorstudents', name: 'AdminMentorStudents', component: AdminMentorStudents, },
-  {path: '/adminworkhistory', name: 'AdminWorkHistory', component: AdminWorkHistory,},
+  {path: '/adminhome', name: 'AdminHome', component: AdminHome, beforeEnter: authGuard },
+  {path: '/adminlogin', name: 'AdminLogin', component: AdminLogin, beforeEnter: authGuard },
+  {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching, beforeEnter: authGuard },
+  {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications, beforeEnter: authGuard },
+  {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch, beforeEnter: authGuard },
+  {path: '/adminusers', name: 'AdminUsers', component: AdminUsers, beforeEnter: authGuard },
+  {path: '/admintools', name: 'AdminTools', component: AdminTools, beforeEnter: authGuard},
+  {path: '/admin-insideasu', name: 'AdminInsideASU', component: AdminInsideASU, beforeEnter: authGuard},
+  {path: '/admin-outsideasu', name: 'AdminOutsideASU', component: AdminOutsideASU, beforeEnter: authGuard },
+  {path: '/admin-mentorfaculty', name: 'AdminMentorFaculty', component: AdminMentorFaculty, beforeEnter: authGuard },
+  {path: '/admin-mentorstudents', name: 'AdminMentorStudents', component: AdminMentorStudents, beforeEnter: authGuard },
+  {path: '/adminworkhistory', name: 'AdminWorkHistory', component: AdminWorkHistory, beforeEnter: authGuard},
 
   {path: '/studenthome', name: 'StudentHome', component: StudentHome},
   {path: '/studentteaching', name: 'StudentTeaching', component: StudentTeaching},
@@ -60,5 +61,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 });
+
+// const { isAuthenticated } = useAuth0();
+
 
 export default router;

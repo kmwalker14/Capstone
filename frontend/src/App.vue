@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Show admin sidebar menu if user is an admin -->
-    <AdminSidebarMenu v-if="isAuthenticated" />
+    <AdminSidebarMenu v-if= "isAuthenticated" />
 
     <!-- Show student menu if user is not an admin -->
     <SidebarMenu v-else />
