@@ -4,7 +4,7 @@
 
       <main class="main-content">
         <header class="header">
-          <h1 class="page-title">Inside ASU</h1>
+          <h1 class="page-title">Teaching</h1>
           <div class="user-profile">
             <div class="user-info">
 
