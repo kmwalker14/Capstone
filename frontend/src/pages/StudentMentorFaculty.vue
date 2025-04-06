@@ -1,26 +1,18 @@
 <template>
   <div class="admin-container">
     <div class="layout-wrapper">
-
       <main class="main-content">
         <header class="header">
-          <h1 class="page-title">Mentor Faculty</h1>
-
+          <h1 class="page-title">My Work as a Faculty Mentor</h1>
         </header>
-        <section class="content-section">
-          <div class="banner"> <!-- REMOVE ??? -->
-          </div>
-          <div class="profile-content">
-            <div class="profile-details">
-              <div class="profile-header-section">
-              </div>
-              <section class="about-section">
-                <h3 class="section-title">Title</h3>
-                <p class="section-content">
-                  Content posted by professor
-                </p>
-              </section>
-            </div>
+
+
+
+        <!-- Submitted Content (Placed Separately Below the White Box) -->
+        <section class="submitted-content">
+
+          <div v-for="content in contents" :key="content.id" class="content-box">
+            <div v-html="content.content"></div>
           </div>
         </section>
       </main>
@@ -28,9 +20,31 @@
   </div>
 </template>
 
+
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'StudentMentorFaculty'
+  name: 'StudentMentorFaculty',
+  data() {
+    return {
+      contents: [] // Array to store fetched content
+    };
+  },
+  async created() {
+    await this.fetchContent();
+  },
+  methods: {
+    async fetchContent() {
+      try {
+        const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
+        const response = await axios.get(`${backendUrl}/api/insideasu`);
+        this.contents = response.data; // Store data in Vue component state
+      } catch (error) {
+        console.error("❌ Error fetching content:", error);
+      }
+    }
+  }
 };
 </script>
 
@@ -43,6 +57,44 @@ export default {
   flex-grow: 1;
   width: 100%;
 }
+
+.content-box {
+  background-color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.submitted-content .content-box {
+  font-family: Poppins, sans-serif; /* Apply Poppins as the default font */
+}
+
+.submitted-content .content-box * {
+  font-family: inherit; /* Inherit font from the parent element (Poppins by default) */
+}
+
+.submitted-content {
+  margin-top: 0; /* Remove any margin on top of the content */
+  padding-top: 0; /* Ensure no extra padding at the top */
+}
+
+.about-section {
+  background-color: white;
+  padding: 20px; /* Padding for the title box */
+  max-width: 600px; /* Limit the width of the title box */
+  margin: 0 auto; /* Center the box */
+  border-radius: 8px; /* Optional: round the corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  margin-bottom: 5px; /* Reduce space below the white box */
+}
+
+.section-title {
+  font-size: 24px; /* Font size for the title */
+  margin-bottom: 0px; /* Adjust space below the title */
+}
+
 
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
@@ -109,9 +161,10 @@ export default {
 
 /* Content section styling */
 .content-section {
-  background: #fff;
-  border-radius: 20px;
-  margin-top: 20px;
+  background: none; /* Remove the white background from the whole section */
+  padding: 0; /* Remove unnecessary padding */
+  margin: 0; /* Remove unnecessary margin */
+
 }
 
 /* Banner styling */
@@ -152,7 +205,7 @@ export default {
 /* Styling for about section */
 .section-title {
   font: 700 24px Poppins, sans-serif;
-  margin: 34px 0 30px;
+  margin: 1px 0 1px;
 }
 
 .section-content {
