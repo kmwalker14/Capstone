@@ -54,7 +54,7 @@ export default {
 
   data() {
     return {
-      currentPage: 'adminhome' // Default to this page
+      currentPage: 'studenthome' // Default to this page
     };
   },
 };

@@ -3,7 +3,7 @@
     <div class="layout-wrapper">
       <main class="main-content">
         <header class="header">
-          <h1 class="page-title">My Work Inside ASU</h1>
+          <h1 class="page-title">Inside ASU</h1>
         </header>
 
 
@@ -85,8 +85,8 @@ export default {
   padding: 20px; /* Padding for the title box */
   max-width: 600px; /* Limit the width of the title box */
   margin: 0 auto; /* Center the box */
-  border-radius: 8px; /* Optional: round the corners */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  border-radius: 8px; /* Round the corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   margin-bottom: 5px; /* Reduce space below the white box */
 }
 
@@ -151,14 +151,6 @@ export default {
   display: block;
 }
 
-/* Avatar styling */
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
-  background: var(--Color-Gray-2, #c1bbeb);
-}
-
 /* Content section styling */
 .content-section {
   background: none; /* Remove the white background from the whole section */
@@ -215,4 +207,63 @@ export default {
 }
 
 /* Media queries for responsive design go here */
+@media (max-width: 1280px) {
+    .admin-container {
+      padding: 20px;
+    }
+
+    .layout-wrapper {
+      padding: 0px;
+    }
+
+    .main-content {
+      padding: 0px 30px 0px 30px;
+    }
+
+    .header {
+      margin: 0 10px;
+    }
+
+    .page-title {
+      font-size: 32px;
+    }
+
+    .content-box {
+      padding: 20px;
+    }
+
+    .content-box * {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .admin-container {
+      padding: 15px;
+    }
+
+    .layout-wrapper {
+      padding: 0px;
+    }
+
+    .main-content {
+      padding: 0px 10px 0px 10px;
+    }
+
+    .header {
+      margin: 0 10px;
+    }
+
+    .page-title {
+      font-size: 26px;
+    }
+
+    .content-box {
+      padding: 20px;
+    }
+
+    .content-box * {
+      font-size: 14px;
+    }
+  }
 </style>

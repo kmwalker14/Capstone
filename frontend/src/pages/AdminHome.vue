@@ -12,14 +12,13 @@
                 <span class="user-name">Samira G.</span>
                 <span class="user-role">Admin</span>
               </div>
-              <div class="user-avatar"></div>
             </div>
           </header>
           <section class="content-section">
             <div class="banner">
               <img
                 loading="lazy"
-                src="@/assets/banner.svg"
+                src="@/assets/banner.png"
                 alt="Profile banner background"
                 class="banner-image"
               />
@@ -63,13 +62,13 @@
                   <h3 class="section-title">Education:</h3>
                   <div class="education-item">
                     <h4 class="education-degree">
-                      Insert Major, University Insert Here
+                      • Insert Major, University Insert Here
                     </h4>
                     <span class="education-year">20??-20??</span>
                   </div>
                   <div class="education-item">
                     <h4 class="education-degree">
-                      Master of Insert Here, University Insert Here
+                      • Master of Insert Here, University Insert Here
                     </h4>
                     <span class="education-year">20??-20??</span>
                   </div>
@@ -172,14 +171,6 @@ body {
   display: block;
 }
 
-/* Avatar styling */
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
-  background: var(--Color-Gray-2, #c1bbeb);
-}
-
 /* Content section styling */
 .content-section {
   background: #fff;
@@ -190,12 +181,12 @@ body {
 /* Banner styling */
 .banner {
   position: relative;
-  min-height: 202px;
-  /*
+  height: 100%;
+  width: 100%;
   background-color: rgba(106, 36, 18, 1);
+  margin-bottom: 50px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  */
 }
 
 .banner-image {
@@ -204,12 +195,15 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* Edit button styling */
 .edit-button {
   position: relative;
   z-index: 1;
+  bottom: 20px; 
   margin: 92px 0 0 36px;
   padding: 17px 43px;
   border-radius: 40px;
@@ -225,13 +219,13 @@ body {
 .profile-content {
   display: flex;
   padding: 0 36px 92px;
-  margin-top: -27px;
+  top: -10px;
   position: relative;
   z-index: 1;
 }
 
 .profile-details {
-  width: 70%;
+  width: 100%; /* 70% ??? */
   color: var(--Color-Text, #303972);
   font-family: Poppins, sans-serif;
 }
@@ -245,7 +239,7 @@ body {
 
 .profile-title {
   font: 700 32px Poppins, sans-serif;
-  margin: 10;     /*T: 10, O: 0*/
+  margin: 0;     /*T: 10, O: 0*/
   padding-right: 1%; /*T: 1%, O: null*/
 }
 
@@ -254,7 +248,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 31px;
+  margin-top: 20px;
   font: 600 18px Poppins, sans-serif;
 }
 
@@ -269,7 +263,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 134px; /*T: 134px, O: null*/
+  margin-top: 95px; /*T: 100px, O: null*/
+  margin-right: 400px;
   font: 600 18px Poppins, sans-serif;
 }
 
@@ -292,6 +287,7 @@ body {
 .education-degree {
   font: 600 18px Poppins, sans-serif;
   margin: 0;
+  margin-left: 20px;
 }
 
 .education-year {
@@ -304,16 +300,176 @@ body {
 
 /* Profile image styling */
 .profile-image-container {
-  width: 30%;
+  width: 35%;
+  height: 100%;
   margin-left: 20px;
 }
 
 .profile-image {
   width: 100%;
-  aspect-ratio: 1.03;
+  height: 100%;
+  aspect-ratio: 1;
   object-fit: fill;
   border-radius: 50%;
 }
 
 /* Media queries for responsive design go here */
+@media (max-width: 1280px) { /* 1366px ? */
+  .layout-wrapper {
+    flex-direction: column; /* Stack sidebar on top if needed */
+    gap: 20px;
+    padding: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center; /* flex-start */
+    text-align: center;
+  }
+  
+  .user-profile {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-content {
+    overflow: auto;
+    top: 10px;
+  }
+
+  .profile-details {
+    width: 70%;
+  }
+
+  .profile-image-container {
+    width: 60%;
+    height: 100%;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    min-width: auto; /* previous - 100px */
+  }
+
+  .education-degree {
+    margin-left: 20px;
+  }
+
+  .education-year {
+    margin-left: 40px;
+  }
+
+  .section-content {
+    text-align: left;
+  }
+
+  .contact-info {
+    margin-top: 0px;
+  }
+
+  .banner {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .banner-image {
+    height: 120px;
+  }
+
+  .edit-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-content {
+    padding: 0px 0px 20px 0px;
+    top: -5px;
+    display: flex;
+    flex-direction: column; /* Stacks the items vertically */
+    align-items: center; /* Centers items horizontally */
+  }
+
+  .profile-details {
+    width: 70%;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .profile-image-container {
+    width: 50%;
+    height: auto; /* Maintain image aspect ratio */
+    order: -1; /* Places the profile image above the profile details */
+    align-items: center;
+  }
+
+  .profile-image {
+    width: 100%; /* Make the image take full container width */
+    height: auto; /* Maintain image aspect ratio */
+    align-items: center;
+  }
+
+  .profile-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    text-align: center;
+  }
+
+  .location-info,
+  .contact-info {
+    font-size: 15px;
+    align-items: center;
+  }
+
+  .location-icon,
+  .email-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .section-content {
+    font: 400 18px Poppins, sans-serif;
+    text-align: left;
+    margin: 0;
+  }
+
+  .education-degree {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+
+  .education-year {
+    font-size: 16px;
+    margin-left: 40px;
+    margin-top: 14px;
+  }
+
+  .banner {
+    height: 65px;
+    margin-bottom: 20px;
+  }
+
+  .banner-image {
+    height: 65px;
+  }
+
+  .edit-button {
+    padding: 8px 20px;
+    font-size: 12px;
+    bottom: 70px;
+    right: 20px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+}
 </style>

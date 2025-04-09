@@ -10,7 +10,6 @@
               <span class="user-name">Samira G.</span>
               <span class="user-role">Admin</span>
             </div>
-            <div class="user-avatar"></div>
           </div>
         </header>
         <button class="new-admin-button" @click="$router.push('/adminnew')">+ New Admin</button>
@@ -26,7 +25,7 @@
                 <!-- User info header -->
                 <div class="user-info-header">
                   <span class="user-name-header">Name</span>
-                  <span class="user-username-header">Username</span>
+                  <span class="user-username-header">UserID</span>
                   <span class="user-email-header">Email</span>
                   <span class="action-header">Action</span>
                 </div>
@@ -168,9 +167,8 @@ export default {
 /* New admin button styling */
 .new-admin-button {
   display: block;
-  position: relative;
-  margin: 50px 0 0 1325px;
-  width: 155px;
+  margin: 20px 0 20px auto;
+  width: 150px;
   height: 50px;
   border-radius: 40px;
   background: var(--Color-Purple, #4d44b5);
@@ -336,14 +334,6 @@ export default {
   display: block;
 }
 
-/* Avatar styling */
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
-  background: var(--Color-Gray-2, #c1bbeb);
-}
-
 /* Content section styling */
 .content-section {
   background: #fff;
@@ -379,13 +369,6 @@ export default {
   gap: 20px;
 }
 
-/* REMOVE ??? */
-.profile-title {
-  font: 700 32px Poppins, sans-serif;
-  margin: 10;     /*T: 10, O: 0*/
-  padding-right: 1%; /*T: 1%, O: null*/
-}
-
 /* Styling for about section */
 .section-title {
   font: 700 24px Poppins, sans-serif;
@@ -399,4 +382,155 @@ export default {
 }
 
 /* Media queries for responsive design go here */
+@media (max-width: 1280px) {
+  .layout-wrapper {
+    flex-direction: row;
+    padding: 15px;
+  }
+
+  .content-section {
+    padding-bottom: 40px;
+  }
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .page-title {
+    font-size: 32px;
+  }
+
+  .user-profile {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .new-admin-button {
+    width: 120px;
+    height: 45px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .user-info-header {
+    text-align: left;
+  }
+
+  .user-info-row {
+    flex-direction: row;
+    padding: 10px 0;
+  }
+
+  .user-info-row .user-name,
+  .user-info-row .user-username,
+  .user-info-row .user-email {
+    width: auto;
+  }
+
+  .action-menu {
+    text-align: right;
+  }
+
+  .profile-content {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    margin-right: -15px;
+    margin-left: -10px;
+  }
+  
+  .layout-wrapper {
+    flex-direction: row;
+    padding: 15px;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .content-section {
+    padding-bottom: 30px;
+  }
+
+  .header {
+    align-items: flex-start;
+    margin: 0px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .user-name,
+  .user-role {
+    font-size: 14px;
+  }
+
+  .new-admin-button {
+    width: 95px;
+    height: 35px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 40px;
+  }
+
+  .user-info-header {
+    flex-direction: row;
+    text-align: left;
+    font-size: 14px;
+    gap: 30px;
+  }
+
+  .user-name-header,
+  .user-username-header,
+  .user-email-header,
+  .action-header {
+    width: 100%;
+    flex: 1;
+  }
+
+  .user-info-row {
+    flex-direction: row;
+    text-align: left;
+    padding: 12px 0px;
+  }
+
+  .user-info-row .user-name,
+  .user-info-row .user-username,
+  .user-info-row .user-email {
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-right: 15px;
+  }
+
+  .action-menu {
+    text-align: right;
+    margin-left: 0;
+  }
+
+  .profile-content {
+    padding: 0px 15px;
+    margin-top: -30px;
+  }
+}
+
+@media (max-width: 428px) {
+  .user-info-header {
+    gap: 35px;
+  }
+}
+
+@media (max-width: 390px) {
+  .user-info-header {
+    gap: 20px;
+  }
+}
 </style>
