@@ -35,7 +35,7 @@
                       alt="Location icon"
                       class="location-icon"
                     />
-                    <span class="location-text">Phoenix, Arizona</span>
+                    <span class="location-text">Tempe, Arizona</span>
                   </div>
                 </div>
                 <div class="contact-info">
@@ -51,31 +51,26 @@
               <section class="about-section">
                 <h3 class="section-title">About:</h3>
                 <p class="section-content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat.
+                  Samira Ghayekhloo is an Assistant Teaching Professor at the School of Computing and Augmented Intelligence in Arizona State University-Tempe since Fall 2019. She earned her PhD in Artificial Intelligence and has over ten years of teaching experience in AI courses including Knowledge Representation, Expert Systems, Data Mining, and Machine Learning.<br><br>
+                  Before joining ASU, Samira served as an Assistant Professor at Azad University, Iran, in the Department of Computer Engineering for three years. During her tenure, she mentored numerous graduate and undergraduate students and provided advisory guidance for their final projects.
                 </p>
+
               </section>
               <section class="education-section">
                 <h3 class="section-title">Education:</h3>
                 <div class="education-item">
                   <h4 class="education-degree">
-                    • Insert Major, University Insert Here
+                    • Ph.D. Eastern Mediterranean University
                   </h4>
-                  <span class="education-year">20??-20??</span>
-                </div>
-                <div class="education-item">
-                  <h4 class="education-degree">
-                    • Master of Insert Here, University Insert Here
-                  </h4>
-                  <span class="education-year">20??-20??</span>
+                  <span class="education-year">2016</span>
                 </div>
               </section>
+
               <section class="office-hours-section">
-                <h3 class="section-title">Office Hours:</h3>
+                <h3 class="section-title">On Campus:</h3>
                 <p class="section-content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
+                  School of Computing and Augmented Intelligence: BYENG 514 <br><br>
+                  Tempe, AZ 85281
                 </p>
               </section>
             </div>
