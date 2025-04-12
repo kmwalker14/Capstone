@@ -91,9 +91,26 @@
 </template>
 
 <script>
+import { useAuth0 } from '@auth0/auth0-vue';
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+
 export default {
-  name: 'StudentHome'
-};
+  name: 'StudentHome',
+
+  setup() {
+      //Rerouting to admin home page in case user is authenticated
+      const { isAuthenticated } = useAuth0();
+      const router = useRouter();
+
+      onMounted(() => {
+        if (isAuthenticated.value){
+          router.replace('/adminhome')
+        }
+      });
+      
+    },
+  };
 </script>
 
 <style> /* Not scoped */
