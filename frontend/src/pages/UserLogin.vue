@@ -233,13 +233,6 @@ margin: 50px auto -400px;
   gap: 20px;
 }
 
-/* REMOVE ??? */
-.profile-title {
-  font: 700 32px Poppins, sans-serif;
-  margin: 10;     /*T: 10, O: 0*/
-  padding-right: 1%; /*T: 1%, O: null*/
-}
-
 /* Styling for about section */
 .section-title {
   font: 700 24px Poppins, sans-serif;

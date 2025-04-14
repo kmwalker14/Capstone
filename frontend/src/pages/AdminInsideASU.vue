@@ -7,18 +7,15 @@
           <h1 class="page-title">Inside ASU</h1>
           <div class="user-profile">
             <div class="user-info">
-              <span class="user-name">Samira G.</span>
               <span class="user-role">Admin</span>
             </div>
           </div>
         </header>
         <section class="content-section">
-          <div class="banner"> <!-- REMOVE ??? -->
-          </div>
+          <div class="banner"></div>
           <div class="profile-content">
             <div class="profile-details">
-              <div class="profile-header-section">
-              </div>
+              <div class="profile-header-section"></div>
               <section class="about-section">
 
                 <div v-if="editor" class="tiptap">
@@ -87,12 +84,11 @@
           </div>
           <button class="submit-button" @click="submitContent">Submit</button>
         </section>
-          <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <div v-for="content in submittedContent" :key="content.id" class="content-box">
+          <div class="banner"></div>
           <div class="submitted-entry tiptap-content">
             <div v-html="content.content" class="tiptap-content"></div>
-
 
             <!-- Buttons wrapped in a flex container -->
             <div class="buttons-container">
@@ -101,8 +97,6 @@
             </div>
           </div>
         </div>
-
-
       </main>
     </div>
   </div>
@@ -160,6 +154,7 @@ name: 'AdminInsideASU',
     EditorContent,
     FontAwesomeIcon
   },
+
   data() {
     return {
       editor: null,
@@ -171,6 +166,7 @@ name: 'AdminInsideASU',
       uploads: []
     }
   },
+  
 methods: {
   setPage(page) {
     this.$emit('page-changed', page);
@@ -185,8 +181,7 @@ methods: {
       }
       this.editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
     }
-  }
-,
+  },
 
   async submitContent() {
     const content = this.editor.getHTML(); // Get rich text content
@@ -215,9 +210,7 @@ methods: {
       console.error("❌ Error saving content:", error.response?.data || error.message);
       alert("Failed to save content");
     }
-  }
-
-  ,
+  },
 
   async deleteContent(contentId) {
     if (!confirm("Are you sure you want to delete this content?")) return;
@@ -236,9 +229,7 @@ methods: {
       console.error("❌ Error deleting content:", error);
       alert("Failed to delete content.");
     }
-  }
-
-  ,
+  },
 
   addImage() {
     const url = window.prompt('Enter image URL:')
@@ -246,9 +237,11 @@ methods: {
       this.editor.chain().focus().setImage({ src: url }).run()
     }
   },
+
   triggerFileUpload() {
     this.$refs.fileInput.click()
   },
+
   async handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -310,12 +303,12 @@ methods: {
     }
  },
 
-
   editContent(content) {
     this.selectedContentId = content.id; // Track the content being edited
     this.editor.commands.setContent(content.content);
     this.isEditing = true; // Load content into editor
   } },
+
   mounted() {
     this.editor = new Editor({
       extensions: [
@@ -347,6 +340,7 @@ methods: {
     });
     this.fetchContent();
   },
+
   beforeUnmount() {
     if (this.editor) {
       this.editor.destroy()
@@ -412,17 +406,10 @@ methods: {
   text-align: center;
 }
 
-/* User text styling for name and role */
-.user-name {
-  color: var(--Color-Text, #303972);
-  font: 600 14px Poppins, sans-serif;
-  display: block;
-}
-
+/* User text styling for user role */
 .user-role {
   color: var(--Color-Gray-3, #a098ae);
   font: 400 14px Poppins, sans-serif;
-  margin-top: 4px;
   display: block;
 }
 
@@ -433,6 +420,7 @@ methods: {
   margin-top: 20px;
   margin-bottom: 20px;
   padding-bottom: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .content-box {
@@ -441,7 +429,6 @@ methods: {
   position: relative; /* Ensures relative positioning for absolute elements */
   margin-top: 50px;
 }
-
 
 /* Banner styling */
 .banner {
@@ -491,9 +478,8 @@ methods: {
   cursor: pointer;
   box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
   transition: background 0.3s ease-in-out;
-  margin-bottom: 15px; /* Adds space between button and bottom of the box */
+  margin-bottom: 10px;
   align-self: flex-start; /* Aligns button to the top if inside a flex container */
-
 }
 
 .submit-button:hover {
@@ -505,10 +491,9 @@ methods: {
   color: white;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-left: 10px; /* Same spacing */
-  margin-bottom: 10px;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -522,33 +507,22 @@ methods: {
 
 .submitted-entry {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
   position: relative; /* Needed for absolute positioning of button */
   display: flex;
-  justify-content: space-between; /* Pushes the button to the right */
-  align-items: center; /* Aligns items vertically */
-
-  /*
-  display: flex;
   flex-direction: column;
-  position: relative;
   justify-content: flex-start;
- */
 }
 
 .buttons-container {
-  margin-left: 5px;
-
-  /*
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  */
 }
 
 .edit-button {
@@ -556,10 +530,9 @@ methods: {
   color: white;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-left: 10px; /* Adds spacing from content */
-  margin-bottom: 10px;
 }
 
 .edit-button:hover {
@@ -586,17 +559,15 @@ methods: {
   all: unset;
 }
 
-.tiptap-content p,
-.tiptap-content div {
-  font-family: inherit !important;
-}
-
-/*
 .tiptap-content div {
   font-family: inherit !important;
   text-align: inherit;
 }
-*/
+
+.tiptap-content p {
+  text-align: justify;
+  margin-bottom: 10px;
+}
 
 .tiptap-content h1 {
   font-size: 2em;
@@ -620,12 +591,6 @@ methods: {
   color: blue;
   text-decoration: underline;
   text-align: inherit;
-}
-
-.tiptap-content p {
-  margin-bottom: 10px;
-
-  /* text-align: justify; */
 }
 
 .button-group button {
@@ -756,12 +721,11 @@ margin: 0;
 
 @media (max-width: 480px) {
   .page-title {
-    font-size: 22px;
+    font-size: 32px;
   }
 
-  .user-name,
-  .user-role {
-    font-size: 12px;
+  .banner {
+    height: 35px;
   }
 
   .header {
@@ -777,20 +741,20 @@ margin: 0;
   }
 
   .submit-button {
-    width: 25%;
-    height: 30px;
-    font-size: 12px;
+    width: 30%;
+    height: 35px;
+    font-size: 16px;
   }
 
   .button-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
   }
 
   .button-group button {
-    font-size: 12px;
-    padding: 4px 8px;
+    font-size: 14px;
+    padding: 4px 4px;
     justify-content: left;
     display: flex;
     flex: 1 1 auto;
@@ -803,7 +767,7 @@ margin: 0;
   .edit-button,
   .delete-button {
     padding: 4px 8px;
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 </style>

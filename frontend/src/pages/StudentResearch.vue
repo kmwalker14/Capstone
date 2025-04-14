@@ -182,13 +182,6 @@ export default {
   gap: 20px;
 }
 
-/* REMOVE ??? */
-.profile-title {
-  font: 700 32px Poppins, sans-serif;
-  margin: 10;     /*T: 10, O: 0*/
-  padding-right: 1%; /*T: 1%, O: null*/
-}
-
 /* Styling for about section */
 .section-title {
   font: 700 24px Poppins, sans-serif;
@@ -220,7 +213,7 @@ export default {
     }
 
     .page-title {
-      font-size: 32px;
+      font-size: auto;
     }
 
     .content-box {
@@ -228,7 +221,7 @@ export default {
     }
 
     .content-box * {
-      font-size: 16px;
+      font-size: auto;
     }
   }
 
@@ -250,7 +243,7 @@ export default {
     }
 
     .page-title {
-      font-size: 26px;
+      font-size: 32px;
     }
 
     .content-box {
@@ -258,7 +251,7 @@ export default {
     }
 
     .content-box * {
-      font-size: 14px;
+      font-size: auto;
     }
   }
 </style>

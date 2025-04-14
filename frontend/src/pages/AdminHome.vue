@@ -9,7 +9,6 @@
             <h1 class="page-title">Welcome!</h1>
             <div class="user-profile">
               <div class="user-info">
-                <span class="user-name">Samira G.</span>
                 <span class="user-role">Admin</span>
               </div>
             </div>
@@ -150,13 +149,7 @@ body {
   text-align: center;
 }
 
-/* User text styling for name and role */
-.user-name {
-  color: var(--Color-Text, #303972);
-  font: 600 14px Poppins, sans-serif;
-  display: block;
-}
-
+/* User text styling for user role */
 .user-role {
   color: var(--Color-Gray-3, #a098ae);
   font: 400 14px Poppins, sans-serif;

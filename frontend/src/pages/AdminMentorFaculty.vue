@@ -7,15 +7,12 @@
           <h1 class="page-title">Faculty Mentoring</h1>
           <div class="user-profile">
             <div class="user-info">
-
-
+              <span class="user-role">Admin</span>
             </div>
-
           </div>
         </header>
         <section class="content-section">
-          <div class="banner"> <!-- REMOVE ??? -->
-          </div>
+          <div class="banner"></div>
           <div class="profile-content">
             <div class="profile-details">
               <div class="profile-header-section">
@@ -89,11 +86,10 @@
           <button class="submit-button" @click="submitContent">Submit</button>
         </section>
         <!-- Display Submitted Content ONLY Below the Rich Text Box -->
-        <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <div v-for="content in submittedContent" :key="content.id" class="content-box">
+          <div class="banner"></div>
           <div class="submitted-entry tiptap-content">
             <div v-html="content.content" class="tiptap-content"></div>
-
 
             <!-- Buttons wrapped in a flex container -->
             <div class="buttons-container">
@@ -102,8 +98,6 @@
             </div>
           </div>
         </div>
-
-
       </main>
     </div>
   </div>
@@ -359,16 +353,14 @@ export default {
 };
 </script>
 
-
 <style scoped>
-/* Styles the main container that holds the entire admin layout */
-
 @import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap');
 
 .tiptap-content span[style*="Comic Sans MS"] {
   font-family: "Comic Sans MS", sans-serif !important;
 }
 
+/* Styles the main container that holds the entire admin layout */
 .admin-container {
   background: var(--Color-Background, #f3f4ff);
   padding: 0 37px 0 0;
@@ -376,8 +368,6 @@ export default {
   flex-grow: 1;
   width: 100%;
 }
-
-
 
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
@@ -387,8 +377,6 @@ export default {
   flex-grow: 1;
   padding: 0px 15px 0px 15px;
 }
-
-
 
 /* Main content styling */
 .main-content {
@@ -422,26 +410,11 @@ export default {
   text-align: center;
 }
 
-/* User text styling for name and role */
-.user-name {
-  color: var(--Color-Text, #303972);
-  font: 600 14px Poppins, sans-serif;
-  display: block;
-}
-
+/* User text styling for user role */
 .user-role {
   color: var(--Color-Gray-3, #a098ae);
   font: 400 14px Poppins, sans-serif;
-  margin-top: 4px;
   display: block;
-}
-
-/* Avatar styling */
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
-  background: var(--Color-Gray-2, #c1bbeb);
 }
 
 /* Content section styling */
@@ -449,20 +422,25 @@ export default {
   background: #fff;
   border-radius: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .content-box {
   display: flex;
   flex-direction: column;
   position: relative; /* Ensures relative positioning for absolute elements */
+  margin-top: 50px;
 }
-
 
 /* Banner styling */
 .banner {
   position: relative;
-  min-height: 100px;
+  height: 50px;
+  background-color: rgba(106, 36, 18, 1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* Profile styling */
@@ -477,8 +455,8 @@ export default {
 .tiptap {
   width: 100%;
   max-width: 800px; /* Limit the width if necessary */
-  margin-top: 20px; /* Space from the top */
-  font-weight: normal
+  margin-top: 5px; /* Space from the top */
+  font-weight: normal;
 }
 
 .control-group {
@@ -492,7 +470,7 @@ export default {
 
 .submit-button {
   display: block;
-  width: 140px;
+  width: 130px;
   height: 50px;
   margin: 20px auto;
   background: var(--Color-Purple, #4d44b5);
@@ -504,9 +482,8 @@ export default {
   cursor: pointer;
   box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
   transition: background 0.3s ease-in-out;
-  margin-bottom: 15px; /* Adds space between button and bottom of the box */
+  margin-bottom: 10px;
   align-self: flex-start; /* Aligns button to the top if inside a flex container */
-
 }
 
 .submit-button:hover {
@@ -518,7 +495,7 @@ export default {
   color: white;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-left: 10px; /* Same spacing */
   transition: background-color 0.3s ease-in-out;
@@ -528,30 +505,28 @@ export default {
   background-color: #3b3791; /* Same hover effect */
 }
 
-.buttons-container {
-  display: flex;
-  justify-content: flex-end; /* Align buttons to the right */
-  gap: 10px; /* Optional: space between buttons */
-}
-
-
 .submitted-content-container {
   margin-top: 20px;
 }
 
 .submitted-entry {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
+  position: relative; /* Needed for absolute positioning of button */
   display: flex;
   flex-direction: column;
-  position: relative;
-  justify-content: flex-start; /* Ensure content starts from the left */
+  justify-content: flex-start;
+}
 
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .edit-button {
@@ -559,7 +534,7 @@ export default {
   color: white;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-left: 10px; /* Adds spacing from content */
 }
@@ -577,25 +552,25 @@ export default {
 }
 
 /* Preserve rich text styling */
-.tiptap-content [style*="text-align"]{
+.tiptap-content [style*="text-align"] {
   font-family: "Poppins", sans-serif !important;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
-
 }
 
 .tiptap-content span {
   all: unset;
 }
-.tiptap-content p {
-  text-align: justify; /* Or set to left, center, or right as needed */
-}
 
 .tiptap-content div {
   font-family: inherit !important;
   text-align: inherit;
+}
 
+.tiptap-content p {
+  text-align: justify;
+  margin-bottom: 10px;
 }
 
 .tiptap-content h1 {
@@ -622,15 +597,6 @@ export default {
   text-align: inherit;
 }
 
-.tiptap-content p {
-  margin-bottom: 10px;
-}
-
-
-
-
-
-
 .button-group button {
   padding: 8px 12px;
   background-color: transparent;
@@ -643,7 +609,7 @@ export default {
 }
 
 .button-group button:hover {
-  background-color: transparent;
+  background-color: lightgray;
 }
 
 .dropdown {
@@ -691,36 +657,121 @@ export default {
 }
 
 .profile-details {
-  width: 100%;
-  color: var(--Color-Text, #303972);
-  font-family: Poppins, sans-serif;
+width: 100%;
+color: var(--Color-Text, #303972);
+font-family: Poppins, sans-serif;
 }
 
 .profile-header-section {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-/* REMOVE ??? */
-.profile-title {
-  font: 700 32px Poppins, sans-serif;
-  margin: 10;     /*T: 10, O: 0*/
-  padding-right: 1%; /*T: 1%, O: null*/
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 20px;
 }
 
 /* Styling for about section */
 .section-title {
-  font: 700 24px Poppins, sans-serif;
-  margin: 34px 0 30px;
+font: 700 24px Poppins, sans-serif;
+margin: 34px 0 30px;
 }
 
 .section-content {
-  font: 400 18px Poppins, sans-serif;
-  text-align: justify;
-  margin: 0;
+font: 400 18px Poppins, sans-serif;
+text-align: justify;
+margin: 0;
 }
 
 /* Media queries for responsive design go here */
+@media (max-width: 1280px) {
+  .layout-wrapper {
+    gap: 37px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .submit-button {
+    width: 120px;
+  }
+
+  .button-group button {
+    font-size: 16px;
+    padding: 8px 12px;
+    background-color: transparent;
+    border: none;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 810px) {
+  .layout-wrapper {
+    gap: 37px;
+  }
+
+  .main-content {
+    padding: 20px 5px 20px 5px;
+  }
+
+  .submit-button {
+    width: 120px;
+  }
+
+  .button-group button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 32px;
+  }
+
+  .banner {
+    height: 35px;
+  }
+
+  .header {
+    margin: 0 10px;
+  }
+
+  .main-content {
+    padding: 10px 0px 10px 0px;
+  }
+
+  .content-section {
+    padding: 0px 0px 5px 0px;
+  }
+
+  .submit-button {
+    width: 30%;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .button-group button {
+    font-size: 14px;
+    padding: 4px 4px;
+    justify-content: left;
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  .tiptap {
+    margin-top: 0px;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
 </style>
