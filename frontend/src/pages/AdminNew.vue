@@ -399,10 +399,9 @@ text-align: center;
   }
 
   .new-admin-button {
-    width: 95px;
-    height: 35px;
+    width: 100px;
+    height: 40px;
     font-size: 12px;
-    font-weight: 600;
     border-radius: 40px;
   }
 
