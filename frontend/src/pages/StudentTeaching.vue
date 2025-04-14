@@ -11,11 +11,8 @@
           </div>
         </header>
 
-
-
         <!-- Submitted Content (Placed Separately Below the White Box) -->
         <section class="submitted-content">
-
           <div v-for="content in contents" :key="content.id" class="content-box">
             <div v-html="content.content"></div>
           </div>
@@ -67,7 +64,7 @@ export default {
     background-color: white;
     padding: 15px;
     margin: 10px 0;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 

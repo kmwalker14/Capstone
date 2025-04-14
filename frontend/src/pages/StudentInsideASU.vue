@@ -63,7 +63,7 @@ export default {
   background-color: white;
   padding: 15px;
   margin: 10px 0;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
 }

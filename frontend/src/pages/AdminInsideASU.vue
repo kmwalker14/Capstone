@@ -86,7 +86,6 @@
         </section>
         <!-- Display Submitted Content ONLY Below the Rich Text Box -->
         <div v-for="content in submittedContent" :key="content.id" class="content-box">
-          <div class="banner"></div>
           <div class="submitted-entry tiptap-content">
             <div v-html="content.content" class="tiptap-content"></div>
 
@@ -427,7 +426,7 @@ methods: {
   display: flex;
   flex-direction: column;
   position: relative; /* Ensures relative positioning for absolute elements */
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 /* Banner styling */
@@ -507,8 +506,7 @@ methods: {
 
 .submitted-entry {
   background: white;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+border-radius: 20px;
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
