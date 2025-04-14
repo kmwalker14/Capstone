@@ -7,15 +7,13 @@
           <h1 class="page-title">Admin Users</h1>
           <div class="user-profile">
             <div class="user-info">
-              <span class="user-name">Samira G.</span>
               <span class="user-role">Admin</span>
             </div>
           </div>
         </header>
         <button class="new-admin-button" @click="$router.push('/adminnew')">+ New Admin</button>
         <section class="content-section">
-          <div class="banner"> <!-- REMOVE BANNER ??? -->
-          </div>
+          <div class="banner"></div>
           <div class="profile-content">
             <div class="profile-details">
               <div class="profile-header-section">
@@ -180,6 +178,10 @@ export default {
   box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
 }
 
+.about-section {
+  margin-top: 60px;
+}
+
 /* Styles the user info header */
 .user-info-header {
   display: flex;
@@ -320,13 +322,7 @@ export default {
   text-align: center;
 }
 
-/* User text styling for name and role */
-.user-name {
-  color: var(--Color-Text, #303972);
-  font: 600 14px Poppins, sans-serif;
-  display: block;
-}
-
+/* User text styling for user role */
 .user-role {
   color: var(--Color-Gray-3, #a098ae);
   font: 400 14px Poppins, sans-serif;
@@ -344,7 +340,11 @@ export default {
 /* Banner styling */
 .banner {
   position: relative;
-  min-height: 55px;
+  height: 50px;
+  background-color:  var(--Color-Purple, #4d44b5);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: 34px;
 }
 
 /* Profile styling */
@@ -370,11 +370,6 @@ export default {
 }
 
 /* Styling for about section */
-.section-title {
-  font: 700 24px Poppins, sans-serif;
-  margin: 34px 30px;
-}
-
 .section-content {
   font: 400 18px Poppins, sans-serif;
   text-align: justify;
@@ -447,6 +442,10 @@ export default {
   .layout-wrapper {
     flex-direction: row;
     padding: 15px;
+  }
+
+  .banner {
+    height: 40px;
   }
 
   .main-content {

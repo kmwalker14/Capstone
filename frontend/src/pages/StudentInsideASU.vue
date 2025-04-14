@@ -4,10 +4,12 @@
       <main class="main-content">
         <header class="header">
           <h1 class="page-title">Inside ASU</h1>
+          <div class="user-profile">
+            <div class="user-info">
+              <span class="user-role">Public</span>
+            </div>
+          </div>
         </header>
-
-
-
         <!-- Submitted Content (Placed Separately Below the White Box) -->
         <section class="submitted-content">
 
@@ -19,7 +21,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';
