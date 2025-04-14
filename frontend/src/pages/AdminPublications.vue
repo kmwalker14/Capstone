@@ -339,7 +339,7 @@ export default {
         FontFamily,
         TextStyle,
       ],
-      content: `<p style="font-family: Poppins;">I am a rich text editor</p>`, // Ensure Poppins is the default font
+      content: `<p style="font-family: Poppins;">Click here to type content. . .</p>`, // Ensure Poppins is the default font
       editorProps: {
         attributes: {
           style: "font-family: Poppins;" // Apply Poppins globally
@@ -434,14 +434,14 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative; /* Ensures relative positioning for absolute elements */
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /* Banner styling */
 .banner {
   position: relative;
   height: 50px;
-  background-color: rgba(106, 36, 18, 1);
+  background-color: var(--Color-Purple, #4d44b5);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
