@@ -399,9 +399,9 @@ text-align: center;
   }
 
   .new-admin-button {
-    width: 95px;
-    height: 35px;
-    font-size: 11px;
+    width: 100px;
+    height: 40px;
+    font-size: 12px;
     border-radius: 40px;
   }
 
@@ -442,7 +442,7 @@ text-align: center;
   .submit-button {
     width: 90px;
     height: 40px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     border-radius: 40px;
     margin-bottom: -50px;

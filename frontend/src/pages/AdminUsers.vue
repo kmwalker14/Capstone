@@ -476,9 +476,9 @@ export default {
   }
 
   .new-admin-button {
-    width: 95px;
-    height: 35px;
-    font-size: 11px;
+    width: 100px;
+    height: 40px;
+    font-size: 12px;
     border-radius: 40px;
   }
 
