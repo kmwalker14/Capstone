@@ -450,6 +450,7 @@ export default {
 
   .banner {
     height: 40px;
+    margin-top: 10px;
   }
 
   .main-content {
@@ -475,9 +476,9 @@ export default {
   }
 
   .new-admin-button {
-    width: 100px;
-    height: 40px;
-    font-size: 12px;
+    width: 95px;
+    height: 35px;
+    font-size: 11px;
     border-radius: 40px;
   }
 
