@@ -519,6 +519,10 @@ export default {
     margin-left: 0;
   }
 
+  .edit-input {
+    height: 20px;
+  }
+
   .profile-content {
     padding: 0px 15px;
     margin-top: -30px;
