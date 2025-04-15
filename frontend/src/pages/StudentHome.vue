@@ -15,46 +15,55 @@
           <div class="banner">
             <img
               loading="lazy"
-              src="@/assets/banner.png"
-              alt="Profile banner background"
               class="banner-image"
             />
             <button class="null-button"></button>
           </div>
 
-          <div class="profile-content">
+          <div class="profile-content" v-if="profileLoaded">
             <div class="profile-details">
               <div class="profile-header-section">
                 <div class="profile-title-group">
                   <h2 class="profile-title">{{ profile.name }}</h2>
                   <div class="location-info">
-                    <img src="@/assets/location.png" alt="Location icon" class="location-icon" />
+                    <img
+                      loading="lazy"
+                      src="@/assets/location.png"
+                      alt="Location icon"
+                      class="location-icon"
+                    />
                     <span class="location-text">{{ profile.location }}</span>
                   </div>
                 </div>
-
                 <div class="contact-info">
-                  <img src="@/assets/email.png" alt="Email icon" class="email-icon" />
+                  <img
+                    loading="lazy"
+                    src="@/assets/email.png"
+                    alt="Email icon"
+                    class="email-icon"
+                  />
                   <span class="email-text">{{ profile.email }}</span>
                 </div>
               </div>
 
               <section class="about-section">
                 <h3 class="section-title">About:</h3>
-                <p class="section-content" v-html="formattedAbout" />
+                <p class="section-content" v-html="formattedAbout"></p>
               </section>
 
               <section class="education-section">
                 <h3 class="section-title">Education:</h3>
                 <div class="education-item">
-                  <h4 class="education-degree">• {{ profile.education }}</h4>
+                  <h4 class="education-degree">
+                    • {{ profile.education }}
+                  </h4>
                   <span class="education-year">{{ profile.educationYear }}</span>
                 </div>
               </section>
 
               <section class="office-hours-section">
                 <h3 class="section-title">On Campus:</h3>
-                <p class="section-content" v-html="formattedOffice" />
+                <p class="section-content" v-html="formattedOffice"></p>
               </section>
             </div>
 
@@ -74,83 +83,59 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuth0 } from '@auth0/auth0-vue';
 import axios from 'axios';
 
 export default {
   name: 'StudentHome',
-  setup() {
-    //Rerouting to admin home page if user is authenticated
-    const { isAuthenticated } = useAuth0();
-    const router = useRouter();
-  
-
-    const profile = ref({
-      name: '',
-      location: 'Tempe, Arizona',
-      email: '',
-      about: '',
-      education: '',
-      educationYear: '',
-      office: '',
-      imageUrl: ''
-    });
-
-
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get('https://asu-capstone-backend.onrender.com/api/profile');
-        const data = response.data;
-
-        let degree = '';
-        let year = '';
-
-        if (data.education) {
-          [degree, year] = data.education.split(',').map(s => s.trim());
-        }
-
-        profile.value = {
-          name: data.name,
-          location: 'Tempe, Arizona',
-          email: data.email,
-          about: data.about,
-          education: degree,
-          educationYear: year,
-          office: data.office_hours,
-          imageUrl: data.imageUrl
-        };
-
-      } catch (err) {
-        console.error('Failed to fetch profile:', err);
-      }
-    };
-
-    const formattedAbout = computed(() =>
-      (profile.value.about || '').replace(/\n/g, '<br />')
-    );
-    
-    const formattedOffice = computed(() =>
-      (profile.value.office || '').replace(/\n/g, '<br />')
-    );
-
-    onMounted(() => {
-    if (isAuthenticated.value) {
-      router.replace('/adminhome');
-    } else {
-      fetchProfile(); // ← this fixes the eslint error too
-    }
-  });
-
+  data() {
     return {
-      profile,
-      formattedAbout,
-      formattedOffice
+      profile: {
+        name: '',
+        location: 'Tempe, Arizona', // default location if not in DB
+        email: '',
+        about: '',
+        education: '',
+        educationYear: '',
+        office: '',
+        imageUrl: ''
+      },
+      profileLoaded: false,
     };
+  },
+  computed: {
+    formattedAbout() {
+      return this.profile.about.replace(/\n/g, '<br />');
+    },
+    formattedOffice() {
+      return this.profile.office.replace(/\n/g, '<br />');
+    }
+  },
+  async mounted() {
+    try {
+      const response = await axios.get('https://asu-capstone-backend.onrender.com/api/profile');
+      const data = response.data[0];
+
+      const [degree, year] = data.education.split(',').map(item => item.trim());
+
+      this.profile = {
+        name: data.name,
+        location: 'Tempe, Arizona',
+        email: data.email,
+        about: data.about,
+        education: degree,
+        educationYear: year,
+        office: data.office_hours,
+        imageUrl: data.imageUrl
+      };
+
+      this.profileLoaded = true;
+    } catch (err) {
+      console.error('Failed to fetch profile data:', err);
+    }
   }
 };
 </script>
+
 
 
 <style scoped> /* Previously not scoped */
