@@ -117,7 +117,6 @@ export default {
           imageUrl: data.imageUrl
         };
 
-        profileLoaded.value = true;
       } catch (err) {
         console.error('Failed to fetch profile:', err);
       }
