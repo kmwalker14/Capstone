@@ -999,6 +999,52 @@ app.delete('/api/tools', async (req, res) => {
     }
 });
 
+
+// Get Homepage Profile API route
+app.get('/api/profile', async (req, res) => {
+    try {
+        const [results] = await db.query("SELECT id, about, education, office_hours, name, email, imageUrl FROM homepage");
+        // Send the profile data as a response
+        res.json(results); // Assuming you want to fetch only one record (adjust as necessary)
+    } catch (err) {
+        // Send an error message if something goes wrong
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+});
+
+
+// POST route to save professor profile data
+app.post('/api/profile', async (req, res) => {
+    let connection;
+    try {
+        console.log("🔹 Incoming Request Body:", req.body);
+
+        const { about, education, office_hours, name, email, imageUrl } = req.body;
+        
+        if (!about || !education || !office_hours) {
+            console.error("❌ Error: Missing required fields");
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        // Get a new connection
+        connection = await db.getConnection();
+
+        const query = 'UPDATE homepage SET about = ?, education = ?, office_hours = ?, name = ?, email = ?, imageUrl = ? WHERE id = 1';
+        await connection.query(query, [about, education, office_hours, name, email, imageUrl]);
+
+        console.log("✅ Professor Profile saved successfully");
+        res.status(201).json({ message: "Professor Profile saved successfully" });
+
+    } catch (err) {
+        console.error("❌ Database error:", err);
+        res.status(500).json({ message: "Database error", error: err.message });
+    } finally {
+        if (connection) connection.release();  // Ensure connection is always released
+    }
+});
+
+
+
 // Upload file and save path in MySQL
 app.post("/upload", upload.single("file"), async (req, res) => {
     let connection;

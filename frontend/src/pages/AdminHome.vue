@@ -82,9 +82,8 @@
   </div>
 </template>
 
-
 <script>
-
+import axios from 'axios';
 
 export default {
   name: 'AdminHome',
@@ -100,8 +99,8 @@ export default {
           degree: "Ph.D. Eastern Mediterranean University",
           year: "2016",
         },
-        office: "School of Computing and Augmented Intelligence: BYENG 514\n\nTempe, AZ 85281",
         imageUrl: require('@/assets/samira.png'),
+        office: "School of Computing and Augmented Intelligence: BYENG 514\n\nTempe, AZ 85281",
       },
       tempData: {},
     };
@@ -111,9 +110,31 @@ export default {
       this.tempData = JSON.parse(JSON.stringify(this.formData));
       this.editMode = true;
     },
-    saveChanges() {
-      this.formData = JSON.parse(JSON.stringify(this.tempData));
-      this.editMode = false;
+    async saveChanges() {
+      // Prepare the payload to match the backend structure
+      const payload = {
+        about: this.tempData.about,
+        education: `${this.tempData.education.degree}, ${this.tempData.education.year}`, // Flatten education
+        office_hours: this.tempData.office, // Just send office as it is
+        name: this.tempData.name,
+        email: this.tempData.email,
+        imageUrl: this.tempData.imageUrl
+      };
+
+      // Send the updated data to the backend
+      try {
+        const response = await axios.post('https://asu-capstone-backend.onrender.com/api/profile', payload);
+        if (response.data.message === "Professor Profile saved successfully") {
+          this.formData = JSON.parse(JSON.stringify(this.tempData));
+          this.editMode = false;
+          alert('Profile updated successfully!');
+        } else {
+          alert('Failed to update profile');
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('An error occurred while updating your profile');
+      }
     },
     cancelEdit() {
       this.editMode = false;
@@ -123,8 +144,7 @@ export default {
       if (file) {
         this.tempData.imageUrl = URL.createObjectURL(file);
       }
-    }
-    
+    },
   },
   computed: {
     formattedAbout() {
@@ -132,8 +152,8 @@ export default {
     },
     formattedOffice() {
       return this.formData.office.replace(/\n/g, '<br />');
-    }
-  } 
+    },
+  }
 };
 </script>
 
