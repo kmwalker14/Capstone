@@ -104,7 +104,12 @@ export default {
         const response = await axios.get('https://asu-capstone-backend.onrender.com/api/profile');
         const data = response.data;
 
-        const [degree, year] = data.education.split(',').map(s => s.trim());
+        let degree = '';
+        let year = '';
+
+        if (data.education) {
+          [degree, year] = data.education.split(',').map(s => s.trim());
+        }
 
         profile.value = {
           name: data.name,
