@@ -126,11 +126,12 @@ export default {
     const formattedOffice = computed(() => profile.value.office.replace(/\n/g, '<br />'));
 
     onMounted(() => {
-
-        if (isAuthenticated.value){
-          router.replace('/adminhome')
-      }
-    });
+    if (isAuthenticated.value) {
+      router.replace('/adminhome');
+    } else {
+      fetchProfile(); // ← this fixes the eslint error too
+    }
+  });
 
     return {
       profile,
