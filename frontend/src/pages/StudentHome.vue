@@ -1,9 +1,6 @@
 <template>
   <div class="student-container">
     <div class="layout-wrapper">
-
-      <!-- Sidebar menu was here -->
-
       <main class="main-content">
         <header class="header">
           <h1 class="page-title">Welcome!</h1>
@@ -13,6 +10,7 @@
             </div>
           </div>
         </header>
+
         <section class="content-section">
           <div class="banner">
             <img
@@ -23,61 +21,47 @@
             />
             <button class="null-button"></button>
           </div>
+
           <div class="profile-content">
             <div class="profile-details">
               <div class="profile-header-section">
                 <div class="profile-title-group">
-                  <h2 class="profile-title">Professor Ghayekhloo</h2>
+                  <h2 class="profile-title">{{ profile.name }}</h2>
                   <div class="location-info">
-                    <img
-                      loading="lazy"
-                      src="@/assets/location.png"
-                      alt="Location icon"
-                      class="location-icon"
-                    />
-                    <span class="location-text">Tempe, Arizona</span>
+                    <img src="@/assets/location.png" alt="Location icon" class="location-icon" />
+                    <span class="location-text">{{ profile.location }}</span>
                   </div>
                 </div>
+
                 <div class="contact-info">
-                  <img
-                    loading="lazy"
-                    src="@/assets/email.png"
-                    alt="Email icon"
-                    class="email-icon"
-                  />
-                  <span class="email-text">sghayekh@asu.edu</span>
+                  <img src="@/assets/email.png" alt="Email icon" class="email-icon" />
+                  <span class="email-text">{{ profile.email }}</span>
                 </div>
               </div>
+
               <section class="about-section">
                 <h3 class="section-title">About:</h3>
-                <p class="section-content">
-                  Samira Ghayekhloo is an Assistant Teaching Professor at the School of Computing and Augmented Intelligence in Arizona State University-Tempe since Fall 2019. She earned her PhD in Artificial Intelligence and has over ten years of teaching experience in AI courses including Knowledge Representation, Expert Systems, Data Mining, and Machine Learning.<br><br>
-                  Before joining ASU, Samira served as an Assistant Professor at Azad University, Iran, in the Department of Computer Engineering for three years. During her tenure, she mentored numerous graduate and undergraduate students and provided advisory guidance for their final projects.
-                </p>
-
+                <p class="section-content" v-html="formattedAbout" />
               </section>
+
               <section class="education-section">
                 <h3 class="section-title">Education:</h3>
                 <div class="education-item">
-                  <h4 class="education-degree">
-                    • Ph.D. Eastern Mediterranean University
-                  </h4>
-                  <span class="education-year">2016</span>
+                  <h4 class="education-degree">• {{ profile.education }}</h4>
+                  <span class="education-year">{{ profile.educationYear }}</span>
                 </div>
               </section>
 
               <section class="office-hours-section">
                 <h3 class="section-title">On Campus:</h3>
-                <p class="section-content">
-                  School of Computing and Augmented Intelligence: BYENG 514 <br><br>
-                  Tempe, AZ 85281
-                </p>
+                <p class="section-content" v-html="formattedOffice" />
               </section>
             </div>
+
             <div class="profile-image-container">
               <img
                 loading="lazy"
-                src="@/assets/samira.png"
+                :src="profile.imageUrl"
                 alt="Professor Ghayekhloo profile"
                 class="profile-image"
               />
@@ -90,27 +74,74 @@
 </template>
 
 <script>
-import { useAuth0 } from '@auth0/auth0-vue';
-import { onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuth0 } from '@auth0/auth0-vue';
+import axios from 'axios';
 
 export default {
   name: 'StudentHome',
-
   setup() {
-      //Rerouting to admin home page if user is authenticated
-      const { isAuthenticated } = useAuth0();
-      const router = useRouter();
+    //Rerouting to admin home page if user is authenticated
+    const { isAuthenticated } = useAuth0();
+    const router = useRouter();
+  
 
-      onMounted(() => {
+    const profile = ref({
+      name: '',
+      location: 'Tempe, Arizona',
+      email: '',
+      about: '',
+      education: '',
+      educationYear: '',
+      office: '',
+      imageUrl: ''
+    });
+
+
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get('https://asu-capstone-backend.onrender.com/api/profile');
+        const data = response.data;
+
+        const [degree, year] = data.education.split(',').map(s => s.trim());
+
+        profile.value = {
+          name: data.name,
+          location: 'Tempe, Arizona',
+          email: data.email,
+          about: data.about,
+          education: degree,
+          educationYear: year,
+          office: data.office_hours,
+          imageUrl: data.imageUrl
+        };
+
+        profileLoaded.value = true;
+      } catch (err) {
+        console.error('Failed to fetch profile:', err);
+      }
+    };
+
+    const formattedAbout = computed(() => profile.value.about.replace(/\n/g, '<br />'));
+    const formattedOffice = computed(() => profile.value.office.replace(/\n/g, '<br />'));
+
+    onMounted(() => {
+
         if (isAuthenticated.value){
           router.replace('/adminhome')
-        }
-      });
-      
-    },
+      }
+    });
+
+    return {
+      profile,
+      formattedAbout,
+      formattedOffice
+    };
+  }
 };
 </script>
+
 
 <style scoped> /* Previously not scoped */
   body {
