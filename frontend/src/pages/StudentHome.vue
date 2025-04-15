@@ -127,8 +127,13 @@ export default {
       }
     };
 
-    const formattedAbout = computed(() => profile.value.about.replace(/\n/g, '<br />'));
-    const formattedOffice = computed(() => profile.value.office.replace(/\n/g, '<br />'));
+    const formattedAbout = computed(() =>
+      (profile.value.about || '').replace(/\n/g, '<br />')
+    );
+    
+    const formattedOffice = computed(() =>
+      (profile.value.office || '').replace(/\n/g, '<br />')
+    );
 
     onMounted(() => {
     if (isAuthenticated.value) {
