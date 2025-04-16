@@ -15,6 +15,7 @@
 
         <section class="content-section">
           <div class="banner">
+          <img loading="lazy" src="@/assets/banner.png" alt="Profile banner" class="banner-image" />
             <div style="padding: 0px;">
               <button class="edit-button" v-if="!editMode" @click="toggleEdit">Edit</button>
               <div v-else>

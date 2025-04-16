@@ -13,10 +13,7 @@
 
         <section class="content-section">
           <div class="banner">
-            <img
-              loading="lazy"
-              class="banner-image"
-            />
+            <img loading="lazy" src="@/assets/banner.png" alt="Profile banner" class="banner-image" />
             <button class="null-button"></button>
           </div>
 
