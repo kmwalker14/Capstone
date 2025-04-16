@@ -102,6 +102,18 @@ export default {
       profileLoaded: false,
     };
   },
+  setup() {
+    //Rerouting to admin home page in case user is authenticated
+    const { isAuthenticated } = useAuth0();
+    const router = useRouter();
+
+    onMounted(() => {
+      if (isAuthenticated.value){
+        router.replace('/adminhome')
+      }
+    });
+      
+  },
   computed: {
     formattedAbout() {
       return this.profile.about.replace(/\n/g, '<br />');
