@@ -157,7 +157,6 @@ export default {
 };
 </script>
 
-
 <style scoped> /* Previously not scoped */
 body {
   margin: 0;
@@ -174,7 +173,6 @@ textarea.section-content {
   resize: vertical;
   box-sizing: border-box;
 }
-
 
 /* Styles the main container that holds the entire admin layout */
 .admin-container {
@@ -214,6 +212,11 @@ textarea.section-content {
   color: var(--Color-Text, #303972);
   font: 700 36px Poppins, sans-serif;
   margin: 0;
+}
+
+input.profile-title {
+  width: 100%;
+  height: 50%;
 }
 
 .user-profile {
@@ -288,7 +291,7 @@ textarea.section-content {
 }
 
 .profile-details {
-  width: 100%; /* 70% ??? */
+  width: 100%; /* or 70% */
   color: var(--Color-Text, #303972);
   font-family: Poppins, sans-serif;
 }
@@ -302,8 +305,8 @@ textarea.section-content {
 
 .profile-title {
   font: 700 32px Poppins, sans-serif;
-  margin: 0;     /*T: 10, O: 0*/
-  padding-right: 1%; /*T: 1%, O: null*/
+  margin: 0;
+  padding-right: 1%;
 }
 
 /* Styling for location and email sections/icons */
@@ -326,7 +329,7 @@ textarea.section-content {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 95px; /*T: 100px, O: null*/
+  margin-top: 95px;
   margin-right: 400px;
   font: 600 18px Poppins, sans-serif;
 }
@@ -377,74 +380,102 @@ textarea.section-content {
 }
 
 /* Media queries for responsive design go here */
-@media (max-width: 1280px) { /* 1366px ? */
-.layout-wrapper {
-  flex-direction: column; /* Stack sidebar on top if needed */
-  gap: 20px;
-  padding: 0;
+@media (max-width: 1825px) {
+  .contact-info {
+    margin-top: 5px;
+  }
 }
 
-.header {
-  flex-direction: column;
-  align-items: center; /* flex-start */
-  text-align: center;
+@media (max-width: 1280px) { /* 1366px if larger needed */
+  .layout-wrapper {
+    flex-direction: column; /* Stack sidebar on top if needed */
+    gap: 20px;
+    padding: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center; /* other option: flex-start */
+    text-align: center;
+  }
+
+  .user-profile {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  input.profile-title {
+    width: 100%;
+  }
+
+  .profile-content {
+    overflow: auto;
+    top: 10px;
+  }
+
+  .profile-details {
+    width: 70%;
+  }
+
+  .profile-image-container {
+    width: 60%;
+    height: 100%;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    min-width: auto; /* previous - 100px */
+  }
+
+  .education-degree {
+    margin-left: 20px;
+  }
+
+  .education-year {
+    margin-left: 40px;
+  }
+
+  .section-content {
+    text-align: left;
+  }
+
+  .contact-info {
+    margin-top: 0px;
+  }
+
+  .banner {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .banner-image {
+    height: 120px;
+  }
+
+  .edit-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    bottom: 30px;
+  }
 }
 
-.user-profile {
-  flex-direction: column;
-  gap: 10px;
+@media (max-width: 915px) {
+  .profile-image {
+    max-width: 200px;
+  }
 }
 
-.profile-content {
-  overflow: auto;
-  top: 10px;
+@media (max-width: 800px) {
+  .profile-image {
+    max-width: 180px;
+  }
 }
 
-.profile-details {
-  width: 70%;
-}
-
-.profile-image-container {
-  width: 60%;
-  height: 100%;
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  min-width: auto; /* previous - 100px */
-}
-
-.education-degree {
-  margin-left: 20px;
-}
-
-.education-year {
-  margin-left: 40px;
-}
-
-.section-content {
-  text-align: left;
-}
-
-.contact-info {
-  margin-top: 0px;
-}
-
-.banner {
-  height: 120px;
-  margin-bottom: 20px;
-}
-
-.banner-image {
-  height: 120px;
-}
-
-.edit-button {
-  padding: 12px 30px;
-  font-size: 16px;
-  bottom: 30px;
-}
+@media (max-width: 700px) {
+  .profile-image {
+    max-width: 150px;
+  }
 }
 
 @media (max-width: 480px) {
