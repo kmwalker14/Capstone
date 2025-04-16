@@ -514,6 +514,10 @@ input.profile-title {
   margin-left: 20px;
 }
 
+input.education-degree {
+  width: 85%;
+}
+
 .education-year {
   font-size: 16px;
   margin-left: 40px;
