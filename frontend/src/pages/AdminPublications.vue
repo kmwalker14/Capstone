@@ -145,9 +145,6 @@ export default {
       }
     };
 
-
-
-
     // Fetch content on mount
     onMounted(fetchContent);
 
@@ -161,6 +158,7 @@ export default {
     EditorContent,
     FontAwesomeIcon
   },
+
   data() {
     return {
       editor: null,
@@ -172,6 +170,7 @@ export default {
       uploads: []
     }
   },
+
   methods: {
     setPage(page) {
       this.$emit('page-changed', page);
@@ -186,8 +185,7 @@ export default {
         }
         this.editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
       }
-    }
-    ,
+    },
 
     async submitContent() {
       const content = this.editor.getHTML(); // Get rich text content
@@ -216,9 +214,7 @@ export default {
         console.error("❌ Error saving content:", error.response?.data || error.message);
         alert("Failed to save content");
       }
-    }
-
-    ,
+    },
 
     async deleteContent(contentId) {
       if (!confirm("Are you sure you want to delete this content?")) return;
@@ -237,9 +233,7 @@ export default {
         console.error("❌ Error deleting content:", error);
         alert("Failed to delete content.");
       }
-    }
-
-    ,
+    },
 
     addImage() {
       const url = window.prompt('Enter image URL:')
@@ -247,9 +241,11 @@ export default {
         this.editor.chain().focus().setImage({ src: url }).run()
       }
     },
+
     triggerFileUpload() {
       this.$refs.fileInput.click()
     },
+
     async handleFileUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -311,19 +307,19 @@ export default {
       }
     },
 
-
     editContent(content) {
       this.selectedContentId = content.id; // Track the content being edited
       this.editor.commands.setContent(content.content);
       this.isEditing = true; // Load content into editor
-    } },
+    } 
+  },
+
   mounted() {
     this.editor = new Editor({
       extensions: [
         StarterKit,
         TextAlign.configure({
           types: ['heading', 'paragraph'],
-
         }),
 
         FontFamily.configure({

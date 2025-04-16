@@ -59,7 +59,6 @@
                           <button @click="editor.chain().focus().setFontFamily('monospace').run()">Monospace</button>
                           <button @click="editor.chain().focus().setFontFamily('cursive').run()">Cursive</button>
                           <button @click="editor.chain().focus().setFontFamily('Poppins, sans-serif').run()">Unset Font</button>
-
                         </div>
                       </div>
 

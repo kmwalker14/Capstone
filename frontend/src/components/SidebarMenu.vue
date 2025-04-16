@@ -174,12 +174,11 @@
 </template>
 
 <script>
-// import LoginButton from '@/authentication/login-button.vue';
 import { useAuth0 } from "@auth0/auth0-vue";
 
 export default {
   name: 'SidebarMenu',
-  // Setup Auth0 function, to be commented out later
+  // Setup Auth0 function
   setup (){
     const { loginWithRedirect } = useAuth0();
 
@@ -338,12 +337,6 @@ export default {
     display: block;
     transition: width 0.3s ease-in-out;
   }
-  
- /*
-  .sidebar-hidden {
-    display: none; /* Hide sidebar when it's collapsed
-  }
-  */
 
   .sidebar-hidden {
     width: 1% !important;

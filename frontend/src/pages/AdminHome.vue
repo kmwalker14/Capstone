@@ -106,11 +106,13 @@ export default {
       tempData: {},
     };
   },
+
   methods: {
     toggleEdit() {
       this.tempData = JSON.parse(JSON.stringify(this.formData));
       this.editMode = true;
     },
+
     async saveChanges() {
       // Prepare the payload to match the backend structure
       const payload = {
@@ -137,9 +139,11 @@ export default {
         alert('An error occurred while updating your profile');
       }
     },
+
     cancelEdit() {
       this.editMode = false;
     },
+
     onImageChange(event) {
       const file = event.target.files[0];
       if (file) {
@@ -147,10 +151,12 @@ export default {
       }
     },
   },
+
   computed: {
     formattedAbout() {
       return this.formData.about.replace(/\n/g, '<br />');
     },
+    
     formattedOffice() {
       return this.formData.office.replace(/\n/g, '<br />');
     },
@@ -158,7 +164,7 @@ export default {
 };
 </script>
 
-<style scoped> /* Previously not scoped */
+<style scoped>
 body {
   margin: 0;
   padding: 0;
@@ -419,14 +425,13 @@ input.profile-title {
   }
 
   .profile-image-container {
-    width: 60%;
+    width: auto;
     height: 100%;
   }
 
   .profile-image {
-    width: 100%;
-    height: 100%;
-    min-width: auto; /* previous - 100px */
+    max-width: 300px;
+    min-width: 100px; /* or auto */
   }
 
   .education-degree {

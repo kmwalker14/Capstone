@@ -347,12 +347,6 @@ export default {
     transition: width 0.3s ease-in-out;
   }
   
- /*
-  .sidebar-hidden {
-    display: none; /* Hide sidebar when it's collapsed
-  }
-  */
-
   .sidebar-hidden {
     width: 1% !important;
   }

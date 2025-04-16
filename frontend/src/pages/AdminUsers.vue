@@ -80,24 +80,24 @@ export default {
       },
     };
   },
+
   methods: {
     async fetchAdmins() {
-
       const backendUrl = process.env.VUE_APP_BACKEND_URL || "https://asu-capstone-backend.onrender.com";
 
-
       try {
-
         const response = await axios.get(`${backendUrl}/admins`); // Update with your API endpoint
         this.admins = response.data; // Store fetched data
       } catch (error) {
         console.error('Error fetching admins:', error);
       }
     },
+
     toggleDropdown(userId, event) {
       event.stopPropagation();
       this.dropdownVisible = this.dropdownVisible === userId ? null : userId; // Toggle visibility based on userId
     },
+
     editUser(admin) {  // Handle the actions when the edit option is clicked (currently shows an alert with user's ID)
     this.editingAdminId = admin.id;
       this.editedAdmin = { ...admin }; // Copy admin details to editedAdmin
@@ -123,6 +123,7 @@ export default {
         alert("Failed to update admin.");
       }
     },
+
     cancelEdit() {
       this.editingAdminId = null; // Cancel edit mode
     },
@@ -145,15 +146,18 @@ export default {
         alert("Failed to remove admin.");
       }
     },
+
     closeDropdown() {
       this.dropdownVisible = null; // Close any open dropdown
     },
   },
+
   mounted() {
     // Close dropdown when clicking outside
     document.addEventListener('click', this.closeDropdown);
     this.fetchAdmins();
   },
+  
   beforeUnmount() {
     // Clean up event listener when component is destroyed/unmounted
     document.removeEventListener('click', this.closeDropdown);

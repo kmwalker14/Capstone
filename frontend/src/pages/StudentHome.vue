@@ -114,6 +114,7 @@ export default {
     });
       
   },
+
   computed: {
     formattedAbout() {
       return this.profile.about.replace(/\n/g, '<br />');
@@ -122,6 +123,7 @@ export default {
       return this.profile.office.replace(/\n/g, '<br />');
     }
   },
+
   async mounted() {
     try {
       const response = await axios.get('https://asu-capstone-backend.onrender.com/api/profile');
@@ -148,9 +150,7 @@ export default {
 };
 </script>
 
-
-
-<style scoped> /* Previously not scoped */
+<style scoped>
   body {
     margin: 0;
     padding: 0;
@@ -279,8 +279,8 @@ export default {
 
   .profile-title {
     font: 700 32px Poppins, sans-serif;
-    margin: 0;     /*T: 10, O: 0*/
-    padding-right: 1%; /*T: 1%, O: null*/
+    margin: 0;
+    padding-right: 1%; /*other option: null*/
   }
 
   /* Styling for location and email sections/icons */
@@ -354,7 +354,13 @@ export default {
   }
 
   /* Media queries for responsive design go here */
-  @media (max-width: 1280px) { /* 1366px ? */
+  @media (max-width: 1825px) {
+    .contact-info {
+      margin-top: 5px;
+    }
+  }
+
+  @media (max-width: 1280px) { /* 1366px */
     .layout-wrapper {
       flex-direction: column; /* Stack sidebar on top if needed */
       gap: 20px;
@@ -382,14 +388,13 @@ export default {
     }
 
     .profile-image-container {
-      width: 60%;
+      width: auto;
       height: 100%;
     }
 
     .profile-image {
-      width: 100%;
-      height: 100%;
-      min-width: auto; /* previous - 100px */
+      max-width: 300px;
+      min-width: 100px; /* or auto */
     }
 
     .education-degree {
@@ -415,6 +420,24 @@ export default {
 
     .banner-image {
       height: 120px;
+    }
+  }
+
+  @media (max-width: 915px) {
+    .profile-image {
+      max-width: 200px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .profile-image {
+      max-width: 180px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .profile-image {
+      max-width: 150px;
     }
   }
 

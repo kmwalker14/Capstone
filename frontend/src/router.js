@@ -1,7 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import { authGuard } from '@auth0/auth0-vue';
 
-import UserLogin from './pages/UserLogin.vue';
 import CallbackPage from './pages/CallbackPage.vue';
 import AdminHome from '@/pages/AdminHome.vue';
 import AdminTeaching from './pages/AdminTeaching.vue';
@@ -33,7 +32,6 @@ const routes = [
 
   {path: '/', redirect: '/studenthome'},
   {path: '/adminhome', name: 'AdminHome', component: AdminHome, beforeEnter: authGuard},
-  {path: '/userlogin', name: 'UserLogin', component: UserLogin},
   {path: '/adminteaching', name: 'AdminTeaching', component: AdminTeaching, beforeEnter: authGuard },
   {path: '/adminpublications', name: 'AdminPublications', component: AdminPublications, beforeEnter: authGuard },
   {path: '/adminresearch', name: 'AdminResearch', component: AdminResearch, beforeEnter: authGuard },

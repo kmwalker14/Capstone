@@ -87,10 +87,12 @@ export default {
       userName: null
     };
   },
+
   methods: {
     setPage(page) { // Keep or remove ?????
       this.$emit('page-changed', page);
     },
+
     async handleSubmit() {
       const firstname = this.firstName;
       const lastname = this.lastName;
@@ -114,7 +116,6 @@ export default {
     }
   },
 };
-
 </script>
 
 <style scoped>
