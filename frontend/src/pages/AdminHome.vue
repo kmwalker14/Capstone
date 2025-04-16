@@ -15,11 +15,11 @@
 
         <section class="content-section">
           <div class="banner">
-            <div style="padding: 20px;">
+            <div style="padding: 0px;">
               <button class="edit-button" v-if="!editMode" @click="toggleEdit">Edit</button>
               <div v-else>
                 <button class="edit-button" @click="saveChanges">Save</button>
-                <button class="edit-button" style="background: gray;" @click="cancelEdit">Cancel</button>
+                <button class="edit-button" @click="cancelEdit">Cancel</button>
               </div>
             </div>
           </div>
@@ -160,8 +160,8 @@ export default {
 
 <style scoped> /* Previously not scoped */
 body {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 textarea.section-content {
@@ -178,202 +178,202 @@ textarea.section-content {
 
 /* Styles the main container that holds the entire admin layout */
 .admin-container {
-background: var(--Color-Background, #f3f4ff);
-padding: 0 37px 0 0;
-overflow: hidden;
-flex-grow: 1;
-width: 100%;
+  background: var(--Color-Background, #f3f4ff);
+  padding: 0 37px 0 0;
+  overflow: hidden;
+  flex-grow: 1;
+  width: 100%;
 }
 
 /* Flex container that holds the sidebar and main content */
 .layout-wrapper {
-display: flex;
-gap: 37px; /* Space between sidebar and content*/
-width: 100%;
-flex-grow: 1;
-padding: 0px 15px 0px 15px;
+  display: flex;
+  gap: 37px; /* Space between sidebar and content*/
+  width: 100%;
+  flex-grow: 1;
+  padding: 0px 15px 0px 15px;
 }
 
 /* Main content styling */
 .main-content {
-width: 100%;
-flex-grow: 1;
-padding: 20px;
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
 }
 
 /* Header with page title and user details */
 .header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin: 0 13px 0 36px;
-font-family: Poppins, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 13px 0 36px;
+  font-family: Poppins, sans-serif;
 }
 
 .page-title {
-color: var(--Color-Text, #303972);
-font: 700 36px Poppins, sans-serif;
-margin: 0;
+  color: var(--Color-Text, #303972);
+  font: 700 36px Poppins, sans-serif;
+  margin: 0;
 }
 
 .user-profile {
-display: flex;
-gap: 18px;
-align-items: center;
+  display: flex;
+  gap: 18px;
+  align-items: center;
 }
 
 .user-info {
-text-align: center;
+  text-align: center;
 }
 
 /* User text styling for user role */
 .user-role {
-color: var(--Color-Gray-3, #a098ae);
-font: 400 14px Poppins, sans-serif;
-margin-top: 4px;
-display: block;
+  color: var(--Color-Gray-3, #a098ae);
+  font: 400 14px Poppins, sans-serif;
+  margin-top: 4px;
+  display: block;
 }
 
 /* Content section styling */
 .content-section {
-background: #fff;
-border-radius: 20px;
-margin-top: 20px;
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 20px;
 }
 
 /* Banner styling */
 .banner {
-position: relative;
-height: 100%;
-width: 100%;
-background-color: rgba(106, 36, 18, 1);
-margin-bottom: 50px;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(106, 36, 18, 1);
+  margin-bottom: 50px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .banner-image {
-position: absolute;
-inset: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* Edit button styling */
 .edit-button {
-position: relative;
-z-index: 1;
-bottom: 20px; 
-margin: 92px 0 0 36px;
-padding: 17px 43px;
-border-radius: 40px;
-background: var(--Color-Purple, #4d44b5);
-color: #fff;
-font: 400 18px Poppins, sans-serif;
-border: none;
-cursor: pointer;
-box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
+  position: relative;
+  z-index: 1;
+  bottom: 20px; 
+  margin: 92px 0 0 36px;
+  padding: 17px 43px;
+  border-radius: 40px;
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
+  font: 400 18px Poppins, sans-serif;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
 }
 
 /* Profile styling */
 .profile-content {
-display: flex;
-padding: 0 36px 92px;
-top: -10px;
-position: relative;
-z-index: 1;
+  display: flex;
+  padding: 0 36px 92px;
+  top: -10px;
+  position: relative;
+  z-index: 1;
 }
 
 .profile-details {
-width: 100%; /* 70% ??? */
-color: var(--Color-Text, #303972);
-font-family: Poppins, sans-serif;
+  width: 100%; /* 70% ??? */
+  color: var(--Color-Text, #303972);
+  font-family: Poppins, sans-serif;
 }
 
 .profile-header-section {
-display: flex;
-justify-content: space-between;
-flex-wrap: wrap;
-gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .profile-title {
-font: 700 32px Poppins, sans-serif;
-margin: 0;     /*T: 10, O: 0*/
-padding-right: 1%; /*T: 1%, O: null*/
+  font: 700 32px Poppins, sans-serif;
+  margin: 0;     /*T: 10, O: 0*/
+  padding-right: 1%; /*T: 1%, O: null*/
 }
 
 /* Styling for location and email sections/icons */
 .location-info {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-top: 20px;
-font: 600 18px Poppins, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font: 600 18px Poppins, sans-serif;
 }
 
 .location-icon,
 .email-icon {
-width: 40px;
-height: 40px;
-object-fit: contain;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .contact-info {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-top: 95px; /*T: 100px, O: null*/
-margin-right: 400px;
-font: 600 18px Poppins, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 95px; /*T: 100px, O: null*/
+  margin-right: 400px;
+  font: 600 18px Poppins, sans-serif;
 }
 
 /* Section styling for About, Education, Office Hours */
 .section-title {
-font: 700 24px Poppins, sans-serif;
-margin: 34px 0 30px;
+  font: 700 24px Poppins, sans-serif;
+  margin: 34px 0 30px;
 }
 
 .section-content {
-font: 400 18px Poppins, sans-serif;
-text-align: justify;
-margin: 0;
+  font: 400 18px Poppins, sans-serif;
+  text-align: justify;
+  margin: 0;
 }
 
 .education-item {
-margin: 29px 0;
+  margin: 29px 0;
 }
 
 .education-degree {
-font: 600 18px Poppins, sans-serif;
-margin: 0;
-margin-left: 20px;
+  font: 600 18px Poppins, sans-serif;
+  margin: 0;
+  margin-left: 20px;
 }
 
 .education-year {
-color: var(--Color-Gray-3, #a098ae);
-font: 400 18px Poppins, sans-serif;
-margin-left: 40px;
-display: block;
-margin-top: 14px;
+  color: var(--Color-Gray-3, #a098ae);
+  font: 400 18px Poppins, sans-serif;
+  margin-left: 40px;
+  display: block;
+  margin-top: 14px;
 }
 
 /* Profile image styling */
 .profile-image-container {
-width: 35%;
-height: 100%;
-margin-left: 20px;
+  width: 35%;
+  height: 100%;
+  margin-left: 20px;
 }
 
 .profile-image {
-width: 100%;
-height: 100%;
-aspect-ratio: 1;
-object-fit: fill;
-border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: fill;
+  border-radius: 50%;
 }
 
 /* Media queries for responsive design go here */
@@ -482,6 +482,11 @@ border-radius: 50%;
   text-align: center;
 }
 
+input.profile-title {
+  width: 100%;
+  padding: 0px;
+}
+
 .location-info,
 .contact-info {
   font-size: 15px;
@@ -513,6 +518,10 @@ border-radius: 50%;
   font-size: 16px;
   margin-left: 40px;
   margin-top: 14px;
+}
+
+input.education-year {
+  width: 50%;
 }
 
 .banner {
