@@ -84,6 +84,9 @@
 
 <script>
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-vue';
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
 
 export default {
   name: 'StudentHome',
