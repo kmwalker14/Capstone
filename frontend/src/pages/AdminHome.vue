@@ -19,8 +19,8 @@
             <div style="padding: 0px;">
               <button class="edit-button" v-if="!editMode" @click="toggleEdit">Edit</button>
               <div v-else>
-                <button class="edit-button" @click="saveChanges">Save</button>
-                <button class="edit-button" @click="cancelEdit">Cancel</button>
+                <button class="save-button" @click="saveChanges">Save</button>
+                <button class="cancel-button" @click="cancelEdit">Cancel</button>
               </div>
             </div>
           </div>
@@ -272,8 +272,10 @@ input.profile-title {
   border-top-right-radius: 20px;
 }
 
-/* Edit button styling */
-.edit-button {
+/* Button styling */
+.edit-button, 
+.save-button,
+.cancel-button {
   position: relative;
   z-index: 1;
   bottom: 20px; 
@@ -459,7 +461,9 @@ input.profile-title {
     height: 120px;
   }
 
-  .edit-button {
+  .edit-button,
+  .save-button,
+  .cancel-button {
     padding: 12px 30px;
     font-size: 16px;
     bottom: 30px;
@@ -485,104 +489,106 @@ input.profile-title {
 }
 
 @media (max-width: 480px) {
-.profile-content {
-  padding: 0px 0px 20px 0px;
-  top: -5px;
-  display: flex;
-  flex-direction: column; /* Stacks the items vertically */
-  align-items: center; /* Centers items horizontally */
-}
+  .profile-content {
+    padding: 0px 0px 20px 0px;
+    top: -5px;
+    display: flex;
+    flex-direction: column; /* Stacks the items vertically */
+    align-items: center; /* Centers items horizontally */
+  }
 
-.profile-details {
-  width: 70%;
-  text-align: left;
-  margin-top: 10px;
-}
+  .profile-details {
+    width: 70%;
+    text-align: left;
+    margin-top: 10px;
+  }
 
-.profile-image-container {
-  width: 50%;
-  height: auto; /* Maintain image aspect ratio */
-  order: -1; /* Places the profile image above the profile details */
-  align-items: center;
-}
+  .profile-image-container {
+    width: 50%;
+    height: auto; /* Maintain image aspect ratio */
+    order: -1; /* Places the profile image above the profile details */
+    align-items: center;
+  }
 
-.profile-image {
-  width: 100%; /* Make the image take full container width */
-  height: auto; /* Maintain image aspect ratio */
-  align-items: center;
-}
+  .profile-image {
+    width: 100%; /* Make the image take full container width */
+    height: auto; /* Maintain image aspect ratio */
+    align-items: center;
+  }
 
-.profile-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-  padding-left: 25px;
-  text-align: center;
-}
+  .profile-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    text-align: center;
+  }
 
-input.profile-title {
-  width: 100%;
-  padding: 0px;
-}
+  input.profile-title {
+    width: 100%;
+    padding: 0px;
+  }
 
-.location-info,
-.contact-info {
-  font-size: 15px;
-  align-items: center;
-}
+  .location-info,
+  .contact-info {
+    font-size: 15px;
+    align-items: center;
+  }
 
-.location-icon,
-.email-icon {
-  width: 30px;
-  height: 30px;
-}
+  .location-icon,
+  .email-icon {
+    width: 30px;
+    height: 30px;
+  }
 
-.section-title {
-  font-size: 18px;
-}
+  .section-title {
+    font-size: 18px;
+  }
 
-.section-content {
-  font: 400 18px Poppins, sans-serif;
-  text-align: left;
-  margin: 0;
-}
+  .section-content {
+    font: 400 18px Poppins, sans-serif;
+    text-align: left;
+    margin: 0;
+  }
 
-.education-degree {
-  font-size: 16px;
-  margin-left: 20px;
-}
+  .education-degree {
+    font-size: 16px;
+    margin-left: 20px;
+  }
 
-input.education-degree {
-  width: 85%;
-}
+  input.education-degree {
+    width: 85%;
+  }
 
-.education-year {
-  font-size: 16px;
-  margin-left: 40px;
-  margin-top: 14px;
-}
+  .education-year {
+    font-size: 16px;
+    margin-left: 40px;
+    margin-top: 14px;
+  }
 
-input.education-year {
-  width: 50%;
-}
+  input.education-year {
+    width: 50%;
+  }
 
-.banner {
-  height: 65px;
-  margin-bottom: 20px;
-}
+  .banner {
+    height: 65px;
+    margin-bottom: 20px;
+  }
 
-.banner-image {
-  height: 65px;
-}
+  .banner-image {
+    height: 65px;
+  }
 
-.edit-button {
-  padding: 8px 20px;
-  font-size: 12px;
-  bottom: 70px;
-  right: 20px;
-}
+  .edit-button,
+  .save-button,
+  .cancel-button {
+    padding: 8px 20px;
+    font-size: 12px;
+    bottom: 70px;
+    right: 20px;
+  }
 
-.page-title {
-  font-size: 24px;
-}
+  .page-title {
+    font-size: 24px;
+  }
 }
 </style>
