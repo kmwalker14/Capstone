@@ -68,6 +68,7 @@
                 </div>
               </div>
             <button class="submit-button" type="submit">Submit</button>
+            <button class="cancel-button" type="cancel" @click="$router.push('/adminusers')">Cancel</button>
           </form>
         </section>
       </main>
@@ -138,15 +139,30 @@ export default {
 /* Styles the submit button */ 
 .submit-button {
   display: block;
-  width: 130px;
-  height: 50px;
-  margin: 20px auto -50px;
+  width: 110px;
+  height: 40px;
+  margin: 40px auto -50px;
   background: var(--Color-Purple, #4d44b5);
   color: #fff;
   border: none;
   border-radius: 40px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
+}
+
+.cancel-button {
+  display: block;
+  width: 110px;
+  height: 40px;
+  margin: 70px auto -80px;
+  background: var(--Color-Purple, #4d44b5);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 20px 50px 0 rgba(191, 21, 108, 0.05);
 }
@@ -373,6 +389,16 @@ text-align: center;
     font-weight: 600;
     border-radius: 40px;
   }
+
+  .cancel-button {
+    width: 105px;
+    height: 45px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-bottom: -60px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -441,6 +467,14 @@ text-align: center;
   }
 
   .submit-button {
+    width: 90px;
+    height: 40px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 40px;
+  }
+
+  .cancel-button {
     width: 90px;
     height: 40px;
     font-size: 12px;
