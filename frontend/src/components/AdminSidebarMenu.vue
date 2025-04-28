@@ -160,7 +160,7 @@
         <span class="nav-text">Tools</span>
     </li>
     <!-- Admin Users -->
-    <li class="nav-item" @click="$router.push('/adminusers')" :class="{'active': $route.path === '/adminusers'}">
+    <li class="nav-item" @click="$router.push('/adminusers')" :class="{'active': $route.path === '/adminusers' || $route.path === '/adminnew'}">
         <img
         loading="lazy"
         src="@/assets/user.png"
